@@ -8,3 +8,5 @@ export function createDb(env: DatabaseConfig) {
 }
 
 export type Database = ReturnType<typeof createDb>;
+export * from "./schema";
+export { and, asc, desc, eq, or, sql } from "drizzle-orm";
