@@ -192,7 +192,7 @@ Semua kriteria Fitur F4 dan 3 test suite wajib Vitest telah terpenuhi sempurna d
 
 ## Log #7: Database Configuration & Migration (packages/db/.env & db:push)
 - **Timestamp:** 2026-10-22
-- **Tujuan:** Mengonfigurasi kredensial database PostgreSQL remote pada `packages/db/.env`, memastikan proteksi Git ignore aktif, dan memverifikasi kesiapan migrasi skema Drizzle via `db:push`.
+- **Tujuan:** Mengonfigurasi kredensial database PostgreSQL remote pada `packages/db/.env`, memastikan proteksi Git ignore aktif, dan mengeksekusi migrasi skema Drizzle via `pnpm run db:push`.
 
 ### Rincian Perubahan:
 1. **Konfigurasi Database Remote**
@@ -203,36 +203,12 @@ Semua kriteria Fitur F4 dan 3 test suite wajib Vitest telah terpenuhi sempurna d
 2. **Proteksi Kredensial (.gitignore)**
    - Menambahkan deklarasi eksplisit `packages/db/.env` pada [.gitignore](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/.gitignore) root selain yang sudah ada pada `packages/db/.gitignore`.
    - Terverifikasi via `git status --ignored` bahwa `packages/db/.env` sepenuhnya di-ignore dan aman dari commit/push ke GitHub.
-3. **Verifikasi Skema Drizzle untuk db:push**
-   - Skema Drizzle yang siap di-push ke database remote mencakup:
-     - Tabel `homestays` (kolom: `id`, `userId`, `title`, `price`, `location`, `category`, `contactWa`, `createdAt`)
-     - Tabel autentikasi Better-Auth: `user`, `session`, `account`, `verification`
-   - Perintah `pnpm run db:push` siap dieksekusi di terminal untuk menyelaraskan skema Drizzle langsung ke remote database PostgreSQL.
+3. **Eksekusi & Verifikasi Skema Drizzle (db:push)**
+   - Perintah `pnpm run db:push` telah berhasil dieksekusi ke PostgreSQL remote server MyRehat (`34.21.153.205:5440`).
+   - Seluruh tabel skema Drizzle telah aktif dan terverifikasi di database remote:
+     - Tabel aplikasi: `homestays` (Fitur F1 BuyHomestay)
+     - Tabel autentikasi Better-Auth: `user`, `account`, `session`, `verification`
 
 ### Status:
-Konfigurasi `packages/db/.env` selesai, proteksi `.gitignore` aktif terverifikasi, dan skema database siap di-push.
-
----
-
-## Log #7: Database Configuration & Migration (packages/db/.env & db:push)
-- **Timestamp:** 2026-10-22
-- **Tujuan:** Mengonfigurasi kredensial database PostgreSQL remote pada `packages/db/.env`, memastikan proteksi Git ignore aktif, dan memverifikasi kesiapan migrasi skema Drizzle via `db:push`.
-
-### Rincian Perubahan:
-1. **Konfigurasi Database Remote**
-   - Membuat/mengisi file [packages/db/.env](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/packages/db/.env):
-     ```env
-     DATABASE_URL=postgresql://taskb8:***@34.21.153.205:5440/taskb8
-     ```
-2. **Proteksi Kredensial (.gitignore)**
-   - Menambahkan deklarasi eksplisit `packages/db/.env` pada [.gitignore](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/.gitignore) root selain yang sudah ada pada `packages/db/.gitignore`.
-   - Terverifikasi via `git status --ignored` bahwa `packages/db/.env` sepenuhnya di-ignore dan aman dari commit/push ke GitHub.
-3. **Verifikasi Skema Drizzle untuk db:push**
-   - Skema Drizzle yang siap di-push ke database remote mencakup:
-     - Tabel `homestays` (kolom: `id`, `userId`, `title`, `price`, `location`, `category`, `contactWa`, `createdAt`)
-     - Tabel autentikasi Better-Auth: `user`, `session`, `account`, `verification`
-   - Perintah `pnpm run db:push` siap dieksekusi di terminal untuk menyelaraskan skema Drizzle langsung ke remote database PostgreSQL.
-
-### Status:
-Konfigurasi `packages/db/.env` selesai, proteksi `.gitignore` aktif terverifikasi, dan skema database siap di-push.
+`pnpm run db:push` telah berhasil dieksekusi di remote database dan seluruh tabel (`homestays`, `user`, `account`, `session`, `verification`) telah aktif terverifikasi di PostgreSQL server MyRehat.
 
