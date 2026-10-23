@@ -26,8 +26,9 @@ export const queryClient = createQueryClient();
 
 function getServerUrl() {
   if (typeof window !== "undefined") {
-    // In browser, always use relative path so Next.js rewrites proxy to backend
-    return "";
+    // In browser, use window.location.origin so client sends requests to the Next.js app host,
+    // and Next.js rewrites in next.config.ts automatically proxy /rpc to the backend
+    return window.location.origin;
   }
 
   const processEnv = typeof process === "undefined" ? undefined : process.env;

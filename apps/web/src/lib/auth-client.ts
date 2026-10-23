@@ -2,8 +2,9 @@ import { createAuthClient } from "better-auth/react";
 
 function getServerUrl() {
   if (typeof window !== "undefined") {
-    // In browser, use relative path so Next.js rewrites proxy /api/auth to backend
-    return "";
+    // In browser, use window.location.origin so Better-Auth receives a valid absolute URL,
+    // and Next.js rewrites in next.config.ts automatically proxy /api/auth to backend
+    return window.location.origin;
   }
 
   const processEnv = typeof process === "undefined" ? undefined : process.env;
@@ -17,7 +18,6 @@ function getServerUrl() {
   return target.endsWith("/") ? target.slice(0, -1) : target;
 }
 
-const base = getServerUrl();
 export const authClient = createAuthClient({
-  baseURL: base ? `${base}/api/auth` : "/api/auth",
+  baseURL: `${getServerUrl()}/api/auth`,
 });
