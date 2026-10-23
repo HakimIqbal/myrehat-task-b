@@ -24,20 +24,25 @@ export function createQueryClient() {
 
 export const queryClient = createQueryClient();
 
-function getServerUrl(url?: string) {
+function getServerUrl() {
+  if (typeof window !== "undefined") {
+    // In browser, always use relative path so Next.js rewrites proxy to backend
+    return "";
+  }
+
   const processEnv = typeof process === "undefined" ? undefined : process.env;
-  if (typeof window === "undefined" && processEnv?.SERVER_URL) {
+  if (processEnv?.SERVER_URL) {
     return processEnv.SERVER_URL.endsWith("/")
       ? processEnv.SERVER_URL.slice(0, -1)
       : processEnv.SERVER_URL;
   }
 
-  const target = url || "http://localhost:3000";
+  const target = processEnv?.NEXT_PUBLIC_SERVER_URL || "http://localhost:3000";
   return target.endsWith("/") ? target.slice(0, -1) : target;
 }
 
 export const link = new RPCLink({
-  url: `${getServerUrl(process.env.NEXT_PUBLIC_SERVER_URL!)}/rpc`,
+  url: `${getServerUrl()}/rpc`,
   fetch(url, options) {
     return fetch(url, {
       ...options,
