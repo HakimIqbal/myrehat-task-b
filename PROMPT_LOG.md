@@ -672,3 +672,85 @@ Done. vitest 32/32 green · tsc 0 errors.
 ### Status:
 Done. vitest 32/32 green · tsc 0 errors. Mobile 390px responsif.
 
+
+---
+
+## Log #20: AI Concierge Overhaul — Same-Origin Relative Transport & Travel Hospitality Design
+- **Timestamp:** 2026-10-23
+- **Tujuan:** Merombak total halaman AI Concierge ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)) dan konfigurasi proxy Next.js ([apps/web/next.config.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/next.config.ts)) berstandar TasteSkill & UI/UX Pro Max:
+  1. Base URL Transport Fix: Mengubah endpoint `useChat` dari `${ENV.NEXT_PUBLIC_SERVER_URL}/ai` menjadi relative path `/ai`, serta menambahkan rewrite `/ai` ke `${serverUrl}/ai` di `next.config.ts` untuk menjamin request Same-Origin bebas CORS error di browser publik / Dokploy.
+  2. Persona & Onboarding: Identitas resmi "MyRehat Concierge" (Sub-label: "Verified Host & Homestay Assistant"), avatar bot dengan live emerald pulse dot dan tombol reset conversation. Empty state headline: "How can MyRehat Concierge assist your stay?".
+  3. 3 Travel Suggestion Chips: Kartu interaktif responsif untuk Cameron Highlands Stay, BuyHomestay Process, dan Direct Host Benefits.
+  4. Brand Bubble Styling: User bubble bergradasi Rausch Coral khas Airbnb (`from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white rounded-2xl rounded-tr-xs`), assistant bubble netral dengan notch (`bg-muted/70 dark:bg-zinc-900 rounded-2xl rounded-tl-xs`), dan indikator 3 bouncing typing dots.
+  5. Input Footer Bar: Textarea auto-resize nyaman dengan tombol submit rounded Rausch gradient.
+
+### Rincian Perubahan:
+1. **Next.js Proxy Rewrites** ([apps/web/next.config.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/next.config.ts)):
+   - Menambahkan rule rewrite `{ source: "/ai", destination: `${serverUrl}/ai` }`.
+2. **AI Concierge Page** ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)):
+   - Mengalihkan transport ke `api: "/ai"`.
+   - Header: status live emerald dot berdenyut halus + tooltip reset conversation.
+   - 3 suggestion cards dengan micro-copy lengkap dan hover visual feedback.
+   - Chat bubbles dengan styling Rausch vs Neutral shadow-2xs.
+   - Loading indicator: 3 bouncing colored dots `[animation-delay]` lembut saat status `submitted`.
+   - Footer input bar berpenampilan modern studio.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors. Mobile 390px responsif.
+
+---
+
+## Log #21: AI Concierge Polish — Auto-Greet Bubble, Quick Action Chips & Hospitality Footer
+- **Timestamp:** 2026-10-23
+- **Tujuan:** Menyempurnakan antarmuka AI Concierge ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)) agar hidup, elegan, dan bebas AI-slop:
+  1. Initial Welcome Message (Auto-Greet): Saat `messages.length === 0`, menampilkan langsung balon chat pembuka resmi dari Assistant ("Hello! Welcome to MyRehat Concierge. Whether you're planning a vacation stay in Cameron Highlands or exploring verified Airbnb business acquisitions across Malaysia, feel free to ask me anything below.").
+  2. 3 Quick Action Chips Ringkas: Di bawah balon pembuka terdapat 3 pill action chips tanpa teks terpotong/ellipsis:
+     - "🏔️ Cameron Highlands Stays"
+     - "💼 Buying an Airbnb Business"
+     - "⚡ Direct Booking Benefits"
+     (mengirim prompt langsung ke chat saat diklik).
+  3. Chat Bubble Styling: User bubble beraksen Rausch Coral (`rounded-2xl rounded-tr-xs bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] px-4 py-3 text-sm text-white shadow-xs leading-relaxed`), Assistant bubble berlatar netral nyaman (`rounded-2xl rounded-tl-xs bg-muted/70 dark:bg-zinc-900 border border-border/50 p-4 text-sm text-foreground shadow-2xs leading-relaxed`).
+  4. Footer Anti-Slop: Menghapus penyebutan backend teknis, diganti mikro-teks hospitality: "MyRehat Concierge • Instant assistance for homestay bookings & property acquisitions".
+
+### Rincian Perubahan:
+1. **AI Concierge Page** ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)):
+   - Mengganti disconnected empty state hero dengan in-stream Auto-Greet assistant bubble + Quick Action Chips.
+   - Menyempurnakan bubble styles dan padding text leading.
+   - Membersihkan teks footer menjadi representasi brand hospitality elegan.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors. Mobile 390px responsif.
+
+
+---
+
+## Log #22: AI Concierge Central Studio Layout (Perplexity / Claude Architecture)
+- **Timestamp:** 2026-10-23
+- **Tujuan:** Merombak total layout halaman AI Concierge ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)) menjadi Central Studio Layout ala Perplexity/Claude:
+  1. Hapus Pola Lama: Menghapus balon greeting raksasa yang melayang, kartu multi-kolom di tengah, dan teks disclaimer yang bocor di footer bawah.
+  2. State Awal Terpusat (Central Studio): Saat `messages.length === 0` dan tidak sedang mengirim, seluruh area `<main>` menampilkan studio terpusat seimbang vertikal dan horizontal:
+     - Avatar bot kecil (`size-10 rounded-2xl border bg-muted/30`).
+     - Judul besar: `"Where are you traveling in Malaysia?"` (`text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-foreground text-center`).
+     - Subjudul ringkas: `"Ask about verified stays, direct host rates, or BuyHomestay acquisitions."` (`text-sm text-muted-foreground text-center max-w-md mx-auto mt-2`).
+  3. Input Box Terpusat pada State Awal: Form chat dirender di tengah layar tepat di bawah subjudul (`w-full max-w-2xl mx-auto mt-6`) dengan textarea auto-resize (`min-h-12 max-h-32 py-3 pl-4 pr-12 text-sm`) dan tombol submit bulat gradient Rausch (`absolute right-2 bottom-2 size-8 bg-gradient-to-r from-[#E61E4D] to-[#D70466]`).
+  4. 3 Quick Chips di Bawah Input: Pill horizontal ringkas tanpa emoji dan tanpa teks terpotong:
+     - `"Cameron Highlands stays"`
+     - `"Buying an Airbnb business"`
+     - `"Direct host pricing"`
+     (langsung mengirim prompt ke chat saat diklik).
+  5. State Aktif & Chat Bubble: Saat percakapan berjalan (`messages.length > 0 || isSending`), input form berpindah ke footer tetap, dan area atas menampilkan `MessageScroller`:
+     - User bubble: `rounded-2xl rounded-tr-sm px-4 py-3 text-sm leading-relaxed text-white shadow-xs max-w-[85%] self-end bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466]`.
+     - Assistant bubble: `rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-relaxed text-foreground bg-muted/70 dark:bg-zinc-900 border border-border/50 shadow-2xs max-w-[85%] self-start`.
+     - Label header per bubble: `text-[11px] text-muted-foreground mb-1` ("You" / "MyRehat Concierge").
+     - Typing indicator: 3 titik bouncing animasi di dalam bubble assistant tanpa spinner.
+  6. Responsif 390px & Zero Leak: Teks bocoran dihapus sepenuhnya, layout aman di mobile screen tanpa overflow.
+
+### Rincian Perubahan:
+1. **AI Concierge Page** ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)):
+   - Implementasi conditional rendering antara Central Studio view (`!hasStarted`) dan Conversation view + Fixed Bottom Footer (`hasStarted`).
+   - Penataan ulang form input terpusat dan 3 pill chips cepat.
+   - Restrukturisasi chat bubbles dengan notch styling (`rounded-tr-sm` untuk user, `rounded-tl-sm` untuk assistant).
+   - Pembersihan footer disclaimer.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors. Mobile 390px responsif.
