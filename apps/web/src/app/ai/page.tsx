@@ -14,9 +14,9 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@myrehat-task-b/ui/comp
 import { DefaultChatTransport } from "ai";
 import {
   ArrowUpIcon,
-  Bot,
   Loader2,
   RotateCwIcon,
+  Sparkles,
 } from "lucide-react";
 import { useState, type FormEvent, type KeyboardEvent } from "react";
 import { Streamdown } from "streamdown";
@@ -77,27 +77,22 @@ export default function AIPage() {
     <MessageScrollerProvider>
       <div className="flex h-[calc(100vh-4rem)] min-h-[500px] w-full flex-col bg-background">
         {/* Concierge Persona Status Header */}
-        <header className="shrink-0 border-b border-border/60 bg-background/80 px-4 py-3 backdrop-blur-md">
+        <header className="shrink-0 bg-transparent px-4 py-3">
           <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="relative flex size-10 items-center justify-center rounded-full border border-border/60 bg-muted/40 text-foreground shadow-2xs">
-                <Bot className="size-5" />
+              <div className="relative flex size-9 items-center justify-center rounded-full border border-border/50 bg-background shadow-2xs text-[#E61E4D]">
+                <Sparkles className="size-4 text-[#E61E4D]" />
                 <span className="absolute bottom-0 right-0 flex size-2.5 items-center justify-center">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex size-2.5 rounded-full border-2 border-background bg-emerald-500" />
                 </span>
               </div>
               <div className="min-w-0">
-                <div className="flex items-center gap-2">
-                  <h1 className="text-sm font-semibold tracking-tight text-foreground">
-                    MyRehat Concierge
-                  </h1>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-medium text-emerald-600 dark:text-emerald-400">
-                    Online
-                  </span>
-                </div>
+                <h1 className="text-sm font-semibold tracking-tight text-foreground">
+                  MyRehat Concierge
+                </h1>
                 <p className="text-[11px] text-muted-foreground">
-                  Verified Host &amp; Homestay Assistant
+                  Direct host &amp; property advisor
                 </p>
               </div>
             </div>
@@ -130,8 +125,8 @@ export default function AIPage() {
           <main className="min-h-0 flex-1 overflow-y-auto flex items-center justify-center px-4 py-8">
             <div className="w-full max-w-2xl mx-auto flex flex-col items-center">
               {/* Bot Avatar Icon */}
-              <div className="flex size-10 items-center justify-center rounded-2xl border border-border/70 bg-muted/30 text-foreground shadow-2xs mb-4">
-                <Bot className="size-5" />
+              <div className="flex size-9 items-center justify-center rounded-full border border-border/50 bg-background shadow-2xs text-[#E61E4D] mb-4">
+                <Sparkles className="size-4 text-[#E61E4D]" />
               </div>
 
               {/* Central Title */}

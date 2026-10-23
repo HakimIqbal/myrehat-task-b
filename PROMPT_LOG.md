@@ -790,3 +790,24 @@ Done. vitest 32/32 green · tsc 0 errors. Double scrollbar di /ai tereliminasi 1
   2. Menyelaraskan lebar pembungkus H1 dengan `max-w-3xl mx-auto leading-tight` agar teks 4 kata utama tampil utuh dan seimbang pada rentang viewport mobile (390px), tablet (sm: 640px), hingga desktop.
 - **Status:**
   Done. vitest 32/32 green · tsc 0 errors. Heading H1 terbaca utuh 100%.
+
+
+---
+
+## Log #25: AI Concierge Header Polish — Borderless Header, Online Badge Removal & Sparkles Icon
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Membersihkan sub-header chat pada [apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx) dari elemen AI-slop dan redundansi visual:
+  1. Menghapus `border-b border-border/60` pada tag `<header>` agar tidak ada garis horizontal kaku yang memotong layar. Header kini menyatu halus: `className="shrink-0 bg-transparent px-4 py-3"`.
+  2. Menghapus badge pill `<span className="... text-emerald-600 ...">Online</span>` yang redundant. Status indikator cukup diwakili oleh titik pulsing hijau pada avatar. Subjudul diganti menjadi: `"Direct host & property advisor"`.
+  3. Mengganti icon `<Bot />` kaku (robot generik) dengan `<Sparkles className="size-4 text-[#E61E4D]" />` (hospitality premium) pada avatar header dan avatar tengah studio. Container avatar diperhalus: `size-9 rounded-full border border-border/50 bg-background shadow-2xs text-[#E61E4D]`.
+
+### Rincian Perubahan:
+1. **AI Concierge Page** ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)):
+   - Import `Bot` dihapus, diganti dengan `Sparkles` dari `lucide-react`.
+   - Header `<header>`: hapus `border-b border-border/60 bg-background/80 backdrop-blur-md`, ganti dengan `bg-transparent`.
+   - Avatar header: `size-9 rounded-full border border-border/50 bg-background shadow-2xs text-[#E61E4D]` + `<Sparkles size-4 />`.
+   - Hapus badge `Online`, simplifikasi sub-label: `"Direct host & property advisor"`.
+   - Avatar tengah studio: `size-9 rounded-full border border-border/50 bg-background shadow-2xs text-[#E61E4D]` + `<Sparkles size-4 />`.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
