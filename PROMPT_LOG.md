@@ -754,3 +754,26 @@ Done. vitest 32/32 green · tsc 0 errors. Mobile 390px responsif.
 
 ### Status:
 Done. vitest 32/32 green · tsc 0 errors. Mobile 390px responsif.
+
+
+---
+
+## Log #23: AI Concierge Layout Conflict Fix (Route-Aware Footer & High-Contrast Input/Bubble)
+- **Timestamp:** 2026-10-23
+- **Tujuan:** Melakukan 3 perbaikan presisi pada `apps/web` agar halaman AI Concierge (`/ai`) berfungsi sempurna dan bebas bentrok layout:
+  1. Route-Aware Footer (`apps/web/src/components/footer.tsx`): Menjadikan `footer.tsx` Client Component dengan hook `usePathname()`, merender `null` saat rute aktif adalah `"/ai"`. Ini menghilangkan benturan footer ganda dan scrollbar ganda tanpa memecahkan `layout.tsx` sebagai Server Component untuk metadata SEO.
+  2. Input Form Visual Prominence (`apps/web/src/app/ai/page.tsx`): Mempertegas visual kotak input di tengah layar pada state awal dengan `border-2 border-border/80 bg-background shadow-md hover:border-foreground/30 focus-within:border-foreground/70 focus-within:ring-2 focus-within:ring-foreground/15`, textarea `py-3.5 text-foreground placeholder:text-muted-foreground/75`, dan tombol submit `absolute right-2.5 bottom-2.5 size-8`.
+  3. High-Contrast Chat Bubbles (`apps/web/src/app/ai/page.tsx`): Menetapkan warna teks putih solid (`text-white font-normal`) pada User bubble Rausch Coral dan merapikan Assistant bubble dengan `bg-muted/80 dark:bg-zinc-900 border border-border/50 text-foreground` untuk memastikan keterbacaan kontras tinggi di mode terang maupun gelap.
+
+### Rincian Perubahan:
+1. **Footer Component** ([apps/web/src/components/footer.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/footer.tsx)):
+   - Menambahkan `"use client"` dan `usePathname()`.
+   - Mengembalikan `null` jika `pathname === "/ai"`.
+2. **AI Concierge Page** ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)):
+   - Input container `border-2 shadow-md` dengan focus ring tegas.
+   - Textarea dengan kontras teks dan placeholder yang lebih kuat.
+   - User chat bubble dengan `text-white font-normal` eksplisit pada notch `rounded-tr-xs`.
+   - Assistant chat bubble dengan `bg-muted/80` pada notch `rounded-tl-xs`.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors. Double scrollbar di /ai tereliminasi 100%.

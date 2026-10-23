@@ -147,14 +147,14 @@ export default function AIPage() {
               {/* Central Input Box */}
               <div className="w-full max-w-2xl mx-auto mt-6">
                 <form onSubmit={handleSubmit} className="w-full">
-                  <div className="relative rounded-2xl border border-border/70 bg-background shadow-sm focus-within:border-ring focus-within:ring-1 focus-within:ring-ring transition-all">
+                  <div className="relative rounded-2xl border-2 border-border/80 bg-background shadow-md hover:border-foreground/30 focus-within:border-foreground/70 focus-within:ring-2 focus-within:ring-foreground/15 transition-all">
                     <textarea
                       name="prompt"
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
                       onKeyDown={handlePromptKeyDown}
                       placeholder="Ask MyRehat Concierge about stays, rates, or property acquisitions..."
-                      className="w-full min-h-12 max-h-32 py-3 pl-4 pr-12 text-sm placeholder:text-muted-foreground/60 resize-none outline-none bg-transparent"
+                      className="w-full min-h-12 max-h-32 py-3.5 pl-4 pr-12 text-sm text-foreground placeholder:text-muted-foreground/75 resize-none outline-none bg-transparent"
                       rows={1}
                       autoComplete="off"
                       autoFocus
@@ -164,7 +164,7 @@ export default function AIPage() {
                       type="submit"
                       disabled={isSending || !input.trim()}
                       aria-label="Send message"
-                      className="absolute right-2 bottom-2 size-8 rounded-full bg-gradient-to-r from-[#E61E4D] to-[#D70466] text-white shadow-xs hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center justify-center cursor-pointer"
+                      className="absolute right-2.5 bottom-2.5 size-8 rounded-full bg-gradient-to-r from-[#E61E4D] to-[#D70466] text-white shadow-xs hover:opacity-90 disabled:opacity-40 transition-all flex items-center justify-center cursor-pointer"
                     >
                       {isSending ? (
                         <Loader2 className="size-4 animate-spin" />
@@ -214,8 +214,8 @@ export default function AIPage() {
                             <div
                               className={
                                 isUser
-                                  ? "rounded-2xl rounded-tr-sm px-4 py-3 text-sm leading-relaxed text-white shadow-xs max-w-[85%] self-end bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466]"
-                                  : "rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-relaxed text-foreground bg-muted/70 dark:bg-zinc-900 border border-border/50 shadow-2xs max-w-[85%] self-start"
+                                  ? "rounded-2xl rounded-tr-xs px-4 py-3 text-sm leading-relaxed text-white font-normal shadow-xs max-w-[85%] self-end bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466]"
+                                  : "rounded-2xl rounded-tl-xs px-4 py-3 text-sm leading-relaxed text-foreground bg-muted/80 dark:bg-zinc-900 border border-border/50 shadow-2xs max-w-[85%] self-start"
                               }
                             >
                               {message.parts?.map((part, index) => {
@@ -248,7 +248,7 @@ export default function AIPage() {
                           <span className="text-[11px] font-medium text-muted-foreground mb-1">
                             MyRehat Concierge
                           </span>
-                          <div className="rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-relaxed text-foreground bg-muted/70 dark:bg-zinc-900 border border-border/50 shadow-2xs max-w-[85%] self-start">
+                          <div className="rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-relaxed text-foreground bg-muted/80 dark:bg-zinc-900 border border-border/50 shadow-2xs max-w-[85%] self-start">
                             <div className="flex items-center gap-1.5 py-1">
                               <span className="size-2 rounded-full bg-[#E61E4D] animate-bounce [animation-delay:-0.3s]" />
                               <span className="size-2 rounded-full bg-[#E31C5F] animate-bounce [animation-delay:-0.15s]" />
@@ -269,14 +269,14 @@ export default function AIPage() {
             <footer className="shrink-0 border-t border-border/60 bg-background/80 px-4 py-3 backdrop-blur-md">
               <div className="mx-auto w-full max-w-3xl">
                 <form onSubmit={handleSubmit} className="w-full">
-                  <div className="relative rounded-2xl border border-border/70 bg-background shadow-sm focus-within:border-ring focus-within:ring-1 focus-within:ring-ring transition-all">
+                  <div className="relative rounded-2xl border border-border/70 bg-background shadow-sm focus-within:border-foreground/70 focus-within:ring-2 focus-within:ring-foreground/15 transition-all">
                     <textarea
                       name="prompt"
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
                       onKeyDown={handlePromptKeyDown}
                       placeholder="Ask MyRehat Concierge about stays, rates, or property acquisitions..."
-                      className="w-full min-h-12 max-h-32 py-3 pl-4 pr-12 text-sm placeholder:text-muted-foreground/60 resize-none outline-none bg-transparent"
+                      className="w-full min-h-12 max-h-32 py-3.5 pl-4 pr-12 text-sm text-foreground placeholder:text-muted-foreground/75 resize-none outline-none bg-transparent"
                       rows={1}
                       autoComplete="off"
                       autoFocus
@@ -286,7 +286,7 @@ export default function AIPage() {
                       type="submit"
                       disabled={isSending || !input.trim()}
                       aria-label="Send message"
-                      className="absolute right-2 bottom-2 size-8 rounded-full bg-gradient-to-r from-[#E61E4D] to-[#D70466] text-white shadow-xs hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center justify-center cursor-pointer"
+                      className="absolute right-2.5 bottom-2.5 size-8 rounded-full bg-gradient-to-r from-[#E61E4D] to-[#D70466] text-white shadow-xs hover:opacity-90 disabled:opacity-40 transition-all flex items-center justify-center cursor-pointer"
                     >
                       {isSending ? (
                         <Loader2 className="size-4 animate-spin" />
