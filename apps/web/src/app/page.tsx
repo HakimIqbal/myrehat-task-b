@@ -100,8 +100,8 @@ export default function Home() {
   return (
     <div className="container mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12 space-y-10 overflow-x-hidden">
       {/* 1. Hero Section - EXACT F4 HEADING */}
-      <section className="text-center space-y-3 max-w-2xl mx-auto pt-2">
-        <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-foreground">
+      <section className="text-center space-y-3 max-w-3xl mx-auto pt-2">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground max-w-3xl mx-auto leading-tight">
           Book homestays directly with hosts
         </h1>
         <p className="text-sm sm:text-base text-muted-foreground">

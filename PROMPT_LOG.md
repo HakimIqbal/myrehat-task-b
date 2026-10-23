@@ -777,3 +777,16 @@ Done. vitest 32/32 green · tsc 0 errors. Mobile 390px responsif.
 
 ### Status:
 Done. vitest 32/32 green · tsc 0 errors. Double scrollbar di /ai tereliminasi 100%.
+
+
+---
+
+## Log #24: Hero Heading Fluid Typography & Line-Break Optimization
+- **Timestamp:** 2026-10-23
+- **Tujuan:** Memastikan kalimat H1 pada seksi hero utama ([apps/web/src/app/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/page.tsx)) terbaca utuh tanpa kata terpotong atau wrap canggung:
+  `<h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground max-w-3xl mx-auto leading-tight">Book homestays directly with hosts</h1>`
+- **Rincian Perubahan:**
+  1. Mengubah ukuran tipografi H1 dari breakpoint kaku `text-3xl sm:text-5xl` menjadi kurva fluid bertahap `text-3xl sm:text-4xl md:text-5xl`.
+  2. Menyelaraskan lebar pembungkus H1 dengan `max-w-3xl mx-auto leading-tight` agar teks 4 kata utama tampil utuh dan seimbang pada rentang viewport mobile (390px), tablet (sm: 640px), hingga desktop.
+- **Status:**
+  Done. vitest 32/32 green · tsc 0 errors. Heading H1 terbaca utuh 100%.
