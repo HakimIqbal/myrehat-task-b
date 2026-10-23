@@ -526,3 +526,149 @@ Auth polish pada modal dialog dan halaman `/login` selesai 100% dengan estetika 
 ### Status:
 Restrukturisasi autentikasi dan penyempurnaan background studio selesai 100% dan terverifikasi sempurna.
 
+
+---
+
+## Log #16: Auth Visual Craftsmanship — Airbnb Canonical UI Polish (5 Details)
+- **Timestamp:** 2026-10-23
+- **Tujuan:** Memoles visual Auth Modal ([auth-modal.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/auth-modal.tsx)) dan halaman `/login` ([login/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/login/page.tsx)) agar mencapai craftsmanship setara modal autentikasi Airbnb asli — 5 detail presisi:
+
+### 5 Perubahan Visual Presisi:
+
+1. **Floating Container & Three-Tier Shadow:**
+   - Card: `max-w-[520px] rounded-3xl border border-border/40 bg-background shadow-[0_8px_28px_rgba(0,0,0,0.12)] overflow-hidden`.
+   - Backdrop modal: `bg-black/50 backdrop-blur-sm transition-all duration-300`.
+   - Header `h-16 px-6 border-b border-border/30 flex items-center justify-between`: tombol X ghost bulat di kiri (`size-8 rounded-full hover:bg-muted/70`), judul tepat di tengah, spacer `size-8` transparan di kanan.
+
+2. **Welcome Typography (Travel Magazine Feel):**
+   - Headline: `text-2xl font-bold tracking-tight text-foreground` — "Welcome to MyRehat".
+   - Subtitle: `mt-1 text-xs text-muted-foreground` — "Direct homestay marketplace and host network across Malaysia."
+
+3. **Input Box Refinement (Airbnb Styled):**
+   - Wrapper `rounded-xl border border-border/80 bg-background transition-all focus-within:border-foreground focus-within:ring-1 focus-within:ring-foreground` menggantikan input standalone.
+   - Label uppercase kecil di dalam container atas: `text-[11px] font-semibold uppercase tracking-wider text-muted-foreground px-3.5 pt-2.5 block`.
+   - Input tanpa border individual: `h-7 w-full bg-transparent px-3.5 pb-2.5 text-sm outline-none placeholder:text-muted-foreground/40`.
+   - Micro-copy helper: `text-[11px] text-muted-foreground/75 leading-relaxed pt-1`.
+
+4. **Primary Action Button — Airbnb Rausch Gradient:**
+   - `h-12 w-full rounded-xl bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] hover:opacity-95 active:scale-[0.99] text-white font-semibold text-sm shadow-sm transition-all cursor-pointer flex items-center justify-center`.
+   - Karakter "Rausch" (merah Airbnb khas) memberikan personality hospitality yang kuat dan tepat sasaran.
+
+5. **Social Buttons — Balanced Grid, Icon Pinned Left, Text Centered:**
+   - `relative flex h-12 w-full cursor-pointer items-center rounded-xl border border-border/80 px-4 font-semibold text-xs text-foreground transition-all hover:bg-muted/40`.
+   - Ikon ditancapkan di posisi absolut kiri: `absolute left-4 size-[18px] shrink-0`.
+   - Teks label presisi di tengah tombol: `w-full text-center`.
+
+### Verifikasi:
+- `bunx vitest run`: **32/32 passed (100% HIJAU)**.
+- `tsc`: **0 error** di seluruh monorepo.
+- Logika multi-step auth (identifier → password/OTP) dan `window.location.href`/`window.location.origin` tetap utuh.
+- Mobile 390px bebas horizontal overflow.
+
+### Status:
+Auth UI polish level Airbnb selesai 100% — craftsmanship-nya setara modal identitas Airbnb asli.
+
+---
+
+## Log #16: Auth Visual Craftsmanship — Airbnb Canonical UI Polish (5 Details)
+- **Timestamp:** 2026-10-23
+- **Tujuan:** Memoles visual Auth Modal ([auth-modal.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/auth-modal.tsx)) dan halaman `/login` ([login/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/login/page.tsx)) agar mencapai craftsmanship setara modal autentikasi Airbnb asli — 5 detail presisi:
+
+### 5 Perubahan Visual Presisi:
+
+1. **Floating Container & Three-Tier Shadow:**
+   - Card: `max-w-[520px] rounded-3xl border border-border/40 bg-background shadow-[0_8px_28px_rgba(0,0,0,0.12)] overflow-hidden`.
+   - Backdrop modal: `bg-black/50 backdrop-blur-sm transition-all duration-300`.
+   - Header `h-16 px-6 border-b border-border/30 flex items-center justify-between`: tombol X ghost bulat di kiri (`size-8 rounded-full hover:bg-muted/70`), judul tepat di tengah, spacer `size-8` transparan di kanan.
+
+2. **Welcome Typography (Travel Magazine Feel):**
+   - Headline: `text-2xl font-bold tracking-tight text-foreground` — "Welcome to MyRehat".
+   - Subtitle: `mt-1 text-xs text-muted-foreground` — "Direct homestay marketplace and host network across Malaysia."
+
+3. **Input Box Refinement (Airbnb Styled):**
+   - Wrapper `rounded-xl border border-border/80 bg-background transition-all focus-within:border-foreground focus-within:ring-1 focus-within:ring-foreground` menggantikan input standalone.
+   - Label uppercase kecil di dalam container atas: `text-[11px] font-semibold uppercase tracking-wider text-muted-foreground px-3.5 pt-2.5 block`.
+   - Input tanpa border individual: `h-7 w-full bg-transparent px-3.5 pb-2.5 text-sm outline-none placeholder:text-muted-foreground/40`.
+   - Micro-copy helper: `text-[11px] text-muted-foreground/75 leading-relaxed pt-1`.
+
+4. **Primary Action Button — Airbnb Rausch Gradient:**
+   - `h-12 w-full rounded-xl bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] hover:opacity-95 active:scale-[0.99] text-white font-semibold text-sm shadow-sm transition-all cursor-pointer flex items-center justify-center`.
+   - Karakter "Rausch" (merah Airbnb khas) memberikan personality hospitality yang kuat dan tepat sasaran.
+
+5. **Social Buttons — Balanced Grid, Icon Pinned Left, Text Centered:**
+   - `relative flex h-12 w-full cursor-pointer items-center rounded-xl border border-border/80 px-4 font-semibold text-xs text-foreground transition-all hover:bg-muted/40`.
+   - Ikon ditancapkan di posisi absolut kiri: `absolute left-4 size-[18px] shrink-0`.
+   - Teks label presisi di tengah tombol: `w-full text-center`.
+
+### Verifikasi:
+- `bunx vitest run`: **32/32 passed (100% HIJAU)**.
+- `tsc`: **0 error** di seluruh monorepo.
+- Logika multi-step auth (identifier → password/OTP) dan `window.location.href`/`window.location.origin` tetap utuh.
+- Mobile 390px bebas horizontal overflow.
+
+### Status:
+Auth UI polish level Airbnb selesai 100% — craftsmanship-nya setara modal identitas Airbnb asli.
+
+
+---
+
+## Log #17: Agent Standing Orders — CLAUDE.md & .cursorrules
+- **Timestamp:** 2026-10-23
+- **Tujuan:** Membuat dua file konfigurasi agent standing orders (`CLAUDE.md` dan `.cursorrules`) di root proyek sebagai MANDATORY ALWAYS-ON POST-TASK DIRECTIVE yang dibaca otomatis oleh Claude AI dan Cursor AI pada setiap sesi.
+
+### Rincian Perubahan:
+1. **`CLAUDE.md`** ([file:///Users/muhiqbalhakim/Dev/myrehat-task-b/CLAUDE.md](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/CLAUDE.md)):
+   - Dibuat baru dengan 5 seksi utama: Project Overview, Automatic Post-Execution Hook (Non-Negotiable), Anti-Slop Design Rules, Key Files Table, dan Verification Checklist.
+   - Directive hook mewajibkan append ke `PROMPT_LOG.md` (incremental Log #) dan `BUG_EXPLANATION_LOCAL.md` setelah setiap task selesai.
+   - Menyertakan format template Log # eksplisit untuk konsistensi.
+
+2. **`.cursorrules`** ([file:///Users/muhiqbalhakim/Dev/myrehat-task-b/.cursorrules](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/.cursorrules)):
+   - Dibuat baru dengan format plain-text yang dioptimalkan untuk parsing Cursor AI.
+   - Mereplikasi semua 4 directive wajib dari CLAUDE.md dalam format ringkas.
+   - Menyertakan: Auth Pattern kanonikal Airbnb, 4 kategori homestay eksak, referensi test files dan jumlah test.
+
+### Status:
+Done. Kedua file agent config aktif. vitest 32/32 green · tsc 0 errors.
+
+---
+
+## Log #18: BuyHomestay Polish — English Copy, Search Bar, Empty State & Agent Config
+- **Timestamp:** 2026-10-23
+- **Tujuan:** Update `CLAUDE.md` & `.cursorrules` dengan directive bilingual (ID+EN), perbaiki copy bahasa Indonesia di form, upgrade search bar, kompakkan empty state, dan aktifkan tombol "Contact Host" pada sample cards.
+
+### Rincian Perubahan:
+1. **`CLAUDE.md`** ([file:///Users/muhiqbalhakim/Dev/myrehat-task-b/CLAUDE.md](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/CLAUDE.md)):
+   - Header hook diubah menjadi bilingual ID+EN: "ATURAN OTOMATIS PASCA-EKSEKUSI / AUTOMATIC POST-EXECUTION HOOK".
+   - 4 directive utama ditulis dalam dua bahasa untuk coverage agent yang lebih luas.
+2. **`.cursorrules`** ([file:///Users/muhiqbalhakim/Dev/myrehat-task-b/.cursorrules](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/.cursorrules)):
+   - Ditulis ulang lengkap dengan rule Anti-Slop: "NO Indonesian/mixed-language copy in UI components — 100% professional English".
+3. **`homestay-form.tsx`** ([file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx)):
+   - Tiga benefit card diubah menjadi bahasa Inggris profesional standar hospitality.
+4. **`homestay-list.tsx`** ([file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-list.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-list.tsx)):
+   - Search bar: `h-12`, placeholder deskriptif, focus ring.
+   - Empty state: Dikompakkan dari `max-w-xl` ke `max-w-lg`.
+   - Sample cards: Tombol "Contact Host" aktif ke link WhatsApp demo.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
+
+---
+
+## Log #19: BuyHomestay Category Badge Clean & Full-Pill Search Bar Fix
+- **Timestamp:** 2026-10-23
+- **Tujuan:** Memperbaiki 2 cacat visual pada marketplace homestay list (`homestay-list.tsx`): menghilangkan angka "0" bocor pada category pill dan memastikan search bar dirender utuh sebagai pill penuh:
+
+### Rincian Perubahan:
+1. **Pembersihan Bocor Angka "0" Kategori** ([homestay-list.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-list.tsx)):
+   - Menghapus rendering badge counter angka mentah pada tombol kategori.
+   - Kategori kini dirender murni hanya nama kategorinya (`<span>{cat}</span>`) dengan padding `px-4 py-1.5`, state aktif solid (`bg-foreground text-background border-foreground shadow-xs font-semibold`), dan state inaktif bersih tanpa kebocoran kode React.
+2. **Search Bar Full-Pill Utuh & Jelas** ([homestay-list.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-list.tsx)):
+   - Wrapper: `relative w-full mb-6`.
+   - Ikon Search: `absolute left-4 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none`.
+   - Elemen `<input>`: `h-12 w-full rounded-full border border-border/80 bg-background pl-11 pr-4 text-sm shadow-xs transition-all placeholder:text-muted-foreground/60 focus:border-ring focus:ring-1 focus:ring-ring outline-none`.
+   - Placeholder: `"Search by title, location, or keyword..."`.
+   - Tombol Clear `X` aktif saat `search` terisi.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors. Mobile 390px responsif.
+

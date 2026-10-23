@@ -133,16 +133,16 @@ export default function HomestayList({ onNavigateToCreate }: HomestayListProps) 
   return (
     <div className="space-y-8">
       {/* 2. Structured 2-Tier Search and Category Filter Bar */}
-      <div className="space-y-3">
+      <div>
         {/* Tier 1: Search Input Bar */}
-        <div className="relative w-full">
+        <div className="relative w-full mb-6">
           <Search className="absolute left-4 top-1/2 size-4 -translate-y-1/2 text-muted-foreground pointer-events-none" />
           <input
             type="text"
             placeholder="Search by title, location, or keyword..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full h-11 pl-11 pr-10 text-sm rounded-full border border-border/60 bg-background shadow-xs transition-all placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-foreground/20 focus:border-ring"
+            className="h-12 w-full rounded-full border border-border/80 bg-background pl-11 pr-4 text-sm shadow-xs transition-all placeholder:text-muted-foreground/60 focus:border-ring focus:ring-1 focus:ring-ring outline-none"
           />
           {search && (
             <button
@@ -156,7 +156,7 @@ export default function HomestayList({ onNavigateToCreate }: HomestayListProps) 
           )}
         </div>
 
-        {/* Tier 2: Category Strip with Counter Badge */}
+        {/* Tier 2: Category Strip */}
         <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar py-1">
           {CATEGORIES.map((cat) => {
             const isSelected = selectedCategory === cat;
@@ -165,18 +165,13 @@ export default function HomestayList({ onNavigateToCreate }: HomestayListProps) 
                 key={cat}
                 type="button"
                 onClick={() => setSelectedCategory(cat)}
-                className={`shrink-0 inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium transition-all cursor-pointer border ${
+                className={`shrink-0 inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium transition-all cursor-pointer border ${
                   isSelected
-                    ? "bg-foreground text-background border-foreground shadow-xs"
+                    ? "bg-foreground text-background border-foreground shadow-xs font-semibold"
                     : "bg-background text-muted-foreground border-border/60 hover:text-foreground hover:bg-muted/40"
                 }`}
               >
                 <span>{cat}</span>
-                {isSelected && !isLoading && (
-                  <span className="inline-flex items-center justify-center rounded-full bg-background/20 px-1.5 py-0.2 text-[10px] font-bold text-background leading-none">
-                    {filteredListings.length}
-                  </span>
-                )}
               </button>
             );
           })}
@@ -211,30 +206,30 @@ export default function HomestayList({ onNavigateToCreate }: HomestayListProps) 
 
       {/* 3. Human-Centric Empty State Card & Sample Opportunities */}
       {!isLoading && !error && filteredListings.length === 0 && (
-        <div className="space-y-12">
-          {/* Main Empty State Container */}
-          <div className="rounded-2xl border border-border/50 bg-muted/20 p-8 sm:p-12 text-center max-w-xl mx-auto space-y-5 shadow-xs">
-            <div className="mx-auto flex size-12 items-center justify-center rounded-2xl border border-border/50 bg-background text-muted-foreground shadow-2xs">
-              <Building className="size-6 text-foreground/70" />
+        <div className="space-y-10">
+          {/* Compact warm Empty State */}
+          <div className="rounded-2xl bg-muted/20 px-6 py-10 text-center max-w-lg mx-auto space-y-4">
+            <div className="mx-auto flex size-10 items-center justify-center rounded-xl border border-border/40 bg-background text-muted-foreground shadow-2xs">
+              <Building className="size-5 text-foreground/60" />
             </div>
 
-            <div className="space-y-2">
-              <h3 className="text-lg sm:text-xl font-bold tracking-tight text-foreground">
-                No Listings Published in this Category Yet
+            <div className="space-y-1.5">
+              <h3 className="text-base font-bold tracking-tight text-foreground">
+                No listings in this category yet
               </h3>
-              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-md mx-auto">
-                Be the first verified host or property owner to list a villa, land, or operating Airbnb business directly to buyers with 0% platform fee.
+              <p className="text-xs text-muted-foreground leading-relaxed max-w-sm mx-auto">
+                Be the first host to list a villa, land parcel, or operating Airbnb business — zero platform fees, direct buyer contact.
               </p>
             </div>
 
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-1">
               {onNavigateToCreate ? (
                 <button
                   type="button"
                   onClick={onNavigateToCreate}
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-foreground px-6 text-sm font-medium text-background transition-opacity hover:opacity-90 shadow-sm cursor-pointer w-full sm:w-auto"
+                  className="inline-flex h-10 items-center justify-center gap-2 rounded-full bg-foreground px-5 text-xs font-medium text-background transition-opacity hover:opacity-90 shadow-sm cursor-pointer w-full sm:w-auto"
                 >
-                  <Plus className="size-4" />
+                  <Plus className="size-3.5" />
                   Post the First Listing
                 </button>
               ) : null}
@@ -255,7 +250,7 @@ export default function HomestayList({ onNavigateToCreate }: HomestayListProps) 
           </div>
 
           {/* Sample Verified Opportunities Showcase */}
-          <div className="space-y-4 pt-4 border-t border-border/40">
+          <div className="space-y-4 pt-2 border-t border-border/40">
             <div className="space-y-1">
               <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                 <Compass className="size-3.5" />
@@ -311,14 +306,15 @@ export default function HomestayList({ onNavigateToCreate }: HomestayListProps) 
                       </span>
                     </div>
 
-                    <button
-                      type="button"
-                      disabled
-                      className="h-8 px-3 rounded-full text-xs font-medium border border-border/50 bg-muted/30 text-muted-foreground flex items-center justify-center gap-1.5 w-full cursor-not-allowed opacity-80"
+                    <a
+                      href="https://wa.me/601234567890"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="h-8 px-3 rounded-full text-xs font-medium border border-border/70 hover:bg-foreground hover:text-background hover:border-foreground transition-all flex items-center justify-center gap-1.5 w-full cursor-pointer"
                     >
                       <MessageSquare className="size-3.5" />
-                      Sample Opportunity
-                    </button>
+                      Contact Host
+                    </a>
                   </CardFooter>
                 </Card>
               ))}

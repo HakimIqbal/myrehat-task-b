@@ -1,0 +1,70 @@
+# .cursorrules — MyRehat Task B
+# Read by Cursor AI on every request. All rules are ALWAYS ON.
+
+## STACK
+Next.js 15 App Router · Elysia (Bun) · Drizzle ORM · PostgreSQL · Better-Auth
+oRPC · TanStack Query · Tailwind CSS v4 · Vitest · TypeScript strict monorepo
+
+## ATURAN OTOMATIS PASCA-EKSEKUSI / AUTOMATIC POST-EXECUTION HOOK (NON-NEGOTIABLE)
+Setiap kali kamu SELESAI melakukan edit kode, perbaikan bug, atau penyempurnaan visual:
+After completing ANY code edit, bug fix, refactor, or visual refinement:
+
+1. WAJIB append prompt dan ringkasan pekerjaan ke PROMPT_LOG.md dengan header Log # berurutan.
+   ALWAYS append an entry to PROMPT_LOG.md with incremental Log # header.
+   - Increment Log # sequentially.
+   - Include: timestamp, purpose, changed files (markdown links), Status line.
+   - Format:
+       ## Log #N: Short Title
+       - **Timestamp:** YYYY-MM-DD
+       - **Tujuan:** one-sentence purpose
+       ### Rincian Perubahan:
+       1. **ComponentName** (file:///abs/path): what changed and why.
+       ### Status:
+       Done. vitest 32/32 green · tsc 0 errors.
+
+2. WAJIB append analisis akar masalah, keputusan arsitektur, dan penjelasan teknis ke BUG_EXPLANATION_LOCAL.md.
+   ALWAYS append a section to BUG_EXPLANATION_LOCAL.md
+   - Title: ## <Topic> (Log #N)
+   - Include root-cause analysis, architecture decision, gotchas.
+
+3. JANGAN PERNAH menyelesaikan turn tanpa memverifikasi KEDUA file sudah di-update.
+   NEVER finish a turn without verifying BOTH documentation files are updated.
+
+4. Pertahankan seluruh test suite tetap hijau dan tsc bersih.
+   ALWAYS verify before ending the turn:
+   - bunx vitest run → 32/32 passed (never regress)
+   - tsc across all workspaces → 0 errors
+   - Mobile 390px viewport — no horizontal overflow
+
+## ANTI-SLOP DESIGN RULES (enforced on every UI change)
+- NO floating badge capsules above headings
+- NO three-column symmetrical feature boxes with green checkmarks
+- NO purple-prose marketing copy ("revolutionary", "seamless", "turnkey")
+- NO font sizes that overflow at 390px viewport
+- NO Indonesian/mixed-language copy in UI components — 100% professional English
+- YES Airbnb / Linear minimalist aesthetic
+- YES Rausch gradient for primary CTA: from-[#E61E4D] via-[#E31C5F] to-[#D70466]
+- YES Airbnb canonical auth: input container with focus-within ring, label inside top
+
+## AUTH PATTERN (Airbnb Canonical)
+- Single unified identifier field (email or phone) → detects type → routes to password/OTP step
+- Primary button: h-12 rounded-xl Rausch gradient text-white font-semibold text-sm tracking-wide
+- Social buttons: h-12 rounded-xl border border-border/80, icon absolute left-4, text w-full text-center text-sm font-medium
+- Legal footer: text-xs text-muted-foreground/80, clickable ToS and Privacy Policy links with toast
+
+## HOMESTAY CATEGORIES (exact 4 — do not modify)
+- "Buy Property"
+- "Buy land to build homestay"
+- "Buy Airbnb Profile"
+- "Buy Airbnb Business"
+
+## KEY DOCUMENTATION FILES
+- PROMPT_LOG.md          — chronological audit log (append every task)
+- BUG_EXPLANATION_LOCAL.md — deep technical notes (gitignored, write candidly)
+
+## TEST FILES
+- tests/waha-webhook.test.ts          — 6 tests
+- tests/homestay-categories.test.ts  — 21 tests
+- scripts/polish.test.ts              — 5 tests
+- Total: 32 tests — must always pass
+

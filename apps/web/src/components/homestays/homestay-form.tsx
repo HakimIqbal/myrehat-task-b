@@ -139,7 +139,7 @@ export default function HomestayForm({ onSuccess }: HomestayFormProps) {
                   Direct Buyer Connections
                 </h4>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Langsung tersambung ke WhatsApp calon pembeli tanpa perantara agen.
+                  Connect directly with prospective buyers via WhatsApp with zero agent intermediaries.
                 </p>
               </div>
             </div>
@@ -154,7 +154,7 @@ export default function HomestayForm({ onSuccess }: HomestayFormProps) {
                   Zero Hidden Commissions
                 </h4>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  100% hasil transaksi milik Anda, MyRehat mengenakan 0% biaya potongan listing.
+                  Keep 100% of your transaction value. MyRehat charges zero platform listing fees.
                 </p>
               </div>
             </div>
@@ -169,7 +169,7 @@ export default function HomestayForm({ onSuccess }: HomestayFormProps) {
                   Verified Hospitality Network
                 </h4>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Paparan langsung ke investor properti dan pengusaha Airbnb di seluruh Malaysia.
+                  Gain immediate exposure to property investors and Airbnb operators across Malaysia.
                 </p>
               </div>
             </div>
