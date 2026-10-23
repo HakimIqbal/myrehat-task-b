@@ -1,7 +1,6 @@
 "use client";
 
-import { Button } from "@myrehat-task-b/ui/components/button";
-import { Building2, Plus, Sparkles } from "lucide-react";
+import { ArrowLeft, Plus } from "lucide-react";
 import { useState } from "react";
 
 import HomestayForm from "@/components/homestays/homestay-form";
@@ -11,66 +10,66 @@ export default function HomestaysPage() {
   const [activeTab, setActiveTab] = useState<"browse" | "create">("browse");
 
   return (
-    <div className="container mx-auto max-w-5xl px-4 py-8 space-y-8">
-      {/* Hero Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b pb-6">
-        <div>
-          <div className="flex items-center gap-2 text-primary font-semibold text-xs tracking-wider uppercase mb-1">
-            <Sparkles className="size-3.5" />
-            MyRehat Marketplace
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
-            BuyHomestay Listings
+    <div className="container mx-auto max-w-6xl px-4 py-8 sm:py-12 space-y-8">
+      {/* 1. Header & Ergonomic Segmented Control Switcher */}
+      <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between border-b border-border/40 pb-6">
+        <div className="space-y-1.5">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+            BuyHomestay Marketplace
           </h1>
-          <p className="mt-1 text-sm text-muted-foreground max-w-2xl">
-            Explore and invest in homestay properties, development land, active Airbnb profiles, and profitable hospitality businesses.
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Acquire verified vacation stays, land, and turnkey Airbnb businesses across Malaysia.
           </p>
         </div>
 
-        <div className="flex items-center gap-2 shrink-0">
-          <Button
-            variant={activeTab === "browse" ? "default" : "outline"}
-            size="sm"
+        {/* Segmented Control Pills */}
+        <div className="flex items-center gap-1 rounded-full border border-border/50 bg-muted/60 p-1 shrink-0 self-start sm:self-auto shadow-2xs">
+          <button
+            type="button"
             onClick={() => setActiveTab("browse")}
-            className="text-xs"
+            className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all cursor-pointer ${
+              activeTab === "browse"
+                ? "bg-background text-foreground font-medium shadow-xs"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+            }`}
           >
-            <Building2 className="mr-1.5 size-3.5" />
-            Browse Listings
-          </Button>
-          <Button
-            variant={activeTab === "create" ? "default" : "outline"}
-            size="sm"
+            Browse Opportunities
+          </button>
+          <button
+            type="button"
             onClick={() => setActiveTab("create")}
-            className="text-xs"
+            className={`inline-flex items-center gap-1 rounded-full px-4 py-1.5 text-xs font-medium transition-all cursor-pointer ${
+              activeTab === "create"
+                ? "bg-background text-foreground font-medium shadow-xs"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+            }`}
           >
-            <Plus className="mr-1.5 size-3.5" />
-            Post New Listing
-          </Button>
+            <Plus className="size-3.5" />
+            Post Listing
+          </button>
         </div>
       </div>
 
       {/* Main Content Body */}
       {activeTab === "create" ? (
-        <div className="max-w-2xl mx-auto space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold">Post a BuyHomestay Listing</h2>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setActiveTab("browse")}
-              className="text-xs text-muted-foreground"
-            >
-              Cancel & Return to Listings
-            </Button>
+        <div className="space-y-4">
+          <button
+            type="button"
+            onClick={() => setActiveTab("browse")}
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+          >
+            <ArrowLeft className="size-3.5" />
+            Back to opportunities
+          </button>
+          <div className="w-full">
+            <HomestayForm onSuccess={() => setActiveTab("browse")} />
           </div>
-          <HomestayForm onSuccess={() => setActiveTab("browse")} />
         </div>
       ) : (
         <div className="space-y-6">
-          <HomestayList />
+          <HomestayList onNavigateToCreate={() => setActiveTab("create")} />
         </div>
       )}
     </div>
   );
 }
-

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import "../index.css";
+import Footer from "@/components/footer";
 import Header from "@/components/header";
 import Providers from "@/components/providers";
 
@@ -16,8 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "myrehat-task-b",
-  description: "myrehat-task-b",
+  title: "MyRehat — Direct Homestay & Airbnb Marketplace",
+  description:
+    "Connect directly with verified homestay hosts, property owners, and Airbnb acquisitions across Malaysia.",
 };
 
 export default function RootLayout({
@@ -29,9 +31,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
-          <div className="grid grid-rows-[auto_1fr] h-svh">
+          <div className="min-h-screen flex flex-col bg-background text-foreground">
             <Header />
-            {children}
+            <main className="flex-1">{children}</main>
+            <Footer />
           </div>
         </Providers>
       </body>
