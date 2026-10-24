@@ -1468,5 +1468,31 @@ Done. vitest 32/32 green · tsc 0 errors (db, api, web, server).
 ### Status:
 Done. vitest 32/32 green · tsc 0 errors (db, api, web, server).
 
+---
+
+## Log #41: Host Dashboard Anti-AI-Slop Refurbishment & Luxury Airbnb/Linear Redesign
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Merombak total halaman Host Dashboard ([apps/web/src/app/dashboard/dashboard.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/dashboard/dashboard.tsx)) agar bebas dari template AI slop (header tabrakan, typo stat cards, dan kartu listing tanpa visual yang anjlok ke bawah), beralih ke standar estetika tinggi Airbnb / Linear:
+  1. Header Host Hub — Clean & Professional:
+     - Header simetris dengan badge verified hijau elegan (`<CheckCircle2 className="size-3" /> Verified Host`) bersanding rapi di samping judul "Host Hub".
+     - Tombol aksi utama dengan Rausch gradient (`from-[#E61E4D] via-[#E31C5F] to-[#D70466]`) untuk "+ Post New Opportunity" dan tombol sekunder "Browse Marketplace" yang proporsional.
+  2. 4 Stat Cards Grid — Micro-Typography & Real Value:
+     - 4 kartu metrik proporsional dengan shadow-2xs halus dan border seimbang:
+       - "Your Listings": jumlah listing aktif milik host (`myListings.length`).
+       - "Marketplace Total": total peluang di platform (`allListings.length`).
+       - "WhatsApp Direct": nilai 100% dengan keterangan `0% platform commission fee`.
+       - "AI Concierge": status `Active` dengan pulsing green dot (`24/7 guest triage ready`).
+  3. Host AI Concierge Banner — Sleek & Refined:
+     - Banner dengan aksen sparkles `#E61E4D`, latar belakang halus berborder rapi, copywriting terfokus ("Automated Property & Guest Inquiry Advisor"), serta tombol direct CTA "Open Concierge Chat".
+  4. Your Managed Listings Section:
+     - Header daftar terpisah dengan indikator jumlah listing aktif host.
+     - Empty state bersih berikon Building dengan tombol "+ Create First Listing" saat host belum memiliki properti.
+     - Kartu listing aktif berasio `aspect-[16/10]` dengan visual image preview Unsplash, badge kategori dan badge "Live", harga RM terformat presisi (`formatPrice`), serta tombol aksi hijau "Test WhatsApp Link" berikon `MessageCircle` dan `ExternalLink`.
+  5. Modal Popup Dialog Post New Opportunity (Airbnb Luxury Pattern):
+     - Modal dialog mengambang ber-backdrop blur (`bg-black/50 backdrop-blur-sm`) dengan header jelas, tombol Close (X), dan integrasi `<HomestayForm embedded />` tanpa pergeseran layout.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors (db, api, web, server).
+
 
 
