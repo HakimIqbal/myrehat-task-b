@@ -21,11 +21,11 @@ Log pengerjaan tugas, prompt pengguna, perubahan kode, dan keputusan teknis yang
      - `GOOGLE_GENERATIVE_AI_API_KEY=***`
      - `DATABASE_URL=placeholder`
 2. **Patch 2: pnpm-workspace.yaml Configuration**
-   - Menambahkan `msgpackr-extract: true` di bawah blok `allowBuilds:` pada [pnpm-workspace.yaml](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/pnpm-workspace.yaml).
+   - Menambahkan `msgpackr-extract: true` di bawah blok `allowBuilds:` pada [`pnpm-workspace.yaml`](pnpm-workspace.yaml).
 3. **Dokumentasi & Git Configuration**
-   - Menambahkan `BUG_EXPLANATION_LOCAL.md` ke [.gitignore](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/.gitignore).
-   - Menginisialisasi dokumen teknis lokal [BUG_EXPLANATION_LOCAL.md](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/BUG_EXPLANATION_LOCAL.md).
-   - Menginisialisasi dokumen audit log [PROMPT_LOG.md](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/PROMPT_LOG.md).
+   - Menambahkan `BUG_EXPLANATION_LOCAL.md` ke [`.gitignore`](.gitignore).
+   - Menginisialisasi dokumen teknis lokal `BUG_EXPLANATION_LOCAL.md` (local notes).
+   - Menginisialisasi dokumen audit log [`PROMPT_LOG.md`](PROMPT_LOG.md).
 
 ### Status:
 Selesai dan terverifikasi. Siap melanjutkan ke patch berikutnya atau instruksi selanjutnya.
@@ -50,7 +50,7 @@ Selesai dan terverifikasi. Siap melanjutkan ke patch berikutnya atau instruksi s
    - Mengubah `defaultCookieAttributes` dari `sameSite: "none", secure: true` menjadi `sameSite: "lax", secure: false`.
    - Mengatasi isu penolakan cookie session di lingkungan HTTP Dokploy.
 4. **Dokumentasi & Technical Notes**
-   - Melakukan append dokumentasi teknis mendalam mengenai arsitektur Dokploy, Same-Origin proxy, dan kebijakan browser cookie ke [BUG_EXPLANATION_LOCAL.md](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/BUG_EXPLANATION_LOCAL.md).
+   - Melakukan append dokumentasi teknis mendalam mengenai arsitektur Dokploy, Same-Origin proxy, dan kebijakan browser cookie ke `BUG_EXPLANATION_LOCAL.md` (local notes).
 
 ### Status:
 Semua 5 patch resmi MyRehat (Patch 1 hingga Patch 5) telah berhasil diaplikasikan dan terdokumentasi dengan lengkap.
@@ -63,32 +63,32 @@ Semua 5 patch resmi MyRehat (Patch 1 hingga Patch 5) telah berhasil diaplikasika
 
 ### Rincian Perubahan:
 1. **Drizzle ORM Database Schema**
-   - Membuat [packages/db/src/schema/homestays.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/packages/db/src/schema/homestays.ts):
+   - Membuat [`packages/db/src/schema/homestays.ts`](packages/db/src/schema/homestays.ts):
      - Tabel `homestays` dengan kolom: `id`, `userId` (FK ke `user.id` on cascade delete), `title`, `price` (numeric), `location`, `category`, `contactWa`, dan `createdAt`.
      - Relasi relasional `homestayRelations` antara `homestays` dan `user`.
      - Ekspor konstan `HOMESTAY_CATEGORIES` dengan 4 kategori presisi.
-   - Mere-ekspor modul homestay di [packages/db/src/schema/index.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/packages/db/src/schema/index.ts) dan relasi di [packages/db/src/relations.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/packages/db/src/relations.ts).
-   - Re-ekspor operator umum Drizzle (`desc`, `eq`, dll.) dari [packages/db/src/index.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/packages/db/src/index.ts).
+   - Mere-ekspor modul homestay di [`packages/db/src/schema/index.ts`](packages/db/src/schema/index.ts) dan relasi di [`packages/db/src/relations.ts`](packages/db/src/relations.ts).
+   - Re-ekspor operator umum Drizzle (`desc`, `eq`, dll.) dari [`packages/db/src/index.ts`](packages/db/src/index.ts).
 
 2. **oRPC API Router & Protected Procedure**
-   - Membuat [packages/api/src/routers/homestays.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/packages/api/src/routers/homestays.ts):
+   - Membuat [`packages/api/src/routers/homestays.ts`](packages/api/src/routers/homestays.ts):
      - Validasi ketat menggunakan Zod enum untuk TEPAT 4 opsi kategori: `"Buy Property"`, `"Buy land to build homestay"`, `"Buy Airbnb Profile"`, `"Buy Airbnb Business"`.
      - `create`: Endpoint `protectedProcedure` yang memvalidasi otentikasi Better-Auth session sebelum melakukan insert ke PostgreSQL via Drizzle.
      - `list`: Endpoint `publicProcedure` yang mengembalikan daftar homestay beserta data seller (`user`), terurut dari yang terbaru (`createdAt desc`).
-   - Mendaftarkan router `homestays` ke `appRouter` pada [packages/api/src/routers/index.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/packages/api/src/routers/index.ts).
+   - Mendaftarkan router `homestays` ke `appRouter` pada [`packages/api/src/routers/index.ts`](packages/api/src/routers/index.ts).
 
 3. **Frontend UI Components & Pages**
-   - Form Create Listing: [apps/web/src/components/homestays/homestay-form.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx)
+   - Form Create Listing: [`apps/web/src/components/homestays/homestay-form.tsx`](apps/web/src/components/homestays/homestay-form.tsx)
      - Input fields: `title`, `price`, `location`, `category` (dropdown strict 4 opsi), dan `contactWa`.
      - Auth guard di sisi klien menggunakan `authClient.useSession()` (prompt login jika belum masuk).
      - Otomatis invalidasi query cache TanStack Query saat submit sukses dan notifikasi Sonner toast.
-   - List & Cards Grid: [apps/web/src/components/homestays/homestay-list.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-list.tsx)
+   - List & Cards Grid: [`apps/web/src/components/homestays/homestay-list.tsx`](apps/web/src/components/homestays/homestay-list.tsx)
      - Filter pill per kategori dan realtime search bar.
      - Tampilan card responsif lengkap dengan badge kategori unik, format harga mata uang, lokasi, seller info, dan tombol kontak WhatsApp langsung (`https://wa.me/...`).
    - Halaman Khusus & Integrasi:
-     - Halaman Marketplace: [apps/web/src/app/homestays/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/homestays/page.tsx).
-     - Halaman Dashboard: [apps/web/src/app/dashboard/dashboard.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/dashboard/dashboard.tsx).
-     - Navigasi Header: [apps/web/src/components/header.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/header.tsx).
+     - Halaman Marketplace: [`apps/web/src/app/homestays/page.tsx`](apps/web/src/app/homestays/page.tsx).
+     - Halaman Dashboard: [`apps/web/src/app/dashboard/dashboard.tsx`](apps/web/src/app/dashboard/dashboard.tsx).
+     - Navigasi Header: [`apps/web/src/components/header.tsx`](apps/web/src/components/header.tsx).
 
 ### Status:
 Fitur F1 telah diimplementasikan secara modular, bersih, lulus kompilasi TypeScript monorepo, dan siap digunakan.
@@ -101,7 +101,7 @@ Fitur F1 telah diimplementasikan secara modular, bersih, lulus kompilasi TypeScr
 
 ### Rincian Perubahan:
 1. **Next.js Route Handler**
-   - Membuat [apps/web/src/app/api/webhooks/waha/route.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/api/webhooks/waha/route.ts).
+   - Membuat [`apps/web/src/app/api/webhooks/waha/route.ts`](apps/web/src/app/api/webhooks/waha/route.ts).
    - Menangani HTTP `POST` untuk webhook eksternal WAHA dan HTTP `GET` untuk verifikasi/health check.
 2. **Validasi Schema Zod**
    - Skema `wahaWebhookSchema`:
@@ -132,7 +132,7 @@ Fitur F2 telah diverifikasi dengan test case (valid WAHA payload, missing fields
 1. **Instalasi & Dependensi**
    - Memasang dependensi `ai-sdk-provider-opencode-sdk` versi 5.0.1 dan menghubungkan `ai` di root workspace `package.json`.
 2. **File Skrip Utama (`scripts/polish.ts`)**
-   - Membuat [scripts/polish.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/scripts/polish.ts):
+   - Membuat [`scripts/polish.ts`](scripts/polish.ts):
      - Mengekspor fungsi `polishDescription(rawDescription: string, options?: PolishOptions): Promise<string>`.
      - Validasi input string mentah (melempar error jika kosong/whitespace).
      - Menggunakan `generateText` dari `ai` dengan model dari `opencode` (`ai-sdk-provider-opencode-sdk`).
@@ -140,7 +140,7 @@ Fitur F2 telah diverifikasi dengan test case (valid WAHA payload, missing fields
      - System prompt khusus: copywriter real estate & homestay profesional MyRehat untuk menghasilkan deskripsi properti menarik, berdaya jual tinggi, dan SEO-friendly.
      - Dukungan eksekusi CLI via `bun scripts/polish.ts "<raw_description>"`.
 3. **Unit Test Mock (`scripts/polish.test.ts`)**
-   - Membuat [scripts/polish.test.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/scripts/polish.test.ts):
+   - Membuat [`scripts/polish.test.ts`](scripts/polish.test.ts):
      - Menguji pemolesan deskripsi homestay dalam mode mock.
      - Menguji injeksi custom mock provider untuk asersi output deterministik.
      - Menguji dynamic mock provider function berbasis prompt.
@@ -148,7 +148,7 @@ Fitur F2 telah diverifikasi dengan test case (valid WAHA payload, missing fields
      - Menguji kepatuhan antarmuka `LanguageModel` terhadap standar AI SDK.
    - Seluruh 5 unit test berhasil lulus 100% menggunakan `bun test scripts/polish.test.ts`.
 4. **Dokumentasi & Technical Notes**
-   - Menambahkan catatan arsitektur LanguageModel v4 spec dan mock provider pattern ke [BUG_EXPLANATION_LOCAL.md](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/BUG_EXPLANATION_LOCAL.md).
+   - Menambahkan catatan arsitektur LanguageModel v4 spec dan mock provider pattern ke `BUG_EXPLANATION_LOCAL.md` (local notes).
 
 ### Status:
 Fitur F3 telah selesai diimplementasikan, teruji via unit test (5/5 pass), siap dijalankan via CLI maupun diimpor sebagai modul, dan monorepo lulus kompilasi TypeScript 100%.
@@ -161,23 +161,23 @@ Fitur F3 telah selesai diimplementasikan, teruji via unit test (5/5 pass), siap 
 
 ### Rincian Perubahan:
 1. **Fitur F4: Hero Heading & Mobile Responsiveness**
-   - Mengubah halaman utama [apps/web/src/app/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/page.tsx):
+   - Mengubah halaman utama [`apps/web/src/app/page.tsx`](apps/web/src/app/page.tsx):
      - Heading utama disetel persis: `"Book homestays directly with hosts"`.
      - Layout dirancang responsif, elegan, bebas horizontal overflow, dan aman pada mobile screen (viewport 390px / iPhone).
      - Menambahkan call-to-action ke marketplace BuyHomestay (`/homestays`) dan Host Dashboard (`/dashboard`), visual cards keunggulan platform, serta indikator status jaringan oRPC.
 2. **Konfigurasi Vitest Monorepo**
    - Memasang `vitest` v5.0.5 pada root workspace.
-   - Membuat [vitest.config.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/vitest.config.ts) dengan path aliases ke seluruh package dan app Next.js (`@/*`, `@myrehat-task-b/*`, `next/server`).
+   - Membuat [`vitest.config.ts`](vitest.config.ts) dengan path aliases ke seluruh package dan app Next.js (`@/*`, `@myrehat-task-b/*`, `next/server`).
 3. **Tiga Test Suite Wajib Vitest (100% Hijau)**
-   - **Validasi Webhook WAHA** ([tests/waha-webhook.test.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/tests/waha-webhook.test.ts)):
+   - **Validasi Webhook WAHA** ([`tests/waha-webhook.test.ts`](tests/waha-webhook.test.ts)):
      - Payload valid lolos dengan status `200 OK`.
      - Payload tanpa `event` ditolak dengan `400 Bad Request`.
      - Payload tanpa `payload.from` ditolak dengan `400 Bad Request`.
      - Payload tanpa `payload.body` ditolak dengan `400 Bad Request`.
      - Malformed JSON ditolak dengan `400 Bad Request`.
-   - **Format Reply WAHA** ([tests/waha-webhook.test.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/tests/waha-webhook.test.ts)):
+   - **Format Reply WAHA** ([`tests/waha-webhook.test.ts`](tests/waha-webhook.test.ts)):
      - Response sukses mengembalikan struktur JSON presisi: `{ to: payload.from, reply: string }`.
-   - **Kategori BuyHomestay: 4 Diterima + 1 Ditolak** ([tests/homestay-categories.test.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/tests/homestay-categories.test.ts)):
+   - **Kategori BuyHomestay: 4 Diterima + 1 Ditolak** ([`tests/homestay-categories.test.ts`](tests/homestay-categories.test.ts)):
      - 4 kategori resmi diterima: `"Buy Property"`, `"Buy land to build homestay"`, `"Buy Airbnb Profile"`, `"Buy Airbnb Business"`.
      - Kategori tidak valid ditolak: `"Rent Apartment"`, `"Invalid Category"`, `"Buy Land"`, dll. melempar error Zod schema.
 4. **Hasil Eksekusi Test & TypeScript Check**
@@ -196,12 +196,12 @@ Semua kriteria Fitur F4 dan 3 test suite wajib Vitest telah terpenuhi sempurna d
 
 ### Rincian Perubahan:
 1. **Konfigurasi Database Remote**
-   - Membuat/mengisi file [packages/db/.env](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/packages/db/.env):
+   - Membuat/mengisi file [`packages/db/.env`](packages/db/.env):
      ```env
      DATABASE_URL=postgresql://taskb8:***@34.21.153.205:5440/taskb8
      ```
 2. **Proteksi Kredensial (.gitignore)**
-   - Menambahkan deklarasi eksplisit `packages/db/.env` pada [.gitignore](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/.gitignore) root selain yang sudah ada pada `packages/db/.gitignore`.
+   - Menambahkan deklarasi eksplisit `packages/db/.env` pada [`.gitignore`](.gitignore) root selain yang sudah ada pada `packages/db/.gitignore`.
    - Terverifikasi via `git status --ignored` bahwa `packages/db/.env` sepenuhnya di-ignore dan aman dari commit/push ke GitHub.
 3. **Eksekusi & Verifikasi Skema Drizzle (db:push)**
    - Perintah `pnpm run db:push` telah berhasil dieksekusi ke PostgreSQL remote server MyRehat (`34.21.153.205:5440`).
@@ -217,7 +217,7 @@ Semua kriteria Fitur F4 dan 3 test suite wajib Vitest telah terpenuhi sempurna d
 
 ## Log #8: Homepage UI Refactor — Anti-Slop & Airbnb Marketplace Standards
 - **Timestamp:** 2026-10-22
-- **Tujuan:** Melakukan refactor total pada [apps/web/src/app/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/page.tsx) dengan standar TasteSkill & UI/UX Pro Max, membuang semua elemen AI-slop, mengimplementasikan interaktivitas search & category pills gaya Airbnb/Linear, menyajikan curated featured listings, serta mempertahankan 100% kelulusan test suite Vitest dan kebersihan `tsc`.
+- **Tujuan:** Melakukan refactor total pada [`apps/web/src/app/page.tsx`](apps/web/src/app/page.tsx) dengan standar TasteSkill & UI/UX Pro Max, membuang semua elemen AI-slop, mengimplementasikan interaktivitas search & category pills gaya Airbnb/Linear, menyajikan curated featured listings, serta mempertahankan 100% kelulusan test suite Vitest dan kebersihan `tsc`.
 
 ### Rincian Perubahan:
 1. **Eliminasi Total Pola AI-Slop**
@@ -285,10 +285,10 @@ Refactor homepage selesai dengan kualitas visual production-grade berstandar kur
    - Chat bubbles dengan kontras jelas antara bubble user (primary background) dan bubble concierge (subtle muted with border).
    - Textarea modern dengan rounded-2xl dan send button terintegrasi.
 5. **Official Footer (`footer.tsx` & `layout.tsx`)**
-   - Komponen footer resmi [apps/web/src/components/footer.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/footer.tsx) terpasang di root layout dengan flex-col sticky structure (`min-h-screen flex flex-col` & `<main className="flex-1">`).
+   - Komponen footer resmi [`apps/web/src/components/footer.tsx`](apps/web/src/components/footer.tsx) terpasang di root layout dengan flex-col sticky structure (`min-h-screen flex flex-col` & `<main className="flex-1">`).
    - Memuat informasi platform, kategori marketplace, tautan host, WhatsApp support link, dan status operational.
 6. **Verifikasi Kualitas & Test Suite**
-   - H1 di [apps/web/src/app/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/page.tsx) diverifikasi tetap persis: `"Book homestays directly with hosts"`.
+   - H1 di [`apps/web/src/app/page.tsx`](apps/web/src/app/page.tsx) diverifikasi tetap persis: `"Book homestays directly with hosts"`.
    - `bunx vitest run`: **32/32 tests passed (100% HIJAU)**.
    - `tsc` (TypeScript compiler) pada seluruh package & app (`packages/db`, `packages/api`, `apps/web`, `apps/server`): **0 error (bersih)**.
    - Mobile viewport 390px teruji aman dengan zero horizontal overflow (`overflow-x-hidden`).
@@ -347,7 +347,7 @@ Penyempurnaan UI/UX tingkat tinggi (High-End Craftsmanship) selesai 100%, bebas 
 
 ## Log #11: Homepage Micro-Refinement — Price Hierarchy, Floating Badges & Action Aesthetics
 - **Timestamp:** 2026-10-22
-- **Tujuan:** Melakukan fine-tuning presisi pada homepage [apps/web/src/app/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/page.tsx) sesuai feedback review visual terakhir dengan mempertahankan layout, struktur, typography, heading F4, dan fungsionalitas:
+- **Tujuan:** Melakukan fine-tuning presisi pada homepage [`apps/web/src/app/page.tsx`](apps/web/src/app/page.tsx) sesuai feedback review visual terakhir dengan mempertahankan layout, struktur, typography, heading F4, dan fungsionalitas:
   1. Menghapus teks uppercase "ASKING PRICE" seluruhnya dan menampilkan harga secara natural dan elegan ala Airbnb.
   2. Merestrukturisasi tag kategori menjadi floating badge halus di pojok kiri atas foto.
   3. Menghapus badge counter "4 listings" di sebelah judul Featured Opportunities untuk tampilan header yang bersih.
@@ -383,7 +383,7 @@ Homepage micro-refinement selesai 100% dan terverifikasi secara fungsional maupu
 
 ## Log #12: BuyHomestay Overhaul — Ergonomic Search, Split Host Onboarding & Curated Empty State
 - **Timestamp:** 2026-10-22
-- **Tujuan:** Melakukan perombakan dan penyempurnaan UI/UX tingkat tinggi pada halaman BuyHomestay Marketplace ([apps/web/src/app/homestays/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/homestays/page.tsx), [homestay-form.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx), [homestay-list.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-list.tsx)) berdasarkan standar TasteSkill, UI/UX Pro Max, dan Dribbble Curated Quality pada 4 area utama:
+- **Tujuan:** Melakukan perombakan dan penyempurnaan UI/UX tingkat tinggi pada halaman BuyHomestay Marketplace ([`apps/web/src/app/homestays/page.tsx`](apps/web/src/app/homestays/page.tsx), [`apps/web/src/components/homestays/homestay-form.tsx`](apps/web/src/components/homestays/homestay-form.tsx), [`apps/web/src/components/homestays/homestay-list.tsx`](apps/web/src/components/homestays/homestay-list.tsx)) berdasarkan standar TasteSkill, UI/UX Pro Max, dan Dribbble Curated Quality pada 4 area utama:
   1. Header & Tab Switcher Ergonomic (`page.tsx`)
   2. Restrukturisasi 2-Tier Search Box & Category Filter Strip (`homestay-list.tsx`)
   3. Human-Centric Empty State Card & Sample Opportunities Showcase (`homestay-list.tsx`)
@@ -430,23 +430,23 @@ BuyHomestay Marketplace overhaul selesai 100% dengan standar Dribbble Curated Qu
 
 ### Rincian Perubahan:
 1. **Komponen Unified Auth Modal & Provider (`auth-modal.tsx` & `providers.tsx`)**
-   - Membuat [apps/web/src/components/auth-modal.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/auth-modal.tsx) yang menyediakan context `useAuthModal` (`openAuthModal`, `closeAuthModal`, `isAuthModalOpen`).
+   - Membuat [`apps/web/src/components/auth-modal.tsx`](apps/web/src/components/auth-modal.tsx) yang menyediakan context `useAuthModal` (`openAuthModal`, `closeAuthModal`, `isAuthModalOpen`).
    - Merender modal via React Portal ke `document.body` dengan animasi backdrop fade dan zoom-in dialog.
    - Dialog dilengkapi tombol close X di kiri atas, judul "Log in or sign up" di tengah, welcome statement, input Email `h-11 rounded-xl`, Password `h-11 rounded-xl` dengan toggle Eye/EyeOff, tombol tunggal "Continue", pembagi "or", tombol Google SVG, tombol WhatsApp SVG, serta footer disclaimer terms & privacy policy.
    - Alur autentikasi seamless: mencoba `authClient.signIn.email` terlebih dahulu; jika akun belum terdaftar, otomatis mengeksekusi `authClient.signUp.email` secara transparan tanpa mengalihkan halaman.
-   - Memasang `AuthModalProvider` ke dalam [apps/web/src/components/providers.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/providers.tsx).
+   - Memasang `AuthModalProvider` ke dalam [`apps/web/src/components/providers.tsx`](apps/web/src/components/providers.tsx).
 2. **Navbar Refinement (`header.tsx` & `user-menu.tsx`)**
-   - Di [apps/web/src/components/header.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/header.tsx):
+   - Di [`apps/web/src/components/header.tsx`](apps/web/src/components/header.tsx):
      - Membaca session status via `authClient.useSession()`.
      - Saat **Guest** (belum login): Menu `Dashboard` disembunyikan dari navbar desktop dan mobile drawer. Menu hanya memuat: `Home`, `BuyHomestay`, `AI Concierge`.
      - Saat **Authenticated** (sudah login): Menu `Dashboard` ditampilkan di navbar dan mobile drawer, bersanding dengan avatar user menu.
-   - Di [apps/web/src/components/user-menu.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/user-menu.tsx):
+   - Di [`apps/web/src/components/user-menu.tsx`](apps/web/src/components/user-menu.tsx):
      - Tombol "Sign In" memanggil `openAuthModal` langsung di atas halaman tanpa redirect.
 3. **Triggering Auth Modal dari Host Onboarding (`homestay-form.tsx`)**
-   - Di [apps/web/src/components/homestays/homestay-form.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx):
+   - Di [`apps/web/src/components/homestays/homestay-form.tsx`](apps/web/src/components/homestays/homestay-form.tsx):
      - Tombol *"Sign In to Continue"* pada Split-Card Host Onboarding kini memicu `openAuthModal` secara instan di atas halaman marketplace.
 4. **Halaman `/login` Fallback (`login/page.tsx`)**
-   - Menyelaraskan rute [apps/web/src/app/login/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/login/page.tsx) dengan kartu unified auth identik agar pengguna yang diarahkan dari route guard `/dashboard` tetap mendapatkan visual berkualitas tinggi.
+   - Menyelaraskan rute [`apps/web/src/app/login/page.tsx`](apps/web/src/app/login/page.tsx) dengan kartu unified auth identik agar pengguna yang diarahkan dari route guard `/dashboard` tetap mendapatkan visual berkualitas tinggi.
 5. **Verifikasi Integritas Teknis**
    - `bunx vitest run`: **32/32 tests passed (100% HIJAU)**.
    - `tsc`: **0 error** di seluruh monorepo.
@@ -490,7 +490,7 @@ Auth polish pada modal dialog dan halaman `/login` selesai 100% dengan estetika 
 
 ## Log #15: Auth Restructure — Ambient Backdrop & Phone/Email + Google/Apple Matrix
 - **Timestamp:** 2026-10-23
-- **Tujuan:** Melakukan perombakan total pada halaman `/login` ([apps/web/src/app/login/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/login/page.tsx)) dan Auth Modal ([apps/web/src/components/auth-modal.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/auth-modal.tsx)) agar memiliki visual depth backdrop elegan ala Linear/Airbnb serta arsitektur hierarki autentikasi modern (Tier 1 Kontak Utama: Email vs WhatsApp/Phone, Tier 2 Identitas Sosial: Google & Apple):
+- **Tujuan:** Melakukan perombakan total pada halaman `/login` ([`apps/web/src/app/login/page.tsx`](apps/web/src/app/login/page.tsx)) dan Auth Modal ([`apps/web/src/components/auth-modal.tsx`](apps/web/src/components/auth-modal.tsx)) agar memiliki visual depth backdrop elegan ala Linear/Airbnb serta arsitektur hierarki autentikasi modern (Tier 1 Kontak Utama: Email vs WhatsApp/Phone, Tier 2 Identitas Sosial: Google & Apple):
   1. Background Halaman `/login`: Menghilangkan kanvas putih datar dengan subtle dot grid pattern dan dual soft ambient radial glow (emerald & amber blur), serta card login berdimensi `max-w-[460px]` dengan efek backdrop-blur-xl dan bayangan studio modern.
   2. Tier 1 Segmented Toggle: Menyediakan selector tab `[Email]` vs `[WhatsApp / Phone]` di atas form:
      - Opsi Email: Input Email + Password (show/hide toggle) + tombol solid "Continue with Email".
@@ -531,7 +531,7 @@ Restrukturisasi autentikasi dan penyempurnaan background studio selesai 100% dan
 
 ## Log #16: Auth Visual Craftsmanship — Airbnb Canonical UI Polish (5 Details)
 - **Timestamp:** 2026-10-23
-- **Tujuan:** Memoles visual Auth Modal ([auth-modal.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/auth-modal.tsx)) dan halaman `/login` ([login/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/login/page.tsx)) agar mencapai craftsmanship setara modal autentikasi Airbnb asli — 5 detail presisi:
+- **Tujuan:** Memoles visual Auth Modal ([`apps/web/src/components/auth-modal.tsx`](apps/web/src/components/auth-modal.tsx)) dan halaman `/login` ([`apps/web/src/app/login/page.tsx`](apps/web/src/app/login/page.tsx)) agar mencapai craftsmanship setara modal autentikasi Airbnb asli — 5 detail presisi:
 
 ### 5 Perubahan Visual Presisi:
 
@@ -572,7 +572,7 @@ Auth UI polish level Airbnb selesai 100% — craftsmanship-nya setara modal iden
 
 ## Log #16: Auth Visual Craftsmanship — Airbnb Canonical UI Polish (5 Details)
 - **Timestamp:** 2026-10-23
-- **Tujuan:** Memoles visual Auth Modal ([auth-modal.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/auth-modal.tsx)) dan halaman `/login` ([login/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/login/page.tsx)) agar mencapai craftsmanship setara modal autentikasi Airbnb asli — 5 detail presisi:
+- **Tujuan:** Memoles visual Auth Modal ([`apps/web/src/components/auth-modal.tsx`](apps/web/src/components/auth-modal.tsx)) dan halaman `/login` ([`apps/web/src/app/login/page.tsx`](apps/web/src/app/login/page.tsx)) agar mencapai craftsmanship setara modal autentikasi Airbnb asli — 5 detail presisi:
 
 ### 5 Perubahan Visual Presisi:
 
@@ -617,12 +617,12 @@ Auth UI polish level Airbnb selesai 100% — craftsmanship-nya setara modal iden
 - **Tujuan:** Membuat dua file konfigurasi agent standing orders (`CLAUDE.md` dan `.cursorrules`) di root proyek sebagai MANDATORY ALWAYS-ON POST-TASK DIRECTIVE yang dibaca otomatis oleh Claude AI dan Cursor AI pada setiap sesi.
 
 ### Rincian Perubahan:
-1. **`CLAUDE.md`** ([file:///Users/muhiqbalhakim/Dev/myrehat-task-b/CLAUDE.md](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/CLAUDE.md)):
+1. **`CLAUDE.md`** ([`CLAUDE.md`](CLAUDE.md)):
    - Dibuat baru dengan 5 seksi utama: Project Overview, Automatic Post-Execution Hook (Non-Negotiable), Anti-Slop Design Rules, Key Files Table, dan Verification Checklist.
    - Directive hook mewajibkan append ke `PROMPT_LOG.md` (incremental Log #) dan `BUG_EXPLANATION_LOCAL.md` setelah setiap task selesai.
    - Menyertakan format template Log # eksplisit untuk konsistensi.
 
-2. **`.cursorrules`** ([file:///Users/muhiqbalhakim/Dev/myrehat-task-b/.cursorrules](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/.cursorrules)):
+2. **`.cursorrules`** ([`.cursorrules`](.cursorrules)):
    - Dibuat baru dengan format plain-text yang dioptimalkan untuk parsing Cursor AI.
    - Mereplikasi semua 4 directive wajib dari CLAUDE.md dalam format ringkas.
    - Menyertakan: Auth Pattern kanonikal Airbnb, 4 kategori homestay eksak, referensi test files dan jumlah test.
@@ -637,14 +637,14 @@ Done. Kedua file agent config aktif. vitest 32/32 green · tsc 0 errors.
 - **Tujuan:** Update `CLAUDE.md` & `.cursorrules` dengan directive bilingual (ID+EN), perbaiki copy bahasa Indonesia di form, upgrade search bar, kompakkan empty state, dan aktifkan tombol "Contact Host" pada sample cards.
 
 ### Rincian Perubahan:
-1. **`CLAUDE.md`** ([file:///Users/muhiqbalhakim/Dev/myrehat-task-b/CLAUDE.md](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/CLAUDE.md)):
+1. **`CLAUDE.md`** ([`CLAUDE.md`](CLAUDE.md)):
    - Header hook diubah menjadi bilingual ID+EN: "ATURAN OTOMATIS PASCA-EKSEKUSI / AUTOMATIC POST-EXECUTION HOOK".
    - 4 directive utama ditulis dalam dua bahasa untuk coverage agent yang lebih luas.
-2. **`.cursorrules`** ([file:///Users/muhiqbalhakim/Dev/myrehat-task-b/.cursorrules](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/.cursorrules)):
+2. **`.cursorrules`** ([`.cursorrules`](.cursorrules)):
    - Ditulis ulang lengkap dengan rule Anti-Slop: "NO Indonesian/mixed-language copy in UI components — 100% professional English".
-3. **`homestay-form.tsx`** ([file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx)):
+3. **`homestay-form.tsx`** ([`apps/web/src/components/homestays/homestay-form.tsx`](apps/web/src/components/homestays/homestay-form.tsx)):
    - Tiga benefit card diubah menjadi bahasa Inggris profesional standar hospitality.
-4. **`homestay-list.tsx`** ([file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-list.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-list.tsx)):
+4. **`homestay-list.tsx`** ([`apps/web/src/components/homestays/homestay-list.tsx`](apps/web/src/components/homestays/homestay-list.tsx)):
    - Search bar: `h-12`, placeholder deskriptif, focus ring.
    - Empty state: Dikompakkan dari `max-w-xl` ke `max-w-lg`.
    - Sample cards: Tombol "Contact Host" aktif ke link WhatsApp demo.
@@ -657,7 +657,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
   1. Header Modal:
      - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
      - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
@@ -686,10 +686,10 @@ Done. vitest 32/32 green · tsc 0 errors.
 - **Tujuan:** Memperbaiki 2 cacat visual pada marketplace homestay list (`homestay-list.tsx`): menghilangkan angka "0" bocor pada category pill dan memastikan search bar dirender utuh sebagai pill penuh:
 
 ### Rincian Perubahan:
-1. **Pembersihan Bocor Angka "0" Kategori** ([homestay-list.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-list.tsx)):
+1. **Pembersihan Bocor Angka "0" Kategori** ([`apps/web/src/components/homestays/homestay-list.tsx`](apps/web/src/components/homestays/homestay-list.tsx)):
    - Menghapus rendering badge counter angka mentah pada tombol kategori.
    - Kategori kini dirender murni hanya nama kategorinya (`<span>{cat}</span>`) dengan padding `px-4 py-1.5`, state aktif solid (`bg-foreground text-background border-foreground shadow-xs font-semibold`), dan state inaktif bersih tanpa kebocoran kode React.
-2. **Search Bar Full-Pill Utuh & Jelas** ([homestay-list.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-list.tsx)):
+2. **Search Bar Full-Pill Utuh & Jelas** ([`apps/web/src/components/homestays/homestay-list.tsx`](apps/web/src/components/homestays/homestay-list.tsx)):
    - Wrapper: `relative w-full mb-6`.
    - Ikon Search: `absolute left-4 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none`.
    - Elemen `<input>`: `h-12 w-full rounded-full border border-border/80 bg-background pl-11 pr-4 text-sm shadow-xs transition-all placeholder:text-muted-foreground/60 focus:border-ring focus:ring-1 focus:ring-ring outline-none`.
@@ -704,7 +704,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
   1. Header Modal:
      - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
      - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
@@ -731,7 +731,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #20: AI Concierge Overhaul — Same-Origin Relative Transport & Travel Hospitality Design
 - **Timestamp:** 2026-10-23
-- **Tujuan:** Merombak total halaman AI Concierge ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)) dan konfigurasi proxy Next.js ([apps/web/next.config.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/next.config.ts)) berstandar TasteSkill & UI/UX Pro Max:
+- **Tujuan:** Merombak total halaman AI Concierge ([`apps/web/src/app/ai/page.tsx`](apps/web/src/app/ai/page.tsx)) dan konfigurasi proxy Next.js ([`apps/web/next.config.ts`](apps/web/next.config.ts)) berstandar TasteSkill & UI/UX Pro Max:
   1. Base URL Transport Fix: Mengubah endpoint `useChat` dari `${ENV.NEXT_PUBLIC_SERVER_URL}/ai` menjadi relative path `/ai`, serta menambahkan rewrite `/ai` ke `${serverUrl}/ai` di `next.config.ts` untuk menjamin request Same-Origin bebas CORS error di browser publik / Dokploy.
   2. Persona & Onboarding: Identitas resmi "MyRehat Concierge" (Sub-label: "Verified Host & Homestay Assistant"), avatar bot dengan live emerald pulse dot dan tombol reset conversation. Empty state headline: "How can MyRehat Concierge assist your stay?".
   3. 3 Travel Suggestion Chips: Kartu interaktif responsif untuk Cameron Highlands Stay, BuyHomestay Process, dan Direct Host Benefits.
@@ -739,9 +739,9 @@ Done. vitest 32/32 green · tsc 0 errors.
   5. Input Footer Bar: Textarea auto-resize nyaman dengan tombol submit rounded Rausch gradient.
 
 ### Rincian Perubahan:
-1. **Next.js Proxy Rewrites** ([apps/web/next.config.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/next.config.ts)):
+1. **Next.js Proxy Rewrites** ([`apps/web/next.config.ts`](apps/web/next.config.ts)):
    - Menambahkan rule rewrite `{ source: "/ai", destination: `${serverUrl}/ai` }`.
-2. **AI Concierge Page** ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)):
+2. **AI Concierge Page** ([`apps/web/src/app/ai/page.tsx`](apps/web/src/app/ai/page.tsx)):
    - Mengalihkan transport ke `api: "/ai"`.
    - Header: status live emerald dot berdenyut halus + tooltip reset conversation.
    - 3 suggestion cards dengan micro-copy lengkap dan hover visual feedback.
@@ -757,7 +757,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
   1. Header Modal:
      - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
      - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
@@ -783,7 +783,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #21: AI Concierge Polish — Auto-Greet Bubble, Quick Action Chips & Hospitality Footer
 - **Timestamp:** 2026-10-23
-- **Tujuan:** Menyempurnakan antarmuka AI Concierge ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)) agar hidup, elegan, dan bebas AI-slop:
+- **Tujuan:** Menyempurnakan antarmuka AI Concierge ([`apps/web/src/app/ai/page.tsx`](apps/web/src/app/ai/page.tsx)) agar hidup, elegan, dan bebas AI-slop:
   1. Initial Welcome Message (Auto-Greet): Saat `messages.length === 0`, menampilkan langsung balon chat pembuka resmi dari Assistant ("Hello! Welcome to MyRehat Concierge. Whether you're planning a vacation stay in Cameron Highlands or exploring verified Airbnb business acquisitions across Malaysia, feel free to ask me anything below.").
   2. 3 Quick Action Chips Ringkas: Di bawah balon pembuka terdapat 3 pill action chips tanpa teks terpotong/ellipsis:
      - "🏔️ Cameron Highlands Stays"
@@ -794,7 +794,7 @@ Done. vitest 32/32 green · tsc 0 errors.
   4. Footer Anti-Slop: Menghapus penyebutan backend teknis, diganti mikro-teks hospitality: "MyRehat Concierge • Instant assistance for homestay bookings & property acquisitions".
 
 ### Rincian Perubahan:
-1. **AI Concierge Page** ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)):
+1. **AI Concierge Page** ([`apps/web/src/app/ai/page.tsx`](apps/web/src/app/ai/page.tsx)):
    - Mengganti disconnected empty state hero dengan in-stream Auto-Greet assistant bubble + Quick Action Chips.
    - Menyempurnakan bubble styles dan padding text leading.
    - Membersihkan teks footer menjadi representasi brand hospitality elegan.
@@ -807,7 +807,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
   1. Header Modal:
      - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
      - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
@@ -834,7 +834,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #22: AI Concierge Central Studio Layout (Perplexity / Claude Architecture)
 - **Timestamp:** 2026-10-23
-- **Tujuan:** Merombak total layout halaman AI Concierge ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)) menjadi Central Studio Layout ala Perplexity/Claude:
+- **Tujuan:** Merombak total layout halaman AI Concierge ([`apps/web/src/app/ai/page.tsx`](apps/web/src/app/ai/page.tsx)) menjadi Central Studio Layout ala Perplexity/Claude:
   1. Hapus Pola Lama: Menghapus balon greeting raksasa yang melayang, kartu multi-kolom di tengah, dan teks disclaimer yang bocor di footer bawah.
   2. State Awal Terpusat (Central Studio): Saat `messages.length === 0` dan tidak sedang mengirim, seluruh area `<main>` menampilkan studio terpusat seimbang vertikal dan horizontal:
      - Avatar bot kecil (`size-10 rounded-2xl border bg-muted/30`).
@@ -854,7 +854,7 @@ Done. vitest 32/32 green · tsc 0 errors.
   6. Responsif 390px & Zero Leak: Teks bocoran dihapus sepenuhnya, layout aman di mobile screen tanpa overflow.
 
 ### Rincian Perubahan:
-1. **AI Concierge Page** ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)):
+1. **AI Concierge Page** ([`apps/web/src/app/ai/page.tsx`](apps/web/src/app/ai/page.tsx)):
    - Implementasi conditional rendering antara Central Studio view (`!hasStarted`) dan Conversation view + Fixed Bottom Footer (`hasStarted`).
    - Penataan ulang form input terpusat dan 3 pill chips cepat.
    - Restrukturisasi chat bubbles dengan notch styling (`rounded-tr-sm` untuk user, `rounded-tl-sm` untuk assistant).
@@ -868,7 +868,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
   1. Header Modal:
      - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
      - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
@@ -901,10 +901,10 @@ Done. vitest 32/32 green · tsc 0 errors.
   3. High-Contrast Chat Bubbles (`apps/web/src/app/ai/page.tsx`): Menetapkan warna teks putih solid (`text-white font-normal`) pada User bubble Rausch Coral dan merapikan Assistant bubble dengan `bg-muted/80 dark:bg-zinc-900 border border-border/50 text-foreground` untuk memastikan keterbacaan kontras tinggi di mode terang maupun gelap.
 
 ### Rincian Perubahan:
-1. **Footer Component** ([apps/web/src/components/footer.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/footer.tsx)):
+1. **Footer Component** ([`apps/web/src/components/footer.tsx`](apps/web/src/components/footer.tsx)):
    - Menambahkan `"use client"` dan `usePathname()`.
    - Mengembalikan `null` jika `pathname === "/ai"`.
-2. **AI Concierge Page** ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)):
+2. **AI Concierge Page** ([`apps/web/src/app/ai/page.tsx`](apps/web/src/app/ai/page.tsx)):
    - Input container `border-2 shadow-md` dengan focus ring tegas.
    - Textarea dengan kontras teks dan placeholder yang lebih kuat.
    - User chat bubble dengan `text-white font-normal` eksplisit pada notch `rounded-tr-xs`.
@@ -918,7 +918,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
   1. Header Modal:
      - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
      - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
@@ -945,7 +945,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #24: Hero Heading Fluid Typography & Line-Break Optimization
 - **Timestamp:** 2026-10-23
-- **Tujuan:** Memastikan kalimat H1 pada seksi hero utama ([apps/web/src/app/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/page.tsx)) terbaca utuh tanpa kata terpotong atau wrap canggung:
+- **Tujuan:** Memastikan kalimat H1 pada seksi hero utama ([`apps/web/src/app/page.tsx`](apps/web/src/app/page.tsx)) terbaca utuh tanpa kata terpotong atau wrap canggung:
   `<h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground max-w-3xl mx-auto leading-tight">Book homestays directly with hosts</h1>`
 - **Rincian Perubahan:**
   1. Mengubah ukuran tipografi H1 dari breakpoint kaku `text-3xl sm:text-5xl` menjadi kurva fluid bertahap `text-3xl sm:text-4xl md:text-5xl`.
@@ -958,13 +958,13 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #25: AI Concierge Header Polish — Borderless Header, Online Badge Removal & Sparkles Icon
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Membersihkan sub-header chat pada [apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx) dari elemen AI-slop dan redundansi visual:
+- **Tujuan:** Membersihkan sub-header chat pada [`apps/web/src/app/ai/page.tsx`](apps/web/src/app/ai/page.tsx) dari elemen AI-slop dan redundansi visual:
   1. Menghapus `border-b border-border/60` pada tag `<header>` agar tidak ada garis horizontal kaku yang memotong layar. Header kini menyatu halus: `className="shrink-0 bg-transparent px-4 py-3"`.
   2. Menghapus badge pill `<span className="... text-emerald-600 ...">Online</span>` yang redundant. Status indikator cukup diwakili oleh titik pulsing hijau pada avatar. Subjudul diganti menjadi: `"Direct host & property advisor"`.
   3. Mengganti icon `<Bot />` kaku (robot generik) dengan `<Sparkles className="size-4 text-[#E61E4D]" />` (hospitality premium) pada avatar header dan avatar tengah studio. Container avatar diperhalus: `size-9 rounded-full border border-border/50 bg-background shadow-2xs text-[#E61E4D]`.
 
 ### Rincian Perubahan:
-1. **AI Concierge Page** ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)):
+1. **AI Concierge Page** ([`apps/web/src/app/ai/page.tsx`](apps/web/src/app/ai/page.tsx)):
    - Import `Bot` dihapus, diganti dengan `Sparkles` dari `lucide-react`.
    - Header `<header>`: hapus `border-b border-border/60 bg-background/80 backdrop-blur-md`, ganti dengan `bg-transparent`.
    - Avatar header: `size-9 rounded-full border border-border/50 bg-background shadow-2xs text-[#E61E4D]` + `<Sparkles size-4 />`.
@@ -979,7 +979,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
   1. Header Modal:
      - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
      - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
@@ -1006,7 +1006,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #26: Auth Flow Refactor — One-Flow Airbnb (Email-Only, Disabled Socials, Mobile-Safe)
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Merombak alur autentikasi di [`auth-modal.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/auth-modal.tsx) dan [`login/page.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/login/page.tsx) ke Opsi A: One-Flow Airbnb.
+- **Tujuan:** Merombak alur autentikasi di [`apps/web/src/components/auth-modal.tsx`](apps/web/src/components/auth-modal.tsx) dan [`apps/web/src/app/login/page.tsx`](apps/web/src/app/login/page.tsx) ke Opsi A: One-Flow Airbnb.
 
 ### Rincian Perubahan:
 1. **Step 1 — Email-Only Identifier:**
@@ -1045,7 +1045,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
   1. Header Modal:
      - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
      - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
@@ -1072,7 +1072,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #27: Auth Step 2 Email Badge Pill & Visual Hierarchy Polish
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Memoles tampilan Step 2 (Password) di [`auth-modal.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/auth-modal.tsx) dan [`login/page.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/login/page.tsx) agar informasi email aktif tampil kontras, tegas, dan elegan:
+- **Tujuan:** Memoles tampilan Step 2 (Password) di [`apps/web/src/components/auth-modal.tsx`](apps/web/src/components/auth-modal.tsx) dan [`apps/web/src/app/login/page.tsx`](apps/web/src/app/login/page.tsx) agar informasi email aktif tampil kontras, tegas, dan elegan:
   1. Membungkus email aktif dan tombol "Change" ke dalam container badge pill terpadu: `flex items-center justify-between rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 shadow-2xs`.
   2. Sisi kiri menampilkan icon `<Mail className="size-3.5 shrink-0 text-muted-foreground" />` dan alamat email dengan tipografi tegas: `text-xs sm:text-sm font-semibold text-foreground truncate max-w-[240px] sm:max-w-[280px]`.
   3. Sisi kanan menampilkan tombol "Change" dengan styling link bersih dan kontras Rausch Coral: `text-xs font-semibold text-[#E61E4D] hover:underline cursor-pointer shrink-0`.
@@ -1086,7 +1086,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
   1. Header Modal:
      - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
      - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
@@ -1112,7 +1112,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #28: Social Buttons Polish — Badge Removal & Centered Alignment
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Memoles tombol Google dan Apple di [`auth-modal.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/auth-modal.tsx) dan [`login/page.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/login/page.tsx):
+- **Tujuan:** Memoles tombol Google dan Apple di [`apps/web/src/components/auth-modal.tsx`](apps/web/src/components/auth-modal.tsx) dan [`apps/web/src/app/login/page.tsx`](apps/web/src/app/login/page.tsx):
   1. Menghapus badge pill "Coming soon" dari kedua tombol agar tampilan tombol bersih, minimalis, dan elegan tanpa elemen yang menumpuk.
   2. Mempertahankan tombol dalam state disabled/unclickable: `opacity-60 cursor-not-allowed bg-muted/20 border-border/50` dengan `tabIndex={-1}` dan `aria-disabled="true"`.
   3. Memastikan icon SVG tetap di posisi absolut kiri (`absolute left-4 size-[18px] shrink-0`) dan teks label ("Continue with Google" / "Continue with Apple") terpusat sempurna secara geometris di tengah tombol (`<span className="w-full text-center">`) tanpa gap kosong atau layout bergeser.
@@ -1126,7 +1126,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
   1. Header Modal:
      - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
      - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
@@ -1153,7 +1153,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #29: BuyHomestay Modal Pop-up Architecture (Floating Dialog & Direct Trigger)
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Mengubah alur "Post Listing" di halaman BuyHomestay ([apps/web/src/app/homestays/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/homestays/page.tsx)) dan komponen form ([apps/web/src/components/homestays/homestay-form.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx)) dari segmented control switcher yang memotong halaman menjadi Modal Dialog pop-up ala Airbnb:
+- **Tujuan:** Mengubah alur "Post Listing" di halaman BuyHomestay ([`apps/web/src/app/homestays/page.tsx`](apps/web/src/app/homestays/page.tsx)) dan komponen form ([`apps/web/src/components/homestays/homestay-form.tsx`](apps/web/src/components/homestays/homestay-form.tsx)) dari segmented control switcher yang memotong halaman menjadi Modal Dialog pop-up ala Airbnb:
   1. Halaman /homestays kini selalu menampilkan katalog listing penuh (HomestayList).
   2. Tombol aksi pill + Post Listing di header kanan (rounded-full px-4 py-2 text-xs font-semibold bg-foreground text-background hover:opacity-90) dengan logika ganda:
      - Jika belum login (!session?.user), membuka openAuthModal().
@@ -1165,7 +1165,7 @@ Done. vitest 32/32 green · tsc 0 errors.
   4. Mempertahankan 5 field wajib F1 (Title, Price MYR, Location, 4 Category Options, WhatsApp Contact Number).
   5. Tombol submit Rausch Gradient: bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white.
   6. Callback onSuccess: menutup modal otomatis (onClose), mereset form, meng-invalidate query TanStack orpc.homestays.list, dan memunculkan toast sonner sukses (listing langsung muncul di katalog).
-  7. Menyelaraskan invocation HomestayForm di [apps/web/src/app/dashboard/dashboard.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/dashboard/dashboard.tsx).
+  7. Menyelaraskan invocation HomestayForm di [`apps/web/src/app/dashboard/dashboard.tsx`](apps/web/src/app/dashboard/dashboard.tsx).
 
 ### Status:
 Done. vitest 32/32 green · tsc 0 errors.
@@ -1175,7 +1175,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
   1. Header Modal:
      - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
      - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
@@ -1202,7 +1202,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #30: Post Listing Luxury Modal Polish (Linear / Airbnb Craftsmanship)
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Memoles antarmuka modal "Post a BuyHomestay Listing" di [apps/web/src/components/homestays/homestay-form.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) dengan standar estetika luxury marketplace ala Airbnb / Linear:
+- **Tujuan:** Memoles antarmuka modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](apps/web/src/components/homestays/homestay-form.tsx) dengan standar estetika luxury marketplace ala Airbnb / Linear:
   1. Header Modal (Visual Anchoring): Header bergaris pemisah halus (flex items-center justify-between border-b border-border/40 px-6 py-4 sm:px-8), judul text-lg font-bold tracking-tight text-foreground + subjudul mikro text-xs text-muted-foreground mt-0.5, dan tombol close X melingkar taktil (flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted/70 hover:text-foreground cursor-pointer).
   2. Container & Form Body Spacing: Card container max-w-2xl rounded-3xl border border-border/40 bg-background shadow-[0_12px_40px_rgba(0,0,0,0.14)] dengan body modal px-6 py-5 sm:px-8 space-y-5 overflow-y-auto max-h-[calc(88vh-8rem)].
   3. 5 Input Fields Depth & Micro-Typography:
@@ -1222,7 +1222,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [apps/web/src/components/homestays/homestay-form.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
   1. Header Modal:
      - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
      - Layout judul bersih dengan border pemisah bawah (border-b border-border/40 px-6 py-5 sm:px-8), judul tegas text-xl font-bold tracking-tight text-foreground, dan subjudul text-xs text-muted-foreground mt-1.
@@ -1248,7 +1248,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
   1. Header Modal:
      - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
      - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
@@ -1274,9 +1274,9 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #32: BuyHomestay Category Interactive Grid & Modern Modal Refinement
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Merombak tampilan formulir "Post a BuyHomestay Listing" di [apps/web/src/components/homestays/homestay-form.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar berkelas, modern, dan sangat rapi mengadopsi standar Airbnb / Linear:
+- **Tujuan:** Merombak tampilan formulir "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](apps/web/src/components/homestays/homestay-form.tsx) agar berkelas, modern, dan sangat rapi mengadopsi standar Airbnb / Linear:
   1. Interactive Selection Grid Kategori:
-     - Menghapus elemen <select> native dan kotak badge deskripsi lama.
+     - Menghapus elemen `<select>` native dan kotak badge deskripsi lama.
      - Menggantinya dengan Grid 4 Kartu Pilihan (grid grid-cols-1 sm:grid-cols-2 gap-2.5):
        1. "Buy Property" — "Turnkey furnished villa or residential home ready for guests"
        2. "Buy land to build homestay" — "Strategic land parcel with permits for villa development"
@@ -1310,13 +1310,13 @@ Done. vitest 32/32 green · tsc 0 errors.
 ## Log #33: Clean Sign-Out Hard Redirect & Marketplace Card Aspect Ratio Alignment
 - **Timestamp:** 2026-10-24
 - **Tujuan:** Memperbaiki alur logout host dan menyelaraskan kualitas visual serta rasio gambar kartu listing di marketplace:
-  1. Logout Clean Redirect ([apps/web/src/components/user-menu.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/user-menu.tsx)):
+  1. Logout Clean Redirect ([`apps/web/src/components/user-menu.tsx`](apps/web/src/components/user-menu.tsx)):
      - Pada handler Sign Out, mengganti client router transition (router.push("/")) menjadi window.location.href = "/" di dalam callback onSuccess dari authClient.signOut.
      - Memastikan seluruh session state, cookie, dan cache TanStack Query ter-reset bersih saat host logout.
-  2. Penyelarasan Kualitas & Rasio Gambar Kartu Marketplace ([apps/web/src/components/homestays/homestay-list.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-list.tsx)):
-     - Mengubah aspect ratio container foto pada Loading Skeleton, Sample Opportunities, dan Real Listings dari aspect-[16/10] menjadi aspect-[4/3] persis seperti etalase kartu di homepage ([apps/web/src/app/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/page.tsx)).
-     - Memastikan elemen <img> menggunakan h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 sehingga foto tampil proporsional, tinggi, tajam, dan tidak terdistorsi.
-     - Menambahkan badge rating bintang (<Star className="size-3 fill-amber-400 text-amber-400" /> 5.00) di sisi kanan nama lokasi pada kartu Real Listings, menciptakan hirarki kartu yang seimbang, mewah, dan konsisten dengan desain homepage.
+  2. Penyelarasan Kualitas & Rasio Gambar Kartu Marketplace ([`apps/web/src/components/homestays/homestay-list.tsx`](apps/web/src/components/homestays/homestay-list.tsx)):
+     - Mengubah aspect ratio container foto pada Loading Skeleton, Sample Opportunities, dan Real Listings dari aspect-[16/10] menjadi aspect-[4/3] persis seperti etalase kartu di homepage ([`apps/web/src/app/page.tsx`](apps/web/src/app/page.tsx)).
+     - Memastikan elemen `<img>` menggunakan h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 sehingga foto tampil proporsional, tinggi, tajam, dan tidak terdistorsi.
+     - Menambahkan badge rating bintang (`<Star className="size-3 fill-amber-400 text-amber-400" />` 5.00) di sisi kanan nama lokasi pada kartu Real Listings, menciptakan hirarki kartu yang seimbang, mewah, dan konsisten dengan desain homepage.
 
 ### Status:
 Done. vitest 32/32 green · tsc 0 errors.
@@ -1326,13 +1326,13 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #34: Full Corner-Flush Marketplace Card Image Alignment (Homepage Parity)
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Menyelaraskan tampilan kartu marketplace di [apps/web/src/components/homestays/homestay-list.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-list.tsx) agar foto penuh, tinggi, dan membentang sempurna ke sudut-sudut rounded container persis seperti homepage ([apps/web/src/app/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/page.tsx)):
+- **Tujuan:** Menyelaraskan tampilan kartu marketplace di [`apps/web/src/components/homestays/homestay-list.tsx`](apps/web/src/components/homestays/homestay-list.tsx) agar foto penuh, tinggi, dan membentang sempurna ke sudut-sudut rounded container persis seperti homepage ([`apps/web/src/app/page.tsx`](apps/web/src/app/page.tsx)):
   1. Penghapusan Padding Eksternal UI Card:
-     - Mengganti wrapper <Card> yang memiliki bawaan py-(--card-spacing) (16px top padding) dengan container murni: <div className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-border/60 bg-card shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-border hover:shadow-md">.
+     - Mengganti wrapper `<Card>` yang memiliki bawaan py-(--card-spacing) (16px top padding) dengan container murni: `<div className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-border/60 bg-card shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-border hover:shadow-md">`.
      - Ini membuat container gambar foto langsung menempel pada koordinat paling atas (0, 0) dan terpotong mulus oleh rounded-2xl overflow-hidden.
   2. Standarisasi Rasio & Tag Gambar (4:3):
      - Memastikan seluruh container gambar memiliki class relative aspect-[4/3] w-full overflow-hidden bg-muted.
-     - Memastikan elemen <img> di dalamnya menggunakan h-full w-full object-cover transition-transform duration-500 group-hover:scale-105.
+     - Memastikan elemen `<img>` di dalamnya menggunakan h-full w-full object-cover transition-transform duration-500 group-hover:scale-105.
      - Memastikan badge pill kategori mengambang di pojok kiri atas foto: absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-medium backdrop-blur-md bg-background/85 border border-border/40 shadow-xs text-foreground.
   3. Keselarasan Header & Detail Konten:
      - Menggunakan area detail padding terpadu p-4 space-y-3 flex-1 flex flex-col justify-between.
@@ -1346,7 +1346,7 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #35: Mobile Polish — Footer 2-Col Grid & AI Studio Optical Centering
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Memperbaiki tampilan mobile (390px-440px / iPhone 16 Pro Max) pada Footer ([apps/web/src/components/footer.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/footer.tsx)) dan Halaman AI Studio ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)):
+- **Tujuan:** Memperbaiki tampilan mobile (390px-440px / iPhone 16 Pro Max) pada Footer ([`apps/web/src/components/footer.tsx`](apps/web/src/components/footer.tsx)) dan Halaman AI Studio ([`apps/web/src/app/ai/page.tsx`](apps/web/src/app/ai/page.tsx)):
   1. Footer Mobile Polish:
      - Mengubah navigasi editorial menjadi 2 kolom grid bersih di mobile (grid grid-cols-2 gap-y-2.5 gap-x-4 text-xs font-medium text-muted-foreground) dan mempertahankan layout horizontal inline di desktop (md:flex md:items-center md:gap-x-4 md:gap-y-2).
      - Menyembunyikan pemisah titik (&middot;) di mobile (hidden md:inline text-border select-none) untuk mencegah baris link bertumpuk canggung saat wrap.
@@ -1354,7 +1354,7 @@ Done. vitest 32/32 green · tsc 0 errors.
      - Menyempurnakan spasi teks brand description (leading-relaxed) dan copyright agar tidak ada teks terpotong atau wrap yang patah.
   2. AI Studio Optical Centering & Mobile Textarea:
      - Mengubah posisi Central Studio dari mathematical center (items-center) ke optical center yang nyaman di mata mobile:
-       <main className="min-h-0 flex-1 overflow-y-auto flex flex-col justify-start sm:justify-center items-center px-4 pt-6 sm:pt-12 pb-8">.
+       `<main className="min-h-0 flex-1 overflow-y-auto flex flex-col justify-start sm:justify-center items-center px-4 pt-6 sm:pt-12 pb-8">`.
      - Memastikan kotak input prompt dan 3 quick chips terlihat langsung di area atas/tengah layar smartphone tanpa terpotong atau tenggelam ke bawah.
      - Textarea input disesuaikan dengan tipografi responsif: text-xs sm:text-sm placeholder:text-xs sm:placeholder:text-sm sehingga placeholder panjang muat dengan nyaman di layar sempit tanpa memotong tombol kirim melingkar.
 
@@ -1366,10 +1366,10 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #36: AI Concierge Mobile Zero-Scroll Lock & Typography Compactness
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Mengunci tampilan halaman AI Concierge ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)) pada state !hasStarted agar terpusat secara paten dan 100% bebas scroll pada viewport mobile (390px - 440px / iPhone 16 Pro Max):
+- **Tujuan:** Mengunci tampilan halaman AI Concierge ([`apps/web/src/app/ai/page.tsx`](apps/web/src/app/ai/page.tsx)) pada state !hasStarted agar terpusat secara paten dan 100% bebas scroll pada viewport mobile (390px - 440px / iPhone 16 Pro Max):
   1. Kunci Container Viewport (Zero-Scroll Lock):
      - Container utama diubah ke dynamic viewport height dengan overflow terisolasi: flex h-[calc(100dvh-4rem)] w-full flex-col bg-background overflow-hidden.
-     - Tag <main> pada state !hasStarted dikunci tanpa overflow-y-auto agar tidak memicu scrollbar atau pergeseran vertikal:
+     - Tag `<main>` pada state !hasStarted dikunci tanpa overflow-y-auto agar tidak memicu scrollbar atau pergeseran vertikal:
        flex-1 w-full flex flex-col items-center justify-center px-4 overflow-hidden -mt-6 sm:mt-0.
   2. Rampingkan Tipografi & Input Box:
      - Avatar Sparkles: size-8 sm:size-9 mb-2.5 text-[#E61E4D].
@@ -1390,12 +1390,12 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ## Log #37: AI Concierge Backend POST /ai Migration to OpenRouter & Fallback Safety
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Memperbaiki endpoint backend POST /ai pada [apps/server/src/index.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/server/src/index.ts) agar fitur chat web MyRehat Concierge di /ai aktif dan berfungsi menggunakan provider OpenRouter tanpa melempar error 500:
+- **Tujuan:** Memperbaiki endpoint backend POST /ai pada [`apps/server/src/index.ts`](apps/server/src/index.ts) agar fitur chat web MyRehat Concierge di /ai aktif dan berfungsi menggunakan provider OpenRouter tanpa melempar error 500:
   1. Dependensi & Resolusi Provider OpenRouter:
      - Menambahkan @openrouter/ai-sdk-provider (^3.1.0) pada apps/server/package.json dan menyambungkan symlink node_modules yang sesuai.
      - Mengganti import @ai-sdk/google dan @ai-sdk/devtools dengan createOpenRouter dari @openrouter/ai-sdk-provider.
      - Menghapus devToolsMiddleware() yang menyebabkan crash HTTP 500 pada mode build production.
-  2. Konfigurasi Environment Variable ([apps/server/.env](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/server/.env)):
+  2. Konfigurasi Environment Variable ([`apps/server/.env`](apps/server/.env)):
      - Menambahkan variabel OPENROUTER_API_KEY= dan OPENROUTER_MODEL=google/gemini-2.5-flash dengan mempertahankan seluruh variabel yang telah ada.
   3. Handler POST /ai & Graceful Fallback:
      - Menginisialisasi OpenRouter client menggunakan process.env.OPENROUTER_API_KEY dan model google/gemini-2.5-flash.
@@ -1412,7 +1412,7 @@ Done. vitest 32/32 green · tsc 0 errors (db, api, web, server).
 ## Log #38: Fix Varlock Environment Variable Validation & Schema Synchronization in apps/server
 - **Timestamp:** 2026-10-24
 - **Tujuan:** Memperbaiki kegagalan validasi environment variable Varlock pada apps/server yang menyebabkan `bun run dev` crash saat `pnpm run dev`:
-  1. Konfigurasi Utuh Environment Variable ([apps/server/.env](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/server/.env)):
+  1. Konfigurasi Utuh Environment Variable ([`apps/server/.env`](apps/server/.env)):
      - Memperbarui file .env secara utuh dengan nilai valid:
        - `NODE_ENV=development`
        - `BETTER_AUTH_SECRET=placeholder-min-32-chars-000000000000` (memenuhi syarat minLength=32)
@@ -1422,11 +1422,11 @@ Done. vitest 32/32 green · tsc 0 errors (db, api, web, server).
        - `OPENROUTER_API_KEY=<REDACTED_OPENROUTER_KEY>`
        - `OPENROUTER_MODEL=google/gemini-2.5-flash`
        - `DATABASE_URL=postgresql://taskb8:***@34.21.153.205:5440/taskb8`
-  2. Sinkronisasi Schema Varlock ([apps/server/.env.schema](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/server/.env.schema)):
+  2. Sinkronisasi Schema Varlock ([`apps/server/.env.schema`](apps/server/.env.schema)):
      - Menambahkan anotasi `# @optional @type=string` untuk `OPENROUTER_API_KEY` dan `OPENROUTER_MODEL` agar tidak memicu kegagalan validasi saat variabel bernilai undefined.
-  3. Regenerasi Kode & Tipe Varlock ([apps/server/src/env.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/server/src/env.ts)):
+  3. Regenerasi Kode & Tipe Varlock ([`apps/server/src/env.ts`](apps/server/src/env.ts)):
      - Menjalankan `bun run env:generate` (`varlock codegen`) dan memastikan kompatibilitas runtime Bun.
-     - Memverifikasi inisialisasi modul runtime [apps/server/src/env.server.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/server/src/env.server.ts) berjalan sukses tanpa error.
+     - Memverifikasi inisialisasi modul runtime [`apps/server/src/env.server.ts`](apps/server/src/env.server.ts) berjalan sukses tanpa error.
 
 ### Status:
 Done. vitest 32/32 green · tsc 0 errors (db, api, web, server) · varlock codegen success.
@@ -1437,15 +1437,15 @@ Done. vitest 32/32 green · tsc 0 errors (db, api, web, server) · varlock codeg
 - **Timestamp:** 2026-10-24
 - **Tujuan:** Memperbaiki masalah bot MyRehat Concierge di /ai yang tidak merespons (request POST /ai berhenti di 200 OK Next.js tanpa streaming respon ke UI frontend):
   1. Investigasi & Eliminasi Route Collision:
-     - Ditemukan bahwa Next.js App Router menganggap request POST `/ai` sebagai request halaman internal ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)), sehingga rewrite afterFiles terlewati dan mengembalikan payload HTML kosong alih-alih proxy ke server Elysia (3000).
+     - Ditemukan bahwa Next.js App Router menganggap request POST `/ai` sebagai request halaman internal ([`apps/web/src/app/ai/page.tsx`](apps/web/src/app/ai/page.tsx)), sehingga rewrite afterFiles terlewati dan mengembalikan payload HTML kosong alih-alih proxy ke server Elysia (3000).
      - Mengubah endpoint API transport frontend menjadi relative path terisolasi: `/api/ai`.
-     - Menambahkan handler proxy Next.js App Router ([apps/web/src/app/api/ai/route.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/api/ai/route.ts)) dan rewrite proxy pada [apps/web/next.config.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/next.config.ts) untuk meneruskan request ke backend Elysia secara transparan dengan header SSE `cache-control: no-cache, no-transform`.
-  2. Perbaikan & Observabilitas Backend Elysia ([apps/server/src/index.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/server/src/index.ts)):
+     - Menambahkan handler proxy Next.js App Router ([`apps/web/src/app/api/ai/route.ts`](apps/web/src/app/api/ai/route.ts)) dan rewrite proxy pada [`apps/web/next.config.ts`](apps/web/next.config.ts) untuk meneruskan request ke backend Elysia secara transparan dengan header SSE `cache-control: no-cache, no-transform`.
+  2. Perbaikan & Observabilitas Backend Elysia ([`apps/server/src/index.ts`](apps/server/src/index.ts)):
      - Mendukung endpoint ganda `.post("/ai", handleAiChat)` dan `.post("/api/ai", handleAiChat)`.
      - Menambahkan logging `console.log("POST /ai received body:", JSON.stringify(body))` dan `try { ... } catch (err) { console.error("OpenRouter error in /ai:", err); }`.
      - Menambahkan sanitasi pesan masukan `normalizedMessages` agar `convertToModelMessages` tidak melempar `TypeError: undefined is not an object (evaluating 'message.parts.some')` saat pesan hanya menyertakan `content` atau `text`.
      - Memastikan fallback stream SSE memancarkan format event Vercel AI SDK valid (`text-start`, `text-delta` dengan atribut `delta` dan `text`, serta `text-end`).
-  3. Resiliensi UI Frontend ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)):
+  3. Resiliensi UI Frontend ([`apps/web/src/app/ai/page.tsx`](apps/web/src/app/ai/page.tsx)):
      - Mengonfigurasi `useChat` dengan transport `api: "/api/ai"` dan error handler `onError`.
      - Menambahkan multi-tier fallback rendering pesan: memprioritaskan `message.parts`, lalu beralih ke `message.text` atau `message.content`, serta menyajikan fallback pesan concierge saat stream selesai tanpa teks.
 
@@ -1456,7 +1456,7 @@ Done. vitest 32/32 green · tsc 0 errors (db, api, web, server).
 
 ## Log #40: Frontend Message Content Extraction & Resilient Typing Indicator in /ai
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Memperbaiki rendering balon chat assistant dan typing indicator pada [apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx) agar teks streaming langsung tampil dan mengalir rapi:
+- **Tujuan:** Memperbaiki rendering balon chat assistant dan typing indicator pada [`apps/web/src/app/ai/page.tsx`](apps/web/src/app/ai/page.tsx) agar teks streaming langsung tampil dan mengalir rapi:
   1. Ekstraksi Universal Konten Pesan (`messageText`):
      - Mengimplementasikan pipeline ekstraksi teks yang memprioritaskan `message.parts` berjenis `text`, lalu melakukan fallback ke `message.content` atau `message.text`.
      - Merender `messageText` menggunakan `<span>{messageText}</span>` untuk user dan `<Streamdown isAnimating={status === "streaming" && message.role === "assistant"}>{messageText}</Streamdown>` untuk assistant.
@@ -1472,7 +1472,7 @@ Done. vitest 32/32 green · tsc 0 errors (db, api, web, server).
 
 ## Log #41: Host Dashboard Anti-AI-Slop Refurbishment & Luxury Airbnb/Linear Redesign
 - **Timestamp:** 2026-10-24
-- **Tujuan:** Merombak total halaman Host Dashboard ([apps/web/src/app/dashboard/dashboard.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/dashboard/dashboard.tsx)) agar bebas dari template AI slop (header tabrakan, typo stat cards, dan kartu listing tanpa visual yang anjlok ke bawah), beralih ke standar estetika tinggi Airbnb / Linear:
+- **Tujuan:** Merombak total halaman Host Dashboard ([`apps/web/src/app/dashboard/dashboard.tsx`](apps/web/src/app/dashboard/dashboard.tsx)) agar bebas dari template AI slop (header tabrakan, typo stat cards, dan kartu listing tanpa visual yang anjlok ke bawah), beralih ke standar estetika tinggi Airbnb / Linear:
   1. Header Host Hub — Clean & Professional:
      - Header simetris dengan badge verified hijau elegan (`<CheckCircle2 className="size-3" /> Verified Host`) bersanding rapi di samping judul "Host Hub".
      - Tombol aksi utama dengan Rausch gradient (`from-[#E61E4D] via-[#E31C5F] to-[#D70466]`) untuk "+ Post New Opportunity" dan tombol sekunder "Browse Marketplace" yang proporsional.
