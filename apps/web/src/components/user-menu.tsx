@@ -91,7 +91,7 @@ export default function UserMenu() {
               authClient.signOut({
                 fetchOptions: {
                   onSuccess: () => {
-                    router.push("/");
+                    window.location.href = "/";
                   },
                 },
               });

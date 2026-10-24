@@ -139,26 +139,13 @@ export default function Dashboard({
         </Card>
       </div>
 
-      {/* Collapsible Listing Creation Form */}
+      {/* Listing Creation Modal */}
       {showCreateForm && (
-        <div className="space-y-4 rounded-2xl border border-border/60 bg-muted/20 p-6 shadow-xs">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-base font-semibold text-foreground">Create a New Opportunity</h2>
-              <p className="text-xs text-muted-foreground">
-                Your listing will immediately appear in the public BuyHomestay marketplace.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => setShowCreateForm(false)}
-              className="text-xs font-medium text-muted-foreground hover:text-foreground cursor-pointer"
-            >
-              Cancel
-            </button>
-          </div>
-          <HomestayForm onSuccess={() => setShowCreateForm(false)} />
-        </div>
+        <HomestayForm
+          isOpen={showCreateForm}
+          onClose={() => setShowCreateForm(false)}
+          onSuccess={() => setShowCreateForm(false)}
+        />
       )}
 
       {/* Host AI Concierge Banner */}

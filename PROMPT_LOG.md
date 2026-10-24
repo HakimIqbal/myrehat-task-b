@@ -652,6 +652,33 @@ Done. Kedua file agent config aktif. vitest 32/32 green · tsc 0 errors.
 ### Status:
 Done. vitest 32/32 green · tsc 0 errors.
 
+
+---
+
+## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+  1. Header Modal:
+     - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
+     - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
+  2. Input Fields Spacing & Natural Typography:
+     - Mengganti label all-caps dengan label natural bertingkat (`text-xs font-semibold text-foreground`): "Listing Title", "Price (MYR)", "Location", "Listing Category", dan "WhatsApp Contact Number".
+     - Spacing bernapas `space-y-4` antar blok input.
+     - Input box seragam: `h-11 w-full rounded-xl border border-border/80 bg-background px-3.5 text-sm text-foreground placeholder:text-muted-foreground/50 transition-all focus:border-foreground focus:ring-1 focus:ring-foreground outline-none`.
+     - Price input dengan prefix "RM" solid di sebelah kiri.
+     - Dropdown category dengan custom chevron down minimalis dan explainer card badge di bawahnya.
+     - WhatsApp input dengan placeholder informatif "+60 12 345 6789 atau 60123456789".
+  3. Dedicated Footer Action Bar:
+     - Menempatkan tombol aksi di footer terpisah dengan border pemisah atas (`border-t border-border/40 px-6 py-4 sm:px-8 flex items-center justify-end gap-4 bg-muted/10`).
+     - Tombol sekunder "Cancel" (`text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer`).
+     - Tombol primer "Publish Listing" pill rounded-full dengan Rausch gradient (`h-11 px-7 rounded-full bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white font-semibold text-xs tracking-wide shadow-sm hover:opacity-95 active:scale-[0.99] cursor-pointer`).
+  4. Ukuran Modal Container:
+     - `max-w-xl rounded-3xl border border-border/40 bg-background shadow-2xl overflow-hidden`.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
+
+
 ---
 
 ## Log #19: BuyHomestay Category Badge Clean & Full-Pill Search Bar Fix
@@ -670,7 +697,34 @@ Done. vitest 32/32 green · tsc 0 errors.
    - Tombol Clear `X` aktif saat `search` terisi.
 
 ### Status:
-Done. vitest 32/32 green · tsc 0 errors. Mobile 390px responsif.
+Done. vitest 32/32 green · tsc 0 errors.
+
+
+---
+
+## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+  1. Header Modal:
+     - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
+     - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
+  2. Input Fields Spacing & Natural Typography:
+     - Mengganti label all-caps dengan label natural bertingkat (`text-xs font-semibold text-foreground`): "Listing Title", "Price (MYR)", "Location", "Listing Category", dan "WhatsApp Contact Number".
+     - Spacing bernapas `space-y-4` antar blok input.
+     - Input box seragam: `h-11 w-full rounded-xl border border-border/80 bg-background px-3.5 text-sm text-foreground placeholder:text-muted-foreground/50 transition-all focus:border-foreground focus:ring-1 focus:ring-foreground outline-none`.
+     - Price input dengan prefix "RM" solid di sebelah kiri.
+     - Dropdown category dengan custom chevron down minimalis dan explainer card badge di bawahnya.
+     - WhatsApp input dengan placeholder informatif "+60 12 345 6789 atau 60123456789".
+  3. Dedicated Footer Action Bar:
+     - Menempatkan tombol aksi di footer terpisah dengan border pemisah atas (`border-t border-border/40 px-6 py-4 sm:px-8 flex items-center justify-end gap-4 bg-muted/10`).
+     - Tombol sekunder "Cancel" (`text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer`).
+     - Tombol primer "Publish Listing" pill rounded-full dengan Rausch gradient (`h-11 px-7 rounded-full bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white font-semibold text-xs tracking-wide shadow-sm hover:opacity-95 active:scale-[0.99] cursor-pointer`).
+  4. Ukuran Modal Container:
+     - `max-w-xl rounded-3xl border border-border/40 bg-background shadow-2xl overflow-hidden`.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
+ Mobile 390px responsif.
 
 
 ---
@@ -696,7 +750,34 @@ Done. vitest 32/32 green · tsc 0 errors. Mobile 390px responsif.
    - Footer input bar berpenampilan modern studio.
 
 ### Status:
-Done. vitest 32/32 green · tsc 0 errors. Mobile 390px responsif.
+Done. vitest 32/32 green · tsc 0 errors.
+
+
+---
+
+## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+  1. Header Modal:
+     - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
+     - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
+  2. Input Fields Spacing & Natural Typography:
+     - Mengganti label all-caps dengan label natural bertingkat (`text-xs font-semibold text-foreground`): "Listing Title", "Price (MYR)", "Location", "Listing Category", dan "WhatsApp Contact Number".
+     - Spacing bernapas `space-y-4` antar blok input.
+     - Input box seragam: `h-11 w-full rounded-xl border border-border/80 bg-background px-3.5 text-sm text-foreground placeholder:text-muted-foreground/50 transition-all focus:border-foreground focus:ring-1 focus:ring-foreground outline-none`.
+     - Price input dengan prefix "RM" solid di sebelah kiri.
+     - Dropdown category dengan custom chevron down minimalis dan explainer card badge di bawahnya.
+     - WhatsApp input dengan placeholder informatif "+60 12 345 6789 atau 60123456789".
+  3. Dedicated Footer Action Bar:
+     - Menempatkan tombol aksi di footer terpisah dengan border pemisah atas (`border-t border-border/40 px-6 py-4 sm:px-8 flex items-center justify-end gap-4 bg-muted/10`).
+     - Tombol sekunder "Cancel" (`text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer`).
+     - Tombol primer "Publish Listing" pill rounded-full dengan Rausch gradient (`h-11 px-7 rounded-full bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white font-semibold text-xs tracking-wide shadow-sm hover:opacity-95 active:scale-[0.99] cursor-pointer`).
+  4. Ukuran Modal Container:
+     - `max-w-xl rounded-3xl border border-border/40 bg-background shadow-2xl overflow-hidden`.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
+ Mobile 390px responsif.
 
 ---
 
@@ -719,7 +800,34 @@ Done. vitest 32/32 green · tsc 0 errors. Mobile 390px responsif.
    - Membersihkan teks footer menjadi representasi brand hospitality elegan.
 
 ### Status:
-Done. vitest 32/32 green · tsc 0 errors. Mobile 390px responsif.
+Done. vitest 32/32 green · tsc 0 errors.
+
+
+---
+
+## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+  1. Header Modal:
+     - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
+     - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
+  2. Input Fields Spacing & Natural Typography:
+     - Mengganti label all-caps dengan label natural bertingkat (`text-xs font-semibold text-foreground`): "Listing Title", "Price (MYR)", "Location", "Listing Category", dan "WhatsApp Contact Number".
+     - Spacing bernapas `space-y-4` antar blok input.
+     - Input box seragam: `h-11 w-full rounded-xl border border-border/80 bg-background px-3.5 text-sm text-foreground placeholder:text-muted-foreground/50 transition-all focus:border-foreground focus:ring-1 focus:ring-foreground outline-none`.
+     - Price input dengan prefix "RM" solid di sebelah kiri.
+     - Dropdown category dengan custom chevron down minimalis dan explainer card badge di bawahnya.
+     - WhatsApp input dengan placeholder informatif "+60 12 345 6789 atau 60123456789".
+  3. Dedicated Footer Action Bar:
+     - Menempatkan tombol aksi di footer terpisah dengan border pemisah atas (`border-t border-border/40 px-6 py-4 sm:px-8 flex items-center justify-end gap-4 bg-muted/10`).
+     - Tombol sekunder "Cancel" (`text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer`).
+     - Tombol primer "Publish Listing" pill rounded-full dengan Rausch gradient (`h-11 px-7 rounded-full bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white font-semibold text-xs tracking-wide shadow-sm hover:opacity-95 active:scale-[0.99] cursor-pointer`).
+  4. Ukuran Modal Container:
+     - `max-w-xl rounded-3xl border border-border/40 bg-background shadow-2xl overflow-hidden`.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
+ Mobile 390px responsif.
 
 
 ---
@@ -753,7 +861,34 @@ Done. vitest 32/32 green · tsc 0 errors. Mobile 390px responsif.
    - Pembersihan footer disclaimer.
 
 ### Status:
-Done. vitest 32/32 green · tsc 0 errors. Mobile 390px responsif.
+Done. vitest 32/32 green · tsc 0 errors.
+
+
+---
+
+## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+  1. Header Modal:
+     - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
+     - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
+  2. Input Fields Spacing & Natural Typography:
+     - Mengganti label all-caps dengan label natural bertingkat (`text-xs font-semibold text-foreground`): "Listing Title", "Price (MYR)", "Location", "Listing Category", dan "WhatsApp Contact Number".
+     - Spacing bernapas `space-y-4` antar blok input.
+     - Input box seragam: `h-11 w-full rounded-xl border border-border/80 bg-background px-3.5 text-sm text-foreground placeholder:text-muted-foreground/50 transition-all focus:border-foreground focus:ring-1 focus:ring-foreground outline-none`.
+     - Price input dengan prefix "RM" solid di sebelah kiri.
+     - Dropdown category dengan custom chevron down minimalis dan explainer card badge di bawahnya.
+     - WhatsApp input dengan placeholder informatif "+60 12 345 6789 atau 60123456789".
+  3. Dedicated Footer Action Bar:
+     - Menempatkan tombol aksi di footer terpisah dengan border pemisah atas (`border-t border-border/40 px-6 py-4 sm:px-8 flex items-center justify-end gap-4 bg-muted/10`).
+     - Tombol sekunder "Cancel" (`text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer`).
+     - Tombol primer "Publish Listing" pill rounded-full dengan Rausch gradient (`h-11 px-7 rounded-full bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white font-semibold text-xs tracking-wide shadow-sm hover:opacity-95 active:scale-[0.99] cursor-pointer`).
+  4. Ukuran Modal Container:
+     - `max-w-xl rounded-3xl border border-border/40 bg-background shadow-2xl overflow-hidden`.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
+ Mobile 390px responsif.
 
 
 ---
@@ -776,7 +911,34 @@ Done. vitest 32/32 green · tsc 0 errors. Mobile 390px responsif.
    - Assistant chat bubble dengan `bg-muted/80` pada notch `rounded-tl-xs`.
 
 ### Status:
-Done. vitest 32/32 green · tsc 0 errors. Double scrollbar di /ai tereliminasi 100%.
+Done. vitest 32/32 green · tsc 0 errors.
+
+
+---
+
+## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+  1. Header Modal:
+     - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
+     - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
+  2. Input Fields Spacing & Natural Typography:
+     - Mengganti label all-caps dengan label natural bertingkat (`text-xs font-semibold text-foreground`): "Listing Title", "Price (MYR)", "Location", "Listing Category", dan "WhatsApp Contact Number".
+     - Spacing bernapas `space-y-4` antar blok input.
+     - Input box seragam: `h-11 w-full rounded-xl border border-border/80 bg-background px-3.5 text-sm text-foreground placeholder:text-muted-foreground/50 transition-all focus:border-foreground focus:ring-1 focus:ring-foreground outline-none`.
+     - Price input dengan prefix "RM" solid di sebelah kiri.
+     - Dropdown category dengan custom chevron down minimalis dan explainer card badge di bawahnya.
+     - WhatsApp input dengan placeholder informatif "+60 12 345 6789 atau 60123456789".
+  3. Dedicated Footer Action Bar:
+     - Menempatkan tombol aksi di footer terpisah dengan border pemisah atas (`border-t border-border/40 px-6 py-4 sm:px-8 flex items-center justify-end gap-4 bg-muted/10`).
+     - Tombol sekunder "Cancel" (`text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer`).
+     - Tombol primer "Publish Listing" pill rounded-full dengan Rausch gradient (`h-11 px-7 rounded-full bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white font-semibold text-xs tracking-wide shadow-sm hover:opacity-95 active:scale-[0.99] cursor-pointer`).
+  4. Ukuran Modal Container:
+     - `max-w-xl rounded-3xl border border-border/40 bg-background shadow-2xl overflow-hidden`.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
+ Double scrollbar di /ai tereliminasi 100%.
 
 
 ---
@@ -815,6 +977,33 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ---
 
+## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+  1. Header Modal:
+     - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
+     - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
+  2. Input Fields Spacing & Natural Typography:
+     - Mengganti label all-caps dengan label natural bertingkat (`text-xs font-semibold text-foreground`): "Listing Title", "Price (MYR)", "Location", "Listing Category", dan "WhatsApp Contact Number".
+     - Spacing bernapas `space-y-4` antar blok input.
+     - Input box seragam: `h-11 w-full rounded-xl border border-border/80 bg-background px-3.5 text-sm text-foreground placeholder:text-muted-foreground/50 transition-all focus:border-foreground focus:ring-1 focus:ring-foreground outline-none`.
+     - Price input dengan prefix "RM" solid di sebelah kiri.
+     - Dropdown category dengan custom chevron down minimalis dan explainer card badge di bawahnya.
+     - WhatsApp input dengan placeholder informatif "+60 12 345 6789 atau 60123456789".
+  3. Dedicated Footer Action Bar:
+     - Menempatkan tombol aksi di footer terpisah dengan border pemisah atas (`border-t border-border/40 px-6 py-4 sm:px-8 flex items-center justify-end gap-4 bg-muted/10`).
+     - Tombol sekunder "Cancel" (`text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer`).
+     - Tombol primer "Publish Listing" pill rounded-full dengan Rausch gradient (`h-11 px-7 rounded-full bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white font-semibold text-xs tracking-wide shadow-sm hover:opacity-95 active:scale-[0.99] cursor-pointer`).
+  4. Ukuran Modal Container:
+     - `max-w-xl rounded-3xl border border-border/40 bg-background shadow-2xl overflow-hidden`.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
+
+
+
+---
+
 ## Log #26: Auth Flow Refactor — One-Flow Airbnb (Email-Only, Disabled Socials, Mobile-Safe)
 - **Timestamp:** 2026-10-24
 - **Tujuan:** Merombak alur autentikasi di [`auth-modal.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/auth-modal.tsx) dan [`login/page.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/login/page.tsx) ke Opsi A: One-Flow Airbnb.
@@ -849,7 +1038,34 @@ Done. vitest 32/32 green · tsc 0 errors.
    - Body: `p-5 sm:p-6` (turun dari p-6 sm:p-8).
 
 ### Status:
-Done. vitest 32/32 green · tsc 0 errors. Mobile 390px aman, overflow eliminated.
+Done. vitest 32/32 green · tsc 0 errors.
+
+
+---
+
+## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+  1. Header Modal:
+     - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
+     - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
+  2. Input Fields Spacing & Natural Typography:
+     - Mengganti label all-caps dengan label natural bertingkat (`text-xs font-semibold text-foreground`): "Listing Title", "Price (MYR)", "Location", "Listing Category", dan "WhatsApp Contact Number".
+     - Spacing bernapas `space-y-4` antar blok input.
+     - Input box seragam: `h-11 w-full rounded-xl border border-border/80 bg-background px-3.5 text-sm text-foreground placeholder:text-muted-foreground/50 transition-all focus:border-foreground focus:ring-1 focus:ring-foreground outline-none`.
+     - Price input dengan prefix "RM" solid di sebelah kiri.
+     - Dropdown category dengan custom chevron down minimalis dan explainer card badge di bawahnya.
+     - WhatsApp input dengan placeholder informatif "+60 12 345 6789 atau 60123456789".
+  3. Dedicated Footer Action Bar:
+     - Menempatkan tombol aksi di footer terpisah dengan border pemisah atas (`border-t border-border/40 px-6 py-4 sm:px-8 flex items-center justify-end gap-4 bg-muted/10`).
+     - Tombol sekunder "Cancel" (`text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer`).
+     - Tombol primer "Publish Listing" pill rounded-full dengan Rausch gradient (`h-11 px-7 rounded-full bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white font-semibold text-xs tracking-wide shadow-sm hover:opacity-95 active:scale-[0.99] cursor-pointer`).
+  4. Ukuran Modal Container:
+     - `max-w-xl rounded-3xl border border-border/40 bg-background shadow-2xl overflow-hidden`.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
+ Mobile 390px aman, overflow eliminated.
 
 
 ---
@@ -865,6 +1081,33 @@ Done. vitest 32/32 green · tsc 0 errors. Mobile 390px aman, overflow eliminated
 ### Status:
 Done. vitest 32/32 green · tsc 0 errors.
 
+
+---
+
+## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+  1. Header Modal:
+     - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
+     - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
+  2. Input Fields Spacing & Natural Typography:
+     - Mengganti label all-caps dengan label natural bertingkat (`text-xs font-semibold text-foreground`): "Listing Title", "Price (MYR)", "Location", "Listing Category", dan "WhatsApp Contact Number".
+     - Spacing bernapas `space-y-4` antar blok input.
+     - Input box seragam: `h-11 w-full rounded-xl border border-border/80 bg-background px-3.5 text-sm text-foreground placeholder:text-muted-foreground/50 transition-all focus:border-foreground focus:ring-1 focus:ring-foreground outline-none`.
+     - Price input dengan prefix "RM" solid di sebelah kiri.
+     - Dropdown category dengan custom chevron down minimalis dan explainer card badge di bawahnya.
+     - WhatsApp input dengan placeholder informatif "+60 12 345 6789 atau 60123456789".
+  3. Dedicated Footer Action Bar:
+     - Menempatkan tombol aksi di footer terpisah dengan border pemisah atas (`border-t border-border/40 px-6 py-4 sm:px-8 flex items-center justify-end gap-4 bg-muted/10`).
+     - Tombol sekunder "Cancel" (`text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer`).
+     - Tombol primer "Publish Listing" pill rounded-full dengan Rausch gradient (`h-11 px-7 rounded-full bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white font-semibold text-xs tracking-wide shadow-sm hover:opacity-95 active:scale-[0.99] cursor-pointer`).
+  4. Ukuran Modal Container:
+     - `max-w-xl rounded-3xl border border-border/40 bg-background shadow-2xl overflow-hidden`.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
+
+
 ---
 
 ## Log #28: Social Buttons Polish — Badge Removal & Centered Alignment
@@ -874,6 +1117,226 @@ Done. vitest 32/32 green · tsc 0 errors.
   2. Mempertahankan tombol dalam state disabled/unclickable: `opacity-60 cursor-not-allowed bg-muted/20 border-border/50` dengan `tabIndex={-1}` dan `aria-disabled="true"`.
   3. Memastikan icon SVG tetap di posisi absolut kiri (`absolute left-4 size-[18px] shrink-0`) dan teks label ("Continue with Google" / "Continue with Apple") terpusat sempurna secara geometris di tengah tombol (`<span className="w-full text-center">`) tanpa gap kosong atau layout bergeser.
   4. Event klik tetap memicu toast sonner informatif yang ramah tanpa memanggil API OAuth.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
+
+
+---
+
+## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+  1. Header Modal:
+     - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
+     - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
+  2. Input Fields Spacing & Natural Typography:
+     - Mengganti label all-caps dengan label natural bertingkat (`text-xs font-semibold text-foreground`): "Listing Title", "Price (MYR)", "Location", "Listing Category", dan "WhatsApp Contact Number".
+     - Spacing bernapas `space-y-4` antar blok input.
+     - Input box seragam: `h-11 w-full rounded-xl border border-border/80 bg-background px-3.5 text-sm text-foreground placeholder:text-muted-foreground/50 transition-all focus:border-foreground focus:ring-1 focus:ring-foreground outline-none`.
+     - Price input dengan prefix "RM" solid di sebelah kiri.
+     - Dropdown category dengan custom chevron down minimalis dan explainer card badge di bawahnya.
+     - WhatsApp input dengan placeholder informatif "+60 12 345 6789 atau 60123456789".
+  3. Dedicated Footer Action Bar:
+     - Menempatkan tombol aksi di footer terpisah dengan border pemisah atas (`border-t border-border/40 px-6 py-4 sm:px-8 flex items-center justify-end gap-4 bg-muted/10`).
+     - Tombol sekunder "Cancel" (`text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer`).
+     - Tombol primer "Publish Listing" pill rounded-full dengan Rausch gradient (`h-11 px-7 rounded-full bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white font-semibold text-xs tracking-wide shadow-sm hover:opacity-95 active:scale-[0.99] cursor-pointer`).
+  4. Ukuran Modal Container:
+     - `max-w-xl rounded-3xl border border-border/40 bg-background shadow-2xl overflow-hidden`.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
+
+
+
+---
+
+## Log #29: BuyHomestay Modal Pop-up Architecture (Floating Dialog & Direct Trigger)
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Mengubah alur "Post Listing" di halaman BuyHomestay ([apps/web/src/app/homestays/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/homestays/page.tsx)) dan komponen form ([apps/web/src/components/homestays/homestay-form.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx)) dari segmented control switcher yang memotong halaman menjadi Modal Dialog pop-up ala Airbnb:
+  1. Halaman /homestays kini selalu menampilkan katalog listing penuh (HomestayList).
+  2. Tombol aksi pill + Post Listing di header kanan (rounded-full px-4 py-2 text-xs font-semibold bg-foreground text-background hover:opacity-90) dengan logika ganda:
+     - Jika belum login (!session?.user), membuka openAuthModal().
+     - Jika sudah login, membuka modal isCreateModalOpen = true.
+  3. Mengubah HomestayForm menjadi Modal Pop-up (React Portal ke document.body):
+     - Backdrop: fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/50 backdrop-blur-sm.
+     - Container: relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-border/40 bg-background p-6 sm:p-8 shadow-2xl.
+     - Header: Judul "Post a BuyHomestay Listing" + tombol silang "X" untuk menutup modal (onClose / Esc key / klik backdrop luar dengan body scroll-lock).
+  4. Mempertahankan 5 field wajib F1 (Title, Price MYR, Location, 4 Category Options, WhatsApp Contact Number).
+  5. Tombol submit Rausch Gradient: bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white.
+  6. Callback onSuccess: menutup modal otomatis (onClose), mereset form, meng-invalidate query TanStack orpc.homestays.list, dan memunculkan toast sonner sukses (listing langsung muncul di katalog).
+  7. Menyelaraskan invocation HomestayForm di [apps/web/src/app/dashboard/dashboard.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/dashboard/dashboard.tsx).
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
+
+
+---
+
+## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+  1. Header Modal:
+     - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
+     - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
+  2. Input Fields Spacing & Natural Typography:
+     - Mengganti label all-caps dengan label natural bertingkat (`text-xs font-semibold text-foreground`): "Listing Title", "Price (MYR)", "Location", "Listing Category", dan "WhatsApp Contact Number".
+     - Spacing bernapas `space-y-4` antar blok input.
+     - Input box seragam: `h-11 w-full rounded-xl border border-border/80 bg-background px-3.5 text-sm text-foreground placeholder:text-muted-foreground/50 transition-all focus:border-foreground focus:ring-1 focus:ring-foreground outline-none`.
+     - Price input dengan prefix "RM" solid di sebelah kiri.
+     - Dropdown category dengan custom chevron down minimalis dan explainer card badge di bawahnya.
+     - WhatsApp input dengan placeholder informatif "+60 12 345 6789 atau 60123456789".
+  3. Dedicated Footer Action Bar:
+     - Menempatkan tombol aksi di footer terpisah dengan border pemisah atas (`border-t border-border/40 px-6 py-4 sm:px-8 flex items-center justify-end gap-4 bg-muted/10`).
+     - Tombol sekunder "Cancel" (`text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer`).
+     - Tombol primer "Publish Listing" pill rounded-full dengan Rausch gradient (`h-11 px-7 rounded-full bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white font-semibold text-xs tracking-wide shadow-sm hover:opacity-95 active:scale-[0.99] cursor-pointer`).
+  4. Ukuran Modal Container:
+     - `max-w-xl rounded-3xl border border-border/40 bg-background shadow-2xl overflow-hidden`.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
+
+
+
+---
+
+## Log #30: Post Listing Luxury Modal Polish (Linear / Airbnb Craftsmanship)
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Memoles antarmuka modal "Post a BuyHomestay Listing" di [apps/web/src/components/homestays/homestay-form.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) dengan standar estetika luxury marketplace ala Airbnb / Linear:
+  1. Header Modal (Visual Anchoring): Header bergaris pemisah halus (flex items-center justify-between border-b border-border/40 px-6 py-4 sm:px-8), judul text-lg font-bold tracking-tight text-foreground + subjudul mikro text-xs text-muted-foreground mt-0.5, dan tombol close X melingkar taktil (flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted/70 hover:text-foreground cursor-pointer).
+  2. Container & Form Body Spacing: Card container max-w-2xl rounded-3xl border border-border/40 bg-background shadow-[0_12px_40px_rgba(0,0,0,0.14)] dengan body modal px-6 py-5 sm:px-8 space-y-5 overflow-y-auto max-h-[calc(88vh-8rem)].
+  3. 5 Input Fields Depth & Micro-Typography:
+     - Container input Airbnb-style: rounded-xl border border-border/80 bg-background transition-all focus-within:border-foreground focus-within:ring-2 focus-within:ring-foreground/15.
+     - Label mikro uppercase: text-[11px] font-semibold uppercase tracking-wider text-muted-foreground px-3.5 pt-2.
+     - Field Title: placeholder "e.g. 4-Bedroom Scandinavian Villa with Infinity Pool".
+     - Field Price (MYR) & Location: grid 2 kolom (grid grid-cols-1 sm:grid-cols-2 gap-4) dengan prefix "RM" solid.
+     - Field Category: custom select dengan chevron icon dan deskripsi kategori di dalam kotak badge subtle (rounded-xl border border-border/50 bg-muted/30 p-3 text-xs text-muted-foreground).
+     - Field WhatsApp: icon Phone dan placeholder "+60 12 345 6789 atau 60123456789".
+  4. Sticky Footer Action Bar: Footer dengan border pemisah (border-t border-border/40 px-6 py-4 sm:px-8 bg-background/95 backdrop-blur-xs flex items-center justify-end gap-3), tombol sekunder "Cancel", dan tombol utama "Publish Listing" Rausch gradient (h-11 px-6 rounded-xl bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white font-semibold text-sm shadow-sm hover:opacity-95 active:scale-[0.99] cursor-pointer).
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
+
+
+---
+
+## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [apps/web/src/components/homestays/homestay-form.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+  1. Header Modal:
+     - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
+     - Layout judul bersih dengan border pemisah bawah (border-b border-border/40 px-6 py-5 sm:px-8), judul tegas text-xl font-bold tracking-tight text-foreground, dan subjudul text-xs text-muted-foreground mt-1.
+  2. Input Fields Spacing & Natural Typography:
+     - Mengganti label all-caps dengan label natural bertingkat (text-xs font-semibold text-foreground): "Listing Title", "Price (MYR)", "Location", "Listing Category", dan "WhatsApp Contact Number".
+     - Spacing bernapas space-y-4 antar blok input.
+     - Input box seragam: h-11 w-full rounded-xl border border-border/80 bg-background px-3.5 text-sm text-foreground placeholder:text-muted-foreground/50 transition-all focus:border-foreground focus:ring-1 focus:ring-foreground outline-none.
+     - Price input dengan prefix "RM" solid di sebelah kiri.
+     - Dropdown category dengan custom chevron down minimalis dan explainer card badge di bawahnya.
+     - WhatsApp input dengan placeholder informatif "+60 12 345 6789 atau 60123456789".
+  3. Dedicated Footer Action Bar:
+     - Menempatkan tombol aksi di footer terpisah dengan border pemisah atas (border-t border-border/40 px-6 py-4 sm:px-8 flex items-center justify-end gap-4 bg-muted/10).
+     - Tombol sekunder "Cancel" (text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer).
+     - Tombol primer "Publish Listing" pill rounded-full dengan Rausch gradient (h-11 px-7 rounded-full bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white font-semibold text-xs tracking-wide shadow-sm hover:opacity-95 active:scale-[0.99] cursor-pointer).
+  4. Ukuran Modal Container:
+     - max-w-xl rounded-3xl border border-border/40 bg-background shadow-2xl overflow-hidden.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
+
+
+---
+
+## Log #31: Post Listing Modal Polish & Anti-Slop Airbnb Revamp
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Merombak total tampilan modal "Post a BuyHomestay Listing" di [`apps/web/src/components/homestays/homestay-form.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar bersih, konsisten, dan bebas dari redundansi visual ala Airbnb:
+  1. Header Modal:
+     - Menghapus tombol silang "X" di pojok kanan atas untuk memusatkan kontrol pembatalan pada tombol "Cancel" dan tombol Escape/backdrop.
+     - Layout judul bersih dengan border pemisah bawah (`border-b border-border/40 px-6 py-5 sm:px-8`), judul tegas `text-xl font-bold tracking-tight text-foreground`, dan subjudul `text-xs text-muted-foreground mt-1`.
+  2. Input Fields Spacing & Natural Typography:
+     - Mengganti label all-caps dengan label natural bertingkat (`text-xs font-semibold text-foreground`): "Listing Title", "Price (MYR)", "Location", "Listing Category", dan "WhatsApp Contact Number".
+     - Spacing bernapas `space-y-4` antar blok input.
+     - Input box seragam: `h-11 w-full rounded-xl border border-border/80 bg-background px-3.5 text-sm text-foreground placeholder:text-muted-foreground/50 transition-all focus:border-foreground focus:ring-1 focus:ring-foreground outline-none`.
+     - Price input dengan prefix "RM" solid di sebelah kiri.
+     - Dropdown category dengan custom chevron down minimalis dan explainer card badge di bawahnya.
+     - WhatsApp input dengan placeholder informatif "+60 12 345 6789 atau 60123456789".
+  3. Dedicated Footer Action Bar:
+     - Menempatkan tombol aksi di footer terpisah dengan border pemisah atas (`border-t border-border/40 px-6 py-4 sm:px-8 flex items-center justify-end gap-4 bg-muted/10`).
+     - Tombol sekunder "Cancel" (`text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer`).
+     - Tombol primer "Publish Listing" pill rounded-full dengan Rausch gradient (`h-11 px-7 rounded-full bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white font-semibold text-xs tracking-wide shadow-sm hover:opacity-95 active:scale-[0.99] cursor-pointer`).
+  4. Ukuran Modal Container:
+     - `max-w-xl rounded-3xl border border-border/40 bg-background shadow-2xl overflow-hidden`.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
+
+
+---
+
+## Log #32: BuyHomestay Category Interactive Grid & Modern Modal Refinement
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Merombak tampilan formulir "Post a BuyHomestay Listing" di [apps/web/src/components/homestays/homestay-form.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-form.tsx) agar berkelas, modern, dan sangat rapi mengadopsi standar Airbnb / Linear:
+  1. Interactive Selection Grid Kategori:
+     - Menghapus elemen <select> native dan kotak badge deskripsi lama.
+     - Menggantinya dengan Grid 4 Kartu Pilihan (grid grid-cols-1 sm:grid-cols-2 gap-2.5):
+       1. "Buy Property" — "Turnkey furnished villa or residential home ready for guests"
+       2. "Buy land to build homestay" — "Strategic land parcel with permits for villa development"
+       3. "Buy Airbnb Profile" — "Established Superhost account with ratings and history"
+       4. "Buy Airbnb Business" — "Operational company with master leases and active cash flow"
+     - Styling per kartu:
+       - Default: cursor-pointer rounded-2xl border border-border/70 bg-background p-3.5 transition-all hover:border-foreground/40 hover:bg-muted/20 text-left
+       - Selected: border-2 border-foreground bg-foreground/5 shadow-xs
+       - Tipografi: Judul kategori text-xs font-bold text-foreground dan deskripsi text-[11px] text-muted-foreground mt-0.5 leading-snug.
+  2. Input Fields Spacing & Clean Micro-Typography:
+     - Spasi antar blok space-y-5 dan label block text-xs font-semibold text-foreground mb-1.5.
+     - Styling input konsisten: h-11 w-full rounded-xl border border-border/80 bg-background px-3.5 text-sm text-foreground shadow-2xs placeholder:text-muted-foreground/45 transition-all focus:border-foreground focus:ring-1 focus:ring-foreground outline-none.
+     - Field Price (MYR): prefix "RM" solid (absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-muted-foreground) dengan padding pl-10.
+     - Field Location: placeholder "e.g. Cameron Highlands, Pahang".
+     - Field WhatsApp: placeholder "+60 12 345 6789 atau 60123456789".
+  3. Header & Footer Modal:
+     - Header: border-b border-border/40 px-6 py-4 sm:px-8 dengan judul text-xl font-bold tracking-tight text-foreground dan subjudul text-xs text-muted-foreground.
+     - Body modal scrollable: max-h-[calc(85vh-8rem)] overflow-y-auto px-6 py-5 sm:px-8 space-y-5.
+     - Footer sticky: border-t border-border/40 px-6 py-4 sm:px-8 flex items-center justify-end gap-3 bg-muted/10 shrink-0.
+     - Tombol Cancel: text-xs font-semibold text-muted-foreground hover:text-foreground cursor-pointer px-3 py-2.
+     - Tombol Publish Listing: h-11 px-7 rounded-full bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white font-semibold text-xs tracking-wide shadow-sm hover:opacity-95 active:scale-[0.99] cursor-pointer.
+  4. Container Modal:
+     - relative w-full max-w-xl max-h-[90vh] flex flex-col rounded-3xl border border-border/40 bg-background shadow-2xl overflow-hidden.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
+
+
+---
+
+## Log #33: Clean Sign-Out Hard Redirect & Marketplace Card Aspect Ratio Alignment
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Memperbaiki alur logout host dan menyelaraskan kualitas visual serta rasio gambar kartu listing di marketplace:
+  1. Logout Clean Redirect ([apps/web/src/components/user-menu.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/user-menu.tsx)):
+     - Pada handler Sign Out, mengganti client router transition (router.push("/")) menjadi window.location.href = "/" di dalam callback onSuccess dari authClient.signOut.
+     - Memastikan seluruh session state, cookie, dan cache TanStack Query ter-reset bersih saat host logout.
+  2. Penyelarasan Kualitas & Rasio Gambar Kartu Marketplace ([apps/web/src/components/homestays/homestay-list.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-list.tsx)):
+     - Mengubah aspect ratio container foto pada Loading Skeleton, Sample Opportunities, dan Real Listings dari aspect-[16/10] menjadi aspect-[4/3] persis seperti etalase kartu di homepage ([apps/web/src/app/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/page.tsx)).
+     - Memastikan elemen <img> menggunakan h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 sehingga foto tampil proporsional, tinggi, tajam, dan tidak terdistorsi.
+     - Menambahkan badge rating bintang (<Star className="size-3 fill-amber-400 text-amber-400" /> 5.00) di sisi kanan nama lokasi pada kartu Real Listings, menciptakan hirarki kartu yang seimbang, mewah, dan konsisten dengan desain homepage.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
+
+
+---
+
+## Log #34: Full Corner-Flush Marketplace Card Image Alignment (Homepage Parity)
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Menyelaraskan tampilan kartu marketplace di [apps/web/src/components/homestays/homestay-list.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/homestays/homestay-list.tsx) agar foto penuh, tinggi, dan membentang sempurna ke sudut-sudut rounded container persis seperti homepage ([apps/web/src/app/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/page.tsx)):
+  1. Penghapusan Padding Eksternal UI Card:
+     - Mengganti wrapper <Card> yang memiliki bawaan py-(--card-spacing) (16px top padding) dengan container murni: <div className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-border/60 bg-card shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-border hover:shadow-md">.
+     - Ini membuat container gambar foto langsung menempel pada koordinat paling atas (0, 0) dan terpotong mulus oleh rounded-2xl overflow-hidden.
+  2. Standarisasi Rasio & Tag Gambar (4:3):
+     - Memastikan seluruh container gambar memiliki class relative aspect-[4/3] w-full overflow-hidden bg-muted.
+     - Memastikan elemen <img> di dalamnya menggunakan h-full w-full object-cover transition-transform duration-500 group-hover:scale-105.
+     - Memastikan badge pill kategori mengambang di pojok kiri atas foto: absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-medium backdrop-blur-md bg-background/85 border border-border/40 shadow-xs text-foreground.
+  3. Keselarasan Header & Detail Konten:
+     - Menggunakan area detail padding terpadu p-4 space-y-3 flex-1 flex flex-col justify-between.
+     - Tampilan baris lokasi dan rating bintang yang seimbang di bawah judul listing (flex items-center justify-between text-xs text-muted-foreground), persis gaya kartu homepage.
 
 ### Status:
 Done. vitest 32/32 green · tsc 0 errors.

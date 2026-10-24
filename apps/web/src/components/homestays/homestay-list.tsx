@@ -1,11 +1,5 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@myrehat-task-b/ui/components/card";
 import { Skeleton } from "@myrehat-task-b/ui/components/skeleton";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -182,8 +176,11 @@ export default function HomestayList({ onNavigateToCreate }: HomestayListProps) 
       {isLoading && (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {[1, 2, 3].map((i) => (
-            <Card key={i} className="overflow-hidden rounded-2xl border-border/50 shadow-xs">
-              <Skeleton className="aspect-[16/10] w-full" />
+            <div
+              key={i}
+              className="overflow-hidden rounded-2xl border border-border/60 bg-card shadow-xs"
+            >
+              <Skeleton className="aspect-[4/3] w-full" />
               <div className="p-4 space-y-3">
                 <Skeleton className="h-5 w-24 rounded-full" />
                 <Skeleton className="h-4 w-3/4" />
@@ -192,7 +189,7 @@ export default function HomestayList({ onNavigateToCreate }: HomestayListProps) 
                   <Skeleton className="h-8 w-full rounded-full" />
                 </div>
               </div>
-            </Card>
+            </div>
           ))}
         </div>
       )}
@@ -263,17 +260,18 @@ export default function HomestayList({ onNavigateToCreate }: HomestayListProps) 
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {SAMPLE_OPPORTUNITIES.map((sample) => (
-                <Card
+                <div
                   key={sample.id}
-                  className="group flex flex-col justify-between overflow-hidden rounded-2xl border-border/60 bg-card shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-border hover:shadow-md"
+                  className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-border/60 bg-card shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-border hover:shadow-md"
                 >
-                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
+                  {/* Photo Preview with Floating Badge */}
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
                     <img
                       src={sample.image}
                       alt={sample.title}
                       loading="lazy"
                       referrerPolicy="no-referrer"
-                      className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-medium backdrop-blur-md bg-background/85 border border-border/40 shadow-xs text-foreground">
                       {sample.category}
@@ -283,40 +281,43 @@ export default function HomestayList({ onNavigateToCreate }: HomestayListProps) 
                     </span>
                   </div>
 
-                  <CardHeader className="space-y-1.5 p-4 pb-2">
-                    <h4 className="line-clamp-1 text-sm font-semibold text-foreground">
-                      {sample.title}
-                    </h4>
-                    <div className="flex items-center justify-between text-xs text-muted-foreground">
-                      <span className="inline-flex items-center gap-1 line-clamp-1">
-                        <MapPin className="size-3.5 shrink-0 text-muted-foreground/80" />
-                        {sample.location}
-                      </span>
-                      <span className="inline-flex items-center gap-0.5 font-semibold text-foreground shrink-0">
-                        <Star className="size-3 fill-amber-400 text-amber-400" />
-                        {sample.rating.toFixed(2)}
-                      </span>
-                    </div>
-                  </CardHeader>
-
-                  <CardFooter className="p-4 pt-0 space-y-2.5 flex-col items-stretch">
-                    <div className="pt-2 border-t border-border/40 flex items-baseline justify-between">
-                      <span className="text-lg font-bold tracking-tight text-foreground">
-                        {sample.price}
-                      </span>
+                  {/* Details */}
+                  <div className="p-4 space-y-3 flex-1 flex flex-col justify-between">
+                    <div className="space-y-1.5">
+                      <h4 className="line-clamp-1 text-sm font-semibold text-foreground">
+                        {sample.title}
+                      </h4>
+                      <div className="flex items-center justify-between text-xs text-muted-foreground">
+                        <span className="inline-flex items-center gap-1 line-clamp-1">
+                          <MapPin className="size-3.5 shrink-0 text-muted-foreground/80" />
+                          <span className="line-clamp-1">{sample.location}</span>
+                        </span>
+                        <span className="inline-flex items-center gap-0.5 font-semibold text-foreground shrink-0">
+                          <Star className="size-3 fill-amber-400 text-amber-400" />
+                          {sample.rating.toFixed(2)}
+                        </span>
+                      </div>
                     </div>
 
-                    <a
-                      href="https://wa.me/601234567890"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="h-8 px-3 rounded-full text-xs font-medium border border-border/70 hover:bg-foreground hover:text-background hover:border-foreground transition-all flex items-center justify-center gap-1.5 w-full cursor-pointer"
-                    >
-                      <MessageSquare className="size-3.5" />
-                      Contact Host
-                    </a>
-                  </CardFooter>
-                </Card>
+                    <div className="pt-2 border-t border-border/40 space-y-2.5">
+                      <div>
+                        <span className="text-lg font-bold tracking-tight text-foreground">
+                          {sample.price}
+                        </span>
+                      </div>
+
+                      <a
+                        href="https://wa.me/601234567890"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="h-8 px-3 rounded-full text-xs font-medium border border-border/70 hover:bg-foreground hover:text-background hover:border-foreground transition-all flex items-center justify-center gap-1.5 w-full cursor-pointer"
+                      >
+                        <MessageSquare className="size-3.5" />
+                        Contact Host
+                      </a>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
@@ -333,71 +334,77 @@ export default function HomestayList({ onNavigateToCreate }: HomestayListProps) 
               "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80";
 
             return (
-              <Card
+              <div
                 key={item.id}
-                className="group flex flex-col justify-between overflow-hidden rounded-2xl border-border/60 bg-card shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-border hover:shadow-md"
+                className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-border/60 bg-card shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-border hover:shadow-md"
               >
                 {/* Visual Cover with Floating Badge */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
                   <img
                     src={imageUrl}
                     alt={item.title}
                     loading="lazy"
                     referrerPolicy="no-referrer"
-                    className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-medium backdrop-blur-md bg-background/85 border border-border/40 shadow-xs text-foreground">
                     {item.category}
                   </span>
                 </div>
 
-                {/* Card Content */}
-                <CardHeader className="space-y-1.5 p-4 pb-2">
-                  <h3 className="line-clamp-2 text-sm font-semibold text-foreground group-hover:text-foreground/90 transition-colors">
-                    {item.title}
-                  </h3>
-                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                    <MapPin className="size-3.5 shrink-0 text-muted-foreground/80" />
-                    <span className="line-clamp-1">{item.location}</span>
-                  </div>
-                </CardHeader>
-
-                <CardContent className="p-4 pt-0">
-                  <div className="flex items-center justify-between border-t border-border/40 pt-2.5 text-[11px] text-muted-foreground">
-                    <span className="flex items-center gap-1">
-                      <User className="size-3" />
-                      {item.user?.name || "Verified Host"}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Calendar className="size-3" />
-                      {new Date(item.createdAt).toLocaleDateString("en-MY", {
-                        day: "numeric",
-                        month: "short",
-                        year: "numeric",
-                      })}
-                    </span>
-                  </div>
-                </CardContent>
-
-                <CardFooter className="p-4 pt-0 space-y-2.5 flex-col items-stretch">
-                  <div className="pt-2 border-t border-border/40 flex items-baseline justify-between">
-                    <span className="text-lg font-bold tracking-tight text-foreground">
-                      {formatPrice(item.price)}
-                    </span>
+                {/* Card Content & Details */}
+                <div className="p-4 space-y-3 flex-1 flex flex-col justify-between">
+                  <div className="space-y-1.5">
+                    <h3 className="line-clamp-2 text-sm font-semibold text-foreground group-hover:text-foreground/90 transition-colors leading-snug">
+                      {item.title}
+                    </h3>
+                    <div className="flex items-center justify-between text-xs text-muted-foreground">
+                      <span className="inline-flex items-center gap-1 line-clamp-1">
+                        <MapPin className="size-3.5 shrink-0 text-muted-foreground/80" />
+                        <span className="line-clamp-1">{item.location}</span>
+                      </span>
+                      <span className="inline-flex items-center gap-0.5 font-semibold text-foreground shrink-0">
+                        <Star className="size-3 fill-amber-400 text-amber-400" />
+                        5.00
+                      </span>
+                    </div>
                   </div>
 
-                  {/* Refined Sleek Pill Contact Button */}
-                  <a
-                    href={waLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="h-8 px-3 rounded-full text-xs font-medium border border-border/70 hover:bg-foreground hover:text-background hover:border-foreground transition-all flex items-center justify-center gap-1.5 w-full cursor-pointer"
-                  >
-                    <MessageSquare className="size-3.5" />
-                    Contact Host
-                  </a>
-                </CardFooter>
-              </Card>
+                  <div className="space-y-2.5">
+                    <div className="flex items-center justify-between border-t border-border/40 pt-2.5 text-[11px] text-muted-foreground">
+                      <span className="flex items-center gap-1">
+                        <User className="size-3" />
+                        {item.user?.name || "Verified Host"}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Calendar className="size-3" />
+                        {new Date(item.createdAt).toLocaleDateString("en-MY", {
+                          day: "numeric",
+                          month: "short",
+                          year: "numeric",
+                        })}
+                      </span>
+                    </div>
+
+                    <div className="pt-2 border-t border-border/40 flex items-baseline justify-between">
+                      <span className="text-lg font-bold tracking-tight text-foreground">
+                        {formatPrice(item.price)}
+                      </span>
+                    </div>
+
+                    {/* Refined Sleek Pill Contact Button */}
+                    <a
+                      href={waLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="h-8 px-3 rounded-full text-xs font-medium border border-border/70 hover:bg-foreground hover:text-background hover:border-foreground transition-all flex items-center justify-center gap-1.5 w-full cursor-pointer"
+                    >
+                      <MessageSquare className="size-3.5" />
+                      Contact Host
+                    </a>
+                  </div>
+                </div>
+              </div>
             );
           })}
         </div>
