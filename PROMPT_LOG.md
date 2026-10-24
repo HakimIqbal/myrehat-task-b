@@ -811,3 +811,69 @@ Done. vitest 32/32 green · tsc 0 errors. Double scrollbar di /ai tereliminasi 1
 
 ### Status:
 Done. vitest 32/32 green · tsc 0 errors.
+
+
+---
+
+## Log #26: Auth Flow Refactor — One-Flow Airbnb (Email-Only, Disabled Socials, Mobile-Safe)
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Merombak alur autentikasi di [`auth-modal.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/auth-modal.tsx) dan [`login/page.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/login/page.tsx) ke Opsi A: One-Flow Airbnb.
+
+### Rincian Perubahan:
+1. **Step 1 — Email-Only Identifier:**
+   - Label diubah dari "Phone number or email" menjadi "Email address".
+   - Placeholder: `name@example.com`.
+   - Validasi `isPhoneOrWhatsApp()`: jika input adalah nomor HP (≥7 digit murni), tampilkan error spesifik: "WhatsApp direct messaging is reserved for Concierge inquiries. Please enter your email to access Host features."
+   - Flow OTP (phone path) dihapus sepenuhnya.
+   - Tombol submit: "Continue".
+
+2. **Step 2 — Password & Auto Sign-up:**
+   - Email aktif + link "Change" untuk kembali ke Step 1.
+   - Input password dengan toggle Show/Hide.
+   - Tombol submit: "Continue to Host Account".
+   - Backend logic (a→b→c):
+     - a. `authClient.signIn.email()`
+     - b. Jika gagal → `authClient.signUp.email()` (auto sign-up)
+     - c. Jika sign-up juga gagal → error: "Incorrect password for this host account. Please try again."
+
+3. **Google & Apple — Disabled "Coming soon":**
+   - Hapus pemanggilan `authClient.signIn.social()`.
+   - Styling: `opacity-60 cursor-not-allowed bg-muted/20 border-border/50`.
+   - Badge pill: "Coming soon" (`rounded-full bg-muted px-2 py-0.5 text-[10px]`).
+   - Klik → `toast.info("... single sign-on will be enabled in the upcoming production release. Please continue with your Host email.")`.
+   - `tabIndex={-1}` dan `aria-disabled="true"` untuk aksesibilitas.
+
+4. **Mobile Viewport — max-w-[460px], h-14 header, p-5 sm:p-6:**
+   - Container card: `max-w-[460px]` (turun dari 520px) untuk margin aman di viewport 390px.
+   - Header: `h-14` (turun dari h-16).
+   - Body: `p-5 sm:p-6` (turun dari p-6 sm:p-8).
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors. Mobile 390px aman, overflow eliminated.
+
+
+---
+
+## Log #27: Auth Step 2 Email Badge Pill & Visual Hierarchy Polish
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Memoles tampilan Step 2 (Password) di [`auth-modal.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/auth-modal.tsx) dan [`login/page.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/login/page.tsx) agar informasi email aktif tampil kontras, tegas, dan elegan:
+  1. Membungkus email aktif dan tombol "Change" ke dalam container badge pill terpadu: `flex items-center justify-between rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 shadow-2xs`.
+  2. Sisi kiri menampilkan icon `<Mail className="size-3.5 shrink-0 text-muted-foreground" />` dan alamat email dengan tipografi tegas: `text-xs sm:text-sm font-semibold text-foreground truncate max-w-[240px] sm:max-w-[280px]`.
+  3. Sisi kanan menampilkan tombol "Change" dengan styling link bersih dan kontras Rausch Coral: `text-xs font-semibold text-[#E61E4D] hover:underline cursor-pointer shrink-0`.
+  4. Menjaga proporsi spasi `space-y-4` antara badge email dan input container password.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
+
+---
+
+## Log #28: Social Buttons Polish — Badge Removal & Centered Alignment
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Memoles tombol Google dan Apple di [`auth-modal.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/auth-modal.tsx) dan [`login/page.tsx`](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/login/page.tsx):
+  1. Menghapus badge pill "Coming soon" dari kedua tombol agar tampilan tombol bersih, minimalis, dan elegan tanpa elemen yang menumpuk.
+  2. Mempertahankan tombol dalam state disabled/unclickable: `opacity-60 cursor-not-allowed bg-muted/20 border-border/50` dengan `tabIndex={-1}` dan `aria-disabled="true"`.
+  3. Memastikan icon SVG tetap di posisi absolut kiri (`absolute left-4 size-[18px] shrink-0`) dan teks label ("Continue with Google" / "Continue with Apple") terpusat sempurna secara geometris di tengah tombol (`<span className="w-full text-center">`) tanpa gap kosong atau layout bergeser.
+  4. Event klik tetap memicu toast sonner informatif yang ramah tanpa memanggil API OAuth.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
