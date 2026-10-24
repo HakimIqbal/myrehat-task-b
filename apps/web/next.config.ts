@@ -23,6 +23,10 @@ const nextConfig: NextConfig = {
         destination: `${serverUrl}/api/auth/:path*`,
       },
       {
+        source: "/api/ai",
+        destination: `${serverUrl}/api/ai`,
+      },
+      {
         source: "/ai",
         destination: `${serverUrl}/ai`,
       },

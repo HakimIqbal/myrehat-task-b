@@ -1384,3 +1384,89 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ### Status:
 Done. vitest 32/32 green · tsc 0 errors.
+
+
+---
+
+## Log #37: AI Concierge Backend POST /ai Migration to OpenRouter & Fallback Safety
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Memperbaiki endpoint backend POST /ai pada [apps/server/src/index.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/server/src/index.ts) agar fitur chat web MyRehat Concierge di /ai aktif dan berfungsi menggunakan provider OpenRouter tanpa melempar error 500:
+  1. Dependensi & Resolusi Provider OpenRouter:
+     - Menambahkan @openrouter/ai-sdk-provider (^3.1.0) pada apps/server/package.json dan menyambungkan symlink node_modules yang sesuai.
+     - Mengganti import @ai-sdk/google dan @ai-sdk/devtools dengan createOpenRouter dari @openrouter/ai-sdk-provider.
+     - Menghapus devToolsMiddleware() yang menyebabkan crash HTTP 500 pada mode build production.
+  2. Konfigurasi Environment Variable ([apps/server/.env](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/server/.env)):
+     - Menambahkan variabel OPENROUTER_API_KEY= dan OPENROUTER_MODEL=google/gemini-2.5-flash dengan mempertahankan seluruh variabel yang telah ada.
+  3. Handler POST /ai & Graceful Fallback:
+     - Menginisialisasi OpenRouter client menggunakan process.env.OPENROUTER_API_KEY dan model google/gemini-2.5-flash.
+     - Membatasi output token menggunakan parameter maxOutputTokens: 1000 (dan maxTokens: 1000) untuk mencegah penolakan kuota token OpenRouter (default Google 65,535 tokens).
+     - Menetapkan system prompt resmi MyRehat Concierge:
+       "You are the official MyRehat Concierge assistant. You provide polite, helpful, and concise assistance for homestay bookings, property inquiries, and BuyHomestay listings. Keep your tone warm, welcoming, and concise."
+     - Mengimplementasikan mekanisme createFallbackStream() jika OPENROUTER_API_KEY tidak tersedia, bernilai placeholder, atau mengalami kendala jaringan, sehingga endpoint selalu mengembalikan respons stream 200 OK yang ramah dan tidak pernah melempar HTTP 500.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors (db, api, web, server).
+
+---
+
+## Log #38: Fix Varlock Environment Variable Validation & Schema Synchronization in apps/server
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Memperbaiki kegagalan validasi environment variable Varlock pada apps/server yang menyebabkan `bun run dev` crash saat `pnpm run dev`:
+  1. Konfigurasi Utuh Environment Variable ([apps/server/.env](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/server/.env)):
+     - Memperbarui file .env secara utuh dengan nilai valid:
+       - `NODE_ENV=development`
+       - `BETTER_AUTH_SECRET=placeholder-min-32-chars-000000000000` (memenuhi syarat minLength=32)
+       - `BETTER_AUTH_URL=http://localhost:3000` (memenuhi syarat format URL)
+       - `CORS_ORIGIN=http://localhost:3001` (memenuhi format URL)
+       - `GOOGLE_GENERATIVE_AI_API_KEY=placeholder`
+       - `OPENROUTER_API_KEY=<REDACTED_OPENROUTER_KEY>`
+       - `OPENROUTER_MODEL=google/gemini-2.5-flash`
+       - `DATABASE_URL=postgresql://taskb8:1b945be09bdb2ce6bb@34.21.153.205:5440/taskb8`
+  2. Sinkronisasi Schema Varlock ([apps/server/.env.schema](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/server/.env.schema)):
+     - Menambahkan anotasi `# @optional @type=string` untuk `OPENROUTER_API_KEY` dan `OPENROUTER_MODEL` agar tidak memicu kegagalan validasi saat variabel bernilai undefined.
+  3. Regenerasi Kode & Tipe Varlock ([apps/server/src/env.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/server/src/env.ts)):
+     - Menjalankan `bun run env:generate` (`varlock codegen`) dan memastikan kompatibilitas runtime Bun.
+     - Memverifikasi inisialisasi modul runtime [apps/server/src/env.server.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/server/src/env.server.ts) berjalan sukses tanpa error.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors (db, api, web, server) · varlock codegen success.
+
+---
+
+## Log #39: Fix AI Concierge Next.js Route Collision & Stream Response Pipeline
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Memperbaiki masalah bot MyRehat Concierge di /ai yang tidak merespons (request POST /ai berhenti di 200 OK Next.js tanpa streaming respon ke UI frontend):
+  1. Investigasi & Eliminasi Route Collision:
+     - Ditemukan bahwa Next.js App Router menganggap request POST `/ai` sebagai request halaman internal ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)), sehingga rewrite afterFiles terlewati dan mengembalikan payload HTML kosong alih-alih proxy ke server Elysia (3000).
+     - Mengubah endpoint API transport frontend menjadi relative path terisolasi: `/api/ai`.
+     - Menambahkan handler proxy Next.js App Router ([apps/web/src/app/api/ai/route.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/api/ai/route.ts)) dan rewrite proxy pada [apps/web/next.config.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/next.config.ts) untuk meneruskan request ke backend Elysia secara transparan dengan header SSE `cache-control: no-cache, no-transform`.
+  2. Perbaikan & Observabilitas Backend Elysia ([apps/server/src/index.ts](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/server/src/index.ts)):
+     - Mendukung endpoint ganda `.post("/ai", handleAiChat)` dan `.post("/api/ai", handleAiChat)`.
+     - Menambahkan logging `console.log("POST /ai received body:", JSON.stringify(body))` dan `try { ... } catch (err) { console.error("OpenRouter error in /ai:", err); }`.
+     - Menambahkan sanitasi pesan masukan `normalizedMessages` agar `convertToModelMessages` tidak melempar `TypeError: undefined is not an object (evaluating 'message.parts.some')` saat pesan hanya menyertakan `content` atau `text`.
+     - Memastikan fallback stream SSE memancarkan format event Vercel AI SDK valid (`text-start`, `text-delta` dengan atribut `delta` dan `text`, serta `text-end`).
+  3. Resiliensi UI Frontend ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)):
+     - Mengonfigurasi `useChat` dengan transport `api: "/api/ai"` dan error handler `onError`.
+     - Menambahkan multi-tier fallback rendering pesan: memprioritaskan `message.parts`, lalu beralih ke `message.text` atau `message.content`, serta menyajikan fallback pesan concierge saat stream selesai tanpa teks.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors (db, api, web, server).
+
+---
+
+## Log #40: Frontend Message Content Extraction & Resilient Typing Indicator in /ai
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Memperbaiki rendering balon chat assistant dan typing indicator pada [apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx) agar teks streaming langsung tampil dan mengalir rapi:
+  1. Ekstraksi Universal Konten Pesan (`messageText`):
+     - Mengimplementasikan pipeline ekstraksi teks yang memprioritaskan `message.parts` berjenis `text`, lalu melakukan fallback ke `message.content` atau `message.text`.
+     - Merender `messageText` menggunakan `<span>{messageText}</span>` untuk user dan `<Streamdown isAnimating={status === "streaming" && message.role === "assistant"}>{messageText}</Streamdown>` untuk assistant.
+     - Menyembunyikan balon chat assistant kosong saat awal streaming (`!messageText.trim() && (status === "streaming" || status === "submitted")`) agar tidak memunculkan kotak kosong melompong.
+  2. Typing Indicator yang Stabil (`isWaitingForAssistant`):
+     - Memperbarui kondisi typing indicator agar aktif saat `status === "submitted"` maupun saat `status === "streaming"` sebelum token teks pertama dari assistant tiba (`lastMessage?.role !== "assistant" || !lastMessageText.trim()`).
+     - Tiga titik animasi bounce tetap berdenyut mulus sampai respons teks mulai mengalir ke layar.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors (db, api, web, server).
+
+
+
