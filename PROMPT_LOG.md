@@ -1340,3 +1340,47 @@ Done. vitest 32/32 green · tsc 0 errors.
 
 ### Status:
 Done. vitest 32/32 green · tsc 0 errors.
+
+
+---
+
+## Log #35: Mobile Polish — Footer 2-Col Grid & AI Studio Optical Centering
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Memperbaiki tampilan mobile (390px-440px / iPhone 16 Pro Max) pada Footer ([apps/web/src/components/footer.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/components/footer.tsx)) dan Halaman AI Studio ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)):
+  1. Footer Mobile Polish:
+     - Mengubah navigasi editorial menjadi 2 kolom grid bersih di mobile (grid grid-cols-2 gap-y-2.5 gap-x-4 text-xs font-medium text-muted-foreground) dan mempertahankan layout horizontal inline di desktop (md:flex md:items-center md:gap-x-4 md:gap-y-2).
+     - Menyembunyikan pemisah titik (&middot;) di mobile (hidden md:inline text-border select-none) untuk mencegah baris link bertumpuk canggung saat wrap.
+     - Mengatur padding container yang proporsional di mobile: px-5 py-8 sm:px-6 sm:py-12.
+     - Menyempurnakan spasi teks brand description (leading-relaxed) dan copyright agar tidak ada teks terpotong atau wrap yang patah.
+  2. AI Studio Optical Centering & Mobile Textarea:
+     - Mengubah posisi Central Studio dari mathematical center (items-center) ke optical center yang nyaman di mata mobile:
+       <main className="min-h-0 flex-1 overflow-y-auto flex flex-col justify-start sm:justify-center items-center px-4 pt-6 sm:pt-12 pb-8">.
+     - Memastikan kotak input prompt dan 3 quick chips terlihat langsung di area atas/tengah layar smartphone tanpa terpotong atau tenggelam ke bawah.
+     - Textarea input disesuaikan dengan tipografi responsif: text-xs sm:text-sm placeholder:text-xs sm:placeholder:text-sm sehingga placeholder panjang muat dengan nyaman di layar sempit tanpa memotong tombol kirim melingkar.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.
+
+
+---
+
+## Log #36: AI Concierge Mobile Zero-Scroll Lock & Typography Compactness
+- **Timestamp:** 2026-10-24
+- **Tujuan:** Mengunci tampilan halaman AI Concierge ([apps/web/src/app/ai/page.tsx](file:///Users/muhiqbalhakim/Dev/myrehat-task-b/apps/web/src/app/ai/page.tsx)) pada state !hasStarted agar terpusat secara paten dan 100% bebas scroll pada viewport mobile (390px - 440px / iPhone 16 Pro Max):
+  1. Kunci Container Viewport (Zero-Scroll Lock):
+     - Container utama diubah ke dynamic viewport height dengan overflow terisolasi: flex h-[calc(100dvh-4rem)] w-full flex-col bg-background overflow-hidden.
+     - Tag <main> pada state !hasStarted dikunci tanpa overflow-y-auto agar tidak memicu scrollbar atau pergeseran vertikal:
+       flex-1 w-full flex flex-col items-center justify-center px-4 overflow-hidden -mt-6 sm:mt-0.
+  2. Rampingkan Tipografi & Input Box:
+     - Avatar Sparkles: size-8 sm:size-9 mb-2.5 text-[#E61E4D].
+     - Judul H2: text-lg sm:text-2xl font-bold tracking-tight text-foreground text-center.
+     - Subjudul: text-xs sm:text-sm text-muted-foreground text-center max-w-xs sm:max-w-md mt-1.
+     - Container form: w-full max-w-xl mx-auto mt-4 sm:mt-6.
+     - Textarea input: placeholder diringkas menjadi "Ask MyRehat Concierge about stays, rates, or properties..." dengan styling w-full min-h-11 max-h-24 py-2.5 pl-3.5 pr-11 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground/70 resize-none outline-none bg-transparent.
+     - Tombol Send: absolute right-2 bottom-2 size-7 sm:size-8 rounded-full dengan icon size-3.5 sm:size-4.
+  3. Quick Chips Ramping:
+     - Container chips: mt-3 sm:mt-4 flex flex-wrap justify-center gap-1.5 sm:gap-2.
+     - Tombol chip: rounded-full border border-border/60 bg-background px-3 py-1.5 text-[11px] sm:text-xs font-medium text-muted-foreground hover:text-foreground.
+
+### Status:
+Done. vitest 32/32 green · tsc 0 errors.

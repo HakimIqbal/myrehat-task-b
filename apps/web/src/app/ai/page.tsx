@@ -75,7 +75,7 @@ export default function AIPage() {
 
   return (
     <MessageScrollerProvider>
-      <div className="flex h-[calc(100vh-4rem)] min-h-[500px] w-full flex-col bg-background">
+      <div className="flex h-[calc(100dvh-4rem)] w-full flex-col bg-background overflow-hidden">
         {/* Concierge Persona Status Header */}
         <header className="shrink-0 bg-transparent px-4 py-3">
           <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-3">
@@ -122,25 +122,25 @@ export default function AIPage() {
 
         {/* Studio Body: Central Studio (messages empty) vs MessageScroller (chat active) */}
         {!hasStarted ? (
-          <main className="min-h-0 flex-1 overflow-y-auto flex items-center justify-center px-4 py-8">
-            <div className="w-full max-w-2xl mx-auto flex flex-col items-center">
+          <main className="flex-1 w-full flex flex-col items-center justify-center px-4 overflow-hidden -mt-6 sm:mt-0">
+            <div className="w-full max-w-xl mx-auto flex flex-col items-center">
               {/* Bot Avatar Icon */}
-              <div className="flex size-9 items-center justify-center rounded-full border border-border/50 bg-background shadow-2xs text-[#E61E4D] mb-4">
+              <div className="flex size-8 sm:size-9 items-center justify-center rounded-full border border-border/50 bg-background shadow-2xs text-[#E61E4D] mb-2.5">
                 <Sparkles className="size-4 text-[#E61E4D]" />
               </div>
 
               {/* Central Title */}
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-foreground text-center">
+              <h2 className="text-lg sm:text-2xl font-bold tracking-tight text-foreground text-center">
                 Where are you traveling in Malaysia?
               </h2>
 
               {/* Subtitle */}
-              <p className="mt-2 text-sm text-muted-foreground text-center max-w-md mx-auto">
+              <p className="text-xs sm:text-sm text-muted-foreground text-center max-w-xs sm:max-w-md mt-1">
                 Ask about verified stays, direct host rates, or BuyHomestay acquisitions.
               </p>
 
               {/* Central Input Box */}
-              <div className="w-full max-w-2xl mx-auto mt-6">
+              <div className="w-full max-w-xl mx-auto mt-4 sm:mt-6">
                 <form onSubmit={handleSubmit} className="w-full">
                   <div className="relative rounded-2xl border-2 border-border/80 bg-background shadow-md hover:border-foreground/30 focus-within:border-foreground/70 focus-within:ring-2 focus-within:ring-foreground/15 transition-all">
                     <textarea
@@ -148,8 +148,8 @@ export default function AIPage() {
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
                       onKeyDown={handlePromptKeyDown}
-                      placeholder="Ask MyRehat Concierge about stays, rates, or property acquisitions..."
-                      className="w-full min-h-12 max-h-32 py-3.5 pl-4 pr-12 text-sm text-foreground placeholder:text-muted-foreground/75 resize-none outline-none bg-transparent"
+                      placeholder="Ask MyRehat Concierge about stays, rates, or properties..."
+                      className="w-full min-h-11 max-h-24 py-2.5 pl-3.5 pr-11 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground/70 resize-none outline-none bg-transparent"
                       rows={1}
                       autoComplete="off"
                       autoFocus
@@ -159,26 +159,26 @@ export default function AIPage() {
                       type="submit"
                       disabled={isSending || !input.trim()}
                       aria-label="Send message"
-                      className="absolute right-2.5 bottom-2.5 size-8 rounded-full bg-gradient-to-r from-[#E61E4D] to-[#D70466] text-white shadow-xs hover:opacity-90 disabled:opacity-40 transition-all flex items-center justify-center cursor-pointer"
+                      className="absolute right-2 bottom-2 size-7 sm:size-8 rounded-full bg-gradient-to-r from-[#E61E4D] to-[#D70466] text-white shadow-xs hover:opacity-90 disabled:opacity-40 transition-all flex items-center justify-center cursor-pointer"
                     >
                       {isSending ? (
-                        <Loader2 className="size-4 animate-spin" />
+                        <Loader2 className="size-3.5 sm:size-4 animate-spin" />
                       ) : (
-                        <ArrowUpIcon className="size-4" />
+                        <ArrowUpIcon className="size-3.5 sm:size-4" />
                       )}
                     </button>
                   </div>
                 </form>
 
                 {/* 3 Quick Chips */}
-                <div className="mt-4 flex flex-wrap justify-center gap-2">
+                <div className="mt-3 sm:mt-4 flex flex-wrap justify-center gap-1.5 sm:gap-2">
                   {QUICK_CHIPS.map((chip, idx) => (
                     <button
                       key={idx}
                       type="button"
                       onClick={() => handleSuggestionClick(chip.prompt)}
                       disabled={isSending}
-                      className="rounded-full border border-border/60 bg-background px-4 py-2 text-xs font-medium text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-all cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+                      className="rounded-full border border-border/60 bg-background px-3 py-1.5 text-[11px] sm:text-xs font-medium text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-all cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       {chip.label}
                     </button>
@@ -270,8 +270,8 @@ export default function AIPage() {
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
                       onKeyDown={handlePromptKeyDown}
-                      placeholder="Ask MyRehat Concierge about stays, rates, or property acquisitions..."
-                      className="w-full min-h-12 max-h-32 py-3.5 pl-4 pr-12 text-sm text-foreground placeholder:text-muted-foreground/75 resize-none outline-none bg-transparent"
+                      placeholder="Ask MyRehat Concierge about stays, rates, or properties..."
+                      className="w-full min-h-11 max-h-24 py-2.5 pl-3.5 pr-11 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground/70 resize-none outline-none bg-transparent"
                       rows={1}
                       autoComplete="off"
                       autoFocus
@@ -281,12 +281,12 @@ export default function AIPage() {
                       type="submit"
                       disabled={isSending || !input.trim()}
                       aria-label="Send message"
-                      className="absolute right-2.5 bottom-2.5 size-8 rounded-full bg-gradient-to-r from-[#E61E4D] to-[#D70466] text-white shadow-xs hover:opacity-90 disabled:opacity-40 transition-all flex items-center justify-center cursor-pointer"
+                      className="absolute right-2 bottom-2 size-7 sm:size-8 rounded-full bg-gradient-to-r from-[#E61E4D] to-[#D70466] text-white shadow-xs hover:opacity-90 disabled:opacity-40 transition-all flex items-center justify-center cursor-pointer"
                     >
                       {isSending ? (
-                        <Loader2 className="size-4 animate-spin" />
+                        <Loader2 className="size-3.5 sm:size-4 animate-spin" />
                       ) : (
-                        <ArrowUpIcon className="size-4" />
+                        <ArrowUpIcon className="size-3.5 sm:size-4" />
                       )}
                     </button>
                   </div>
