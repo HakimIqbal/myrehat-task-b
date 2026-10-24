@@ -61,3 +61,8 @@ temp
 # Local notes
 BUG_EXPLANATION_LOCAL.md
 
+# Internal AI agent rules & OS files
+CLAUDE.md
+.cursorrules
+.DS_Store
+
