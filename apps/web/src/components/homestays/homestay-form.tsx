@@ -48,12 +48,14 @@ export interface HomestayFormProps {
   isOpen?: boolean;
   onClose?: () => void;
   onSuccess?: () => void;
+  embedded?: boolean;
 }
 
 export default function HomestayForm({
   isOpen = true,
   onClose,
   onSuccess,
+  embedded = false,
 }: HomestayFormProps) {
   const queryClient = useQueryClient();
 
@@ -66,7 +68,7 @@ export default function HomestayForm({
 
   // Esc key and body scroll lock
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || embedded) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose?.();
@@ -78,7 +80,7 @@ export default function HomestayForm({
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = originalOverflow;
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, embedded, onClose]);
 
   const createMutation = useMutation({
     ...orpc.homestays.create.mutationOptions(),
@@ -141,29 +143,8 @@ export default function HomestayForm({
     });
   };
 
-  return createPortal(
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-label="Post a BuyHomestay Listing"
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/50 backdrop-blur-sm transition-all duration-300"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose?.();
-      }}
-    >
-      <div className="relative w-full max-w-xl max-h-[90vh] flex flex-col rounded-3xl border border-border/40 bg-background shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-        {/* Header Modal */}
-        <div className="border-b border-border/40 px-6 py-4 sm:px-8 shrink-0">
-          <h2 className="text-xl font-bold tracking-tight text-foreground">
-            Post a BuyHomestay Listing
-          </h2>
-          <p className="text-xs text-muted-foreground">
-            Submit your vacation home, development plot, or Airbnb business to verified buyers.
-          </p>
-        </div>
-
-        {/* Form Body and Footer */}
-        <form onSubmit={handleSubmit} className="flex flex-col min-h-0 flex-1">
+  const formBody = (
+    <form onSubmit={handleSubmit} className="flex flex-col min-h-0 flex-1">
           <div className="max-h-[calc(85vh-8rem)] overflow-y-auto px-6 py-5 sm:px-8 space-y-5">
             {formError && (
               <div className="flex items-start gap-2.5 rounded-xl border border-destructive/30 bg-destructive/10 p-3.5 text-xs text-destructive">
@@ -321,6 +302,34 @@ export default function HomestayForm({
             </button>
           </div>
         </form>
+  );
+
+  if (embedded) {
+    return formBody;
+  }
+
+  return createPortal(
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Post a BuyHomestay Listing"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/50 backdrop-blur-sm transition-all duration-300"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose?.();
+      }}
+    >
+      <div className="relative w-full max-w-xl max-h-[90vh] flex flex-col rounded-3xl border border-border/40 bg-background shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+        {/* Header Modal */}
+        <div className="border-b border-border/40 px-6 py-4 sm:px-8 shrink-0">
+          <h2 className="text-xl font-bold tracking-tight text-foreground">
+            Post a BuyHomestay Listing
+          </h2>
+          <p className="text-xs text-muted-foreground">
+            Submit your vacation home, development plot, or Airbnb business to verified buyers.
+          </p>
+        </div>
+
+        {formBody}
       </div>
     </div>,
     document.body,
