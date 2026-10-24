@@ -38,14 +38,32 @@ const QUICK_CHIPS = [
 
 export default function AIPage() {
   const [input, setInput] = useState("");
-  // Same-Origin Relative API Path "/ai" to leverage Next.js proxy rewrites
+  // Same-Origin Relative API Path "/api/ai" routed via Next.js proxy route to Elysia backend
   const { messages, sendMessage, status, setMessages } = useChat({
     transport: new DefaultChatTransport({
-      api: "/ai",
+      api: "/api/ai",
     }),
+    onError: (err) => {
+      console.error("MyRehat Concierge chat error:", err);
+    },
   });
   const isSending = status === "submitted" || status === "streaming";
   const hasStarted = messages.length > 0 || isSending;
+
+  const lastMessage = messages[messages.length - 1];
+  const lastMessageText =
+    lastMessage?.parts
+      ?.filter((p) => p.type === "text")
+      .map((p) => (p as { text?: string }).text || "")
+      .join("") ||
+    (lastMessage as { content?: string } | undefined)?.content ||
+    (lastMessage as { text?: string } | undefined)?.text ||
+    "";
+
+  const isWaitingForAssistant =
+    status === "submitted" ||
+    (status === "streaming" &&
+      (lastMessage?.role !== "assistant" || !lastMessageText.trim()));
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -199,6 +217,24 @@ export default function AIPage() {
                   >
                     {messages.map((message) => {
                       const isUser = message.role === "user";
+                      const messageText =
+                        message.parts
+                          ?.filter((p) => p.type === "text")
+                          .map((p) => (p as { text?: string }).text || "")
+                          .join("") ||
+                        (message as { content?: string }).content ||
+                        (message as { text?: string }).text ||
+                        "";
+
+                      // Hide empty assistant bubble during submitted or initial streaming (before first token)
+                      // since the dedicated typing indicator below handles the loading visual.
+                      if (
+                        !isUser &&
+                        !messageText.trim() &&
+                        (status === "streaming" || status === "submitted")
+                      ) {
+                        return null;
+                      }
 
                       return (
                         <MessageScrollerItem key={message.id} scrollAnchor={isUser}>
@@ -213,23 +249,21 @@ export default function AIPage() {
                                   : "rounded-2xl rounded-tl-xs px-4 py-3 text-sm leading-relaxed text-foreground bg-muted/80 dark:bg-zinc-900 border border-border/50 shadow-2xs max-w-[85%] self-start"
                               }
                             >
-                              {message.parts?.map((part, index) => {
-                                if (part.type === "text") {
-                                  return isUser ? (
-                                    <span key={index}>{part.text}</span>
-                                  ) : (
-                                    <Streamdown
-                                      key={index}
-                                      isAnimating={
-                                        status === "streaming" && message.role === "assistant"
-                                      }
-                                    >
-                                      {part.text}
-                                    </Streamdown>
-                                  );
-                                }
-                                return null;
-                              })}
+                              {isUser ? (
+                                <span>{messageText}</span>
+                              ) : messageText ? (
+                                <Streamdown
+                                  isAnimating={
+                                    status === "streaming" && message.role === "assistant"
+                                  }
+                                >
+                                  {messageText}
+                                </Streamdown>
+                              ) : (
+                                <span className="text-muted-foreground italic text-xs">
+                                  I am currently experiencing higher than usual traffic. Please explore our verified listings on the Marketplace or contact hosts directly via WhatsApp!
+                                </span>
+                              )}
                             </div>
                           </div>
                         </MessageScrollerItem>
@@ -237,7 +271,7 @@ export default function AIPage() {
                     })}
 
                     {/* Typing Animation in Assistant Bubble */}
-                    {status === "submitted" && (
+                    {isWaitingForAssistant && (
                       <MessageScrollerItem>
                         <div className="flex flex-col items-start">
                           <span className="text-[11px] font-medium text-muted-foreground mb-1">

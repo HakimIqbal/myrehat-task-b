@@ -1,7 +1,6 @@
-import { devToolsMiddleware } from "@ai-sdk/devtools";
-import { google } from "@ai-sdk/google";
 import { cors } from "@elysiajs/cors";
 import { appRouter } from "@myrehat-task-b/api/routers/index";
+import { createOpenRouter } from "@openrouter/ai-sdk-provider";
 import { OpenAPIHandler } from "@orpc/openapi/fetch";
 import { OpenAPIReferencePlugin } from "@orpc/openapi/plugins";
 import { onError } from "@orpc/server";
@@ -9,11 +8,11 @@ import { RPCHandler } from "@orpc/server/fetch";
 import { ZodToJsonSchemaConverter } from "@orpc/zod/zod4";
 import {
   convertToModelMessages,
+  createUIMessageStream,
   createUIMessageStreamResponse,
   streamText,
   toUIMessageStream,
   type UIMessage,
-  wrapLanguageModel,
 } from "ai";
 import { Elysia } from "elysia";
 
@@ -40,6 +39,94 @@ const apiHandler = new OpenAPIHandler(appRouter, {
     }),
   ],
 });
+
+function createFallbackStream(text: string) {
+  const msgId = `msg_${Date.now()}`;
+  return createUIMessageStream({
+    execute: ({ writer }) => {
+      writer.write({ type: "text-start", id: msgId });
+      writer.write({ type: "text-delta", id: msgId, delta: text, text } as any);
+      writer.write({ type: "text-end", id: msgId });
+    },
+  });
+}
+
+const handleAiChat = async (context: any) => {
+  let body: { messages?: UIMessage[] } = {};
+  try {
+    body = (await context.request.json()) as { messages?: UIMessage[] };
+  } catch {
+    body = { messages: [] };
+  }
+  console.log("POST /ai received body:", JSON.stringify(body));
+
+  const uiMessages = body.messages || [];
+  const normalizedMessages = uiMessages.map((msg: any) => {
+    if (!msg.parts) {
+      const text = typeof msg.content === "string" ? msg.content : (msg.text || "");
+      return {
+        ...msg,
+        parts: [{ type: "text", text }],
+      };
+    }
+    return msg;
+  });
+
+  const apiKey = process.env.OPENROUTER_API_KEY?.trim();
+  const modelName = process.env.OPENROUTER_MODEL?.trim() || "google/gemini-2.5-flash";
+
+  const isPlaceholder =
+    !apiKey ||
+    apiKey === "placeholder" ||
+    apiKey.startsWith("placeh") ||
+    apiKey === "***" ||
+    apiKey.includes("your-api-key");
+
+  if (isPlaceholder) {
+    console.log("OpenRouter API key is placeholder or empty, serving concierge fallback stream.");
+    return createUIMessageStreamResponse({
+      stream: createFallbackStream(
+        "Welcome to MyRehat Concierge! I can help you find verified homestays, check direct host rates, or explore BuyHomestay property opportunities across Malaysia. How can I assist you with your travel or property plans today?",
+      ),
+    });
+  }
+
+  try {
+    console.log("Invoking OpenRouter with model:", modelName);
+    const openrouter = createOpenRouter({
+      apiKey,
+    });
+
+    const model = openrouter(modelName);
+
+    const result = streamText({
+      model,
+      system:
+        "You are the official MyRehat Concierge assistant. You provide polite, helpful, and concise assistance for homestay bookings, property inquiries, and BuyHomestay listings. Keep your tone warm, welcoming, and concise.",
+      messages: await convertToModelMessages(normalizedMessages),
+      maxOutputTokens: 1000,
+      ...({ maxTokens: 1000 } as any),
+    });
+
+    return createUIMessageStreamResponse({
+      stream: toUIMessageStream({
+        stream: result.stream,
+        onError: (err) => {
+          console.error("OpenRouter error in /ai:", err);
+          return "MyRehat Concierge is experiencing high traffic. Please try again or reach out to hosts directly on WhatsApp!";
+        },
+      }),
+    });
+  } catch (err) {
+    console.error("OpenRouter error in /ai:", err);
+
+    return createUIMessageStreamResponse({
+      stream: createFallbackStream(
+        "I am currently experiencing higher than usual traffic. Please explore our verified listings on the Marketplace or contact hosts directly via WhatsApp!",
+      ),
+    });
+  }
+};
 
 new Elysia()
   .use(
@@ -83,22 +170,8 @@ new Elysia()
       parse: "none",
     },
   )
-  .post("/ai", async (context) => {
-    const body = (await context.request.json()) as { messages?: UIMessage[] };
-    const uiMessages = body.messages || [];
-    const model = wrapLanguageModel({
-      model: google("gemini-2.5-flash"),
-      middleware: devToolsMiddleware(),
-    });
-    const result = streamText({
-      model,
-      messages: await convertToModelMessages(uiMessages),
-    });
-
-    return createUIMessageStreamResponse({
-      stream: toUIMessageStream({ stream: result.stream }),
-    });
-  })
+  .post("/ai", handleAiChat)
+  .post("/api/ai", handleAiChat)
   .get("/", () => "OK")
   .listen(3000, () => {
     console.log("Server is running on http://localhost:3000");
