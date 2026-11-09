@@ -73,5 +73,27 @@ describe("Wajib 2: Validasi Kategori BuyHomestay (4 Diterima + 1 Ditolak)", () =
       });
     }
   });
+
+  describe("Reject Kategori ke-5 (di luar 4 kategori resmi)", () => {
+    const rejectedFifthCategory = "Rent Luxury Villa";
+
+    it(`Menolak kategori ke-5 '${rejectedFifthCategory}' pada enum schema`, () => {
+      const result = homestayCategorySchema.safeParse(rejectedFifthCategory);
+      expect(result.success).toBe(false);
+    });
+
+    it(`Menolak input payload listing dengan kategori ke-5 '${rejectedFifthCategory}'`, () => {
+      const payload = {
+        title: "Test Listing Kategori 5",
+        price: 250000,
+        location: "Kuala Lumpur",
+        category: rejectedFifthCategory,
+        contactWa: "+60123456789",
+      };
+
+      const result = createHomestayInputSchema.safeParse(payload);
+      expect(result.success).toBe(false);
+    });
+  });
 });
 
